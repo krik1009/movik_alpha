@@ -1,4 +1,5 @@
-//! comment section
+//! comment function
+//! self, owner in state? 
 
 import React from 'react'
 import { getSingleContent, getSingleUser, getAllTags, getAllFollows, followOwner, unfollowOwner, getAllLikes, likeContent, unlikeContent, postComment, deleteComment } from '../../lib/api'
@@ -11,8 +12,8 @@ import axios from 'axios'
 class Show extends React.Component {
   state = { 
     content: null,
-    similarCont: '',
-    self: null,
+    similarCont: null,
+    self: '',
     owner: null,
     followed: false,
     liked: false,
@@ -151,7 +152,9 @@ class Show extends React.Component {
 
   render() {
     const { content, similarCont, followed, liked, owner, self, formData } = this.state
-    if (!content || !similarCont || !owner ) return null
+    if (!content) return null
+    if (!similarCont) return null
+    if (!owner) return null
     const numLikes = content.likes ? content.likes.length : 0
     const numFollowers = owner.followers ? owner.followers.length : 0
     const numComments = content.comments ? content  .comments.length : 0

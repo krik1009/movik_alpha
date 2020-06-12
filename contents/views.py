@@ -10,12 +10,14 @@ from .serializers import ContentSerializer, PopulatedContentSerializer
 
 
 class ContentListView(APIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-
     def get(self, _request):
         contents = Content.objects.all()
         serailized_contents = PopulatedContentSerializer(contents, many=True)
         return Response(serailized_contents.data, status=status.HTTP_200_OK)
+
+
+class ContentCreateView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def post(self, request):
         request.data['owner'] = request.user.id
@@ -26,8 +28,20 @@ class ContentListView(APIView):
         return Response(new_content.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
-
 class ContentDetailView(APIView):
+    def get_content(self, pk):
+        try:
+            return Content.objects.get(pk=pk)
+        except Content.DoesNotExist:
+            raise NotFound()
+
+    def get(self, _request, pk):
+        content = self.get_content(pk)
+        serialized_content = PopulatedContentSerializer(content)
+        return Response(serialized_content.data, status=status.HTTP_200_OK)
+      
+
+class ContentEditDeleteView(APIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get_content(self, pk):
@@ -39,12 +53,6 @@ class ContentDetailView(APIView):
     def is_content_owner(self, content, user):
         if content.owner.id != user.id:
             raise PermissionDenied()
-
-
-    def get(self, _request, pk):
-        content = self.get_content(pk)
-        serialized_content = PopulatedContentSerializer(content)
-        return Response(serialized_content.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
         content_to_update = self.get_content(pk)

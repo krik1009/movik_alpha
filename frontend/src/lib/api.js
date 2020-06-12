@@ -10,27 +10,27 @@ export const withHeaders = () => {
 
 // contents
 export const getAllContents = async () => {
-  const { data } = await axios.get(`${baseUrl}/contents`)
+  const { data } = await axios.get(`${baseUrl}/contents/`)
   return data
 }
 
 export const getSingleContent = async id => {
-  const { data } = await axios.get(`${baseUrl}/contents/${id}`)
+  const { data } = await axios.get(`${baseUrl}/contents/${id}/`)
   return data
 }
 
 export const uploadContent = async formData => {
-  const { data } = await axios.post(`${baseUrl}/contents/`, formData, withHeaders())
+  const { data } = await axios.post(`${baseUrl}/contents/create/`, formData, withHeaders())
   return data
 }
 
 export const editContent = async (contentId, formData) => {
-  const { data } = await axios.put(`${baseUrl}/contents/${contentId}/`, formData, withHeaders())
+  const { data } = await axios.put(`${baseUrl}/contents/${contentId}/edit/`, formData, withHeaders())
   return data
 }
 
 export const deleteContent = async contentId => {
-  return await axios.delete(`${baseUrl}/contents/${contentId}/`, withHeaders())
+  return await axios.delete(`${baseUrl}/contents/${contentId}/edit/`, withHeaders())
 }
 
 
