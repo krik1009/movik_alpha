@@ -28,14 +28,14 @@ class ProfileEdit extends React.Component {
   }
 
   handleChange = e => {
-    const formData = { ...this.state.formData, [e.target.name]: e.target.value }
+    const formData = { ...this.state.formData, [e.target.name]: e.target.value  }
     this.setState({ formData })
   }
 
   handleSubmit = async e => {
     e.preventDefault()
     const userId = getUserId()
-    console.log('edit', userId)
+    // const formData = { ...this.state.formData, password: getToken(), password_confimation: getToken() }
     try {
       await editUser(userId, this.state.formData)
       this.props.history.push(`/profiles/${userId}/`)
@@ -56,6 +56,7 @@ class ProfileEdit extends React.Component {
 
   render() {
     const { formData, errors } = this.state
+    console.log(this.state)
 
     return (
       <div className="register" style={{ 
@@ -125,10 +126,10 @@ class ProfileEdit extends React.Component {
                   </div>
                 </div>
                 <div className="buttons is-right" style={{ width: '100%' }}>
-                  <div 
+                  <button 
                     type="submit"
                     className="button is-black is-fullwidth"
-                  >Update Profile</div>
+                  >Update Profile</button>
                 </div>
                 <button onClick={this.handleDeleteAccount}>Delete Account</button>
               </form>

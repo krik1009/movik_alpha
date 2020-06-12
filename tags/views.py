@@ -10,12 +10,15 @@ from .serializers import TagSerializer, PopulatedTagSerializer
 
 
 class TagListView(APIView):
-    # permission_classes = (IsAuthenticated, )
     
     def get(self, _request):
         tags = Tag.objects.all()
         serialized_tags = PopulatedTagSerializer(tags, many=True)
         return Response(serialized_tags.data, status=status.HTTP_200_OK)
+
+
+class TagCreateView(APIView):
+    permission_classes = (IsAuthenticated, )
       
     def post(self, request):
         request.data['owner'] = request.user.id
@@ -27,7 +30,20 @@ class TagListView(APIView):
 
 
 class TagDetailView(APIView):
-    # permission_classes = (IsAuthenticated, )
+    def get_tag(self, pk):
+        try:
+            return Tag.objects.get(pk=pk)
+        except Tag.DoesNotExist:
+            raise NotFound()
+
+    def get(self, _request, pk):
+        tag = self.get_tag(pk)
+        serialized_tag = PopulatedTagSerializer(tag)
+        return Response(serialized_tag.data, status=status.HTTP_200_OK)
+
+    
+class TagDeleteView(APIView):
+    permission_classes = (IsAuthenticated, )
 
     def get_tag(self, pk):
         try:
@@ -38,11 +54,6 @@ class TagDetailView(APIView):
     def is_tag_owner(self, tag, user):
         if tag.owner.id != user.id:
             raise PermissionDenied()
-
-    def get(self, _request, pk):
-        tag = self.get_tag(pk)
-        serialized_tag = PopulatedTagSerializer(tag)
-        return Response(serialized_tag.data, status=status.HTTP_200_OK)
 
     def delete(self, request, pk):
         tag_to_delete = self.get_tag(pk)

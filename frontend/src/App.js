@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-// import SecureRoute from './components/common/SecureRoute'
+import SecureRoute from './components/common/SecureRoute'
 
 //common
 import Home from './components/common/Home'
@@ -23,7 +23,7 @@ import ProfileEdit from './components/users/ProfileEdit'
 import Index from './components/contents/Index'
 import Show from './components/contents/Show'
 import New from './components/contents/New'
-
+import Edit from './components/contents/Edit'
 
 // //hikes
 // import HikesIndex from './components/hikes/HikesIndex'
@@ -47,20 +47,17 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Home} />
 
-        <Route path="/contents/new" component={New} />
+        <SecureRoute path="/contents/:id/edit" component={Edit} />
+        <SecureRoute path="/contents/new" component={New} />
         <Route path="/contents/:id" component={Show} />
         <Route path="/contents" component={Index} />
-
 
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
 
-        <Route path='/profiles/:id/edit' component={ProfileEdit} />
+        <SecureRoute path='/profiles/:id/edit' component={ProfileEdit} />
         <Route path="/profiles/:id" component={ProfileShow} />
        
-
-
-
       </Switch>
       <Footer />
     </BrowserRouter>

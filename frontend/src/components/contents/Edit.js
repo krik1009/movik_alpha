@@ -1,13 +1,11 @@
-//! how to upload video w cloud
-
 import React from 'react'
 import CreatableSelect from 'react-select/creatable'
 import ImageUpload from '../common/ImageUpload'
-import { getSingleUser, uploadContent, getAllTags, getAllCategories, createCategory, createTag, getSingleContent } from '../../lib/api'
+import { getSingleContent, editContent, createCategory, createTag } from '../../lib/api'
 import { getUserId } from '../../lib/auth'
 
 
-class New extends React.Component {
+class Edit extends React.Component {
   state = {
     formData: {
       title: '',
@@ -24,7 +22,6 @@ class New extends React.Component {
     },
     tagOptions: [],
     categoryOptions: [],
-    profile: '',
     errors: {}
   }
 
@@ -60,11 +57,15 @@ class New extends React.Component {
   }
 
   async componentDidMount() {
-    const tags = await getAllTags()
-    const tagOptions = tags.map( item => this.returnObj(item.name.toLowerCase(), item.id))
-    const categories = await getAllCategories()
-    const categoryOptions = categories.map( item => this.returnObj(item.name.toLowerCase(), item.id))
-    this.setState({ tagOptions, categoryOptions })
+    const contentId = this.props.match.params.id
+    console.log(contentId)
+    try {
+      const data = await getSingleContent(contentId)
+      this.setState({ formData: data })
+    } catch (err) {
+      this.props.history.push('/notfound')
+      this.setState({ errors: err })
+    }
   }
 
   handleChange = e => {
@@ -74,13 +75,13 @@ class New extends React.Component {
 
   handleSelectCategories = (newValue, _actionMeta) => {
     let addedCategories
-    const newPk = this.state.categoryOptions.sort((a, b) => a.value - b.value)[this.state.categoryOptions.length - 1].value
+    const maxIndex = this.state.categoryOptions.length - 1
     if (newValue) {
       newValue.map( (item, i) => {
-        if (item.__isNew__) createCategory({ pk: newPk + i, name: item.value })
+        if (item.__isNew__) createCategory({ pk: this.state.categoryOptions[maxIndex].value + i, name: item.value })
       })
       addedCategories = newValue.map( (item, i) => {
-        if (item.__isNew__) item.value = newPk + i
+        if (item.__isNew__) item.value = this.state.categoryOptions[maxIndex].value + i
         return item.value
       })
     }
@@ -90,13 +91,13 @@ class New extends React.Component {
 
   handleSelectTags = (newValue, _actionMeta) => {
     let addedTags
-    const newPk = this.state.tagOptions.sort((a, b) => a.value - b.value)[this.state.tagOptions.length - 1].value
+    const maxIndex = this.state.tagOptions.length - 1
     if (newValue) {
       newValue.map( (item, i) => {
-        if (item.__isNew__) createTag({ pk: newPk + i, name: item.value })
+        if (item.__isNew__) createTag({ pk: this.state.tagOptions[maxIndex].value + i, name: item.value })
       })
       addedTags = newValue.map( (item, i) => {
-        if (item.__isNew__) item.value = newPk + i
+        if (item.__isNew__) item.value = this.state.tagOptions[maxIndex].value + i
         return item.value
       })
     }
@@ -106,18 +107,18 @@ class New extends React.Component {
 
   handleSubmit = async e => {
     e.preventDefault()
-    const userId = getUserId()
+    const contentId = this.props.match.params.id
+    console.log('edit', contentId)
     try {
-      await uploadContent(this.state.formData)
-      const profile = await getSingleUser(userId)
-      this.setState({ profile })
-      this.props.history.push(`/profiles/${userId}`)
+      await editContent(contentId, this.state.formData)
+      this.props.history.push(`/contents/${contentId}/`)
     } catch (err) {
       this.setState({ errors: err })
-    } 
+    }
   }
 
 
+    
   render() {
     const { formData, errors, tagOptions, categoryOptions } = this.state
     console.log(this.state)
@@ -303,4 +304,4 @@ class New extends React.Component {
   }
 }
 
-export default New
+export default Edit

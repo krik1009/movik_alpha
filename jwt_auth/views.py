@@ -5,11 +5,12 @@ from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
 
-from .serializers import UserSerializer, PopulatedUserSerializer
+from .serializers import UserSerializer, PopulatedUserSerializer, UpdateUserSerializer
 User = get_user_model()
 
 
@@ -27,14 +28,14 @@ class LoginView(APIView):
         try:
             return User.objects.get(email=email)
         except User.DoesNotExist:
-            raise PermissionDenied({'message': 'Invalid Credentilais'})
+            raise PermissionDenied({'message': 'Invalid Credentilais' })
 
     def post(self, request):
-        email = request.data.get('email') 
+        email = request.data.get('email')
         password = request.data.get('password')
         user = self.get_user(email)
         if not user.check_password(password):
-            raise PermissionDenied({'message': 'Invalid Credentails'})
+            raise PermissionDenied({'message': 'Invalid Credentilais' })
         dt = datetime.now() + timedelta(days=7)
         token = jwt.encode({'sub': user.id, 'exp': int(
             dt.strftime('%s'))}, settings.SECRET_KEY, algorithm='HS256')
@@ -42,7 +43,21 @@ class LoginView(APIView):
 
 
 class ProfileView(APIView):
+    def get_user(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            raise NotFound()
+          
+    def get(self, _request, pk):
+        user = self.get_user(pk)
+        serialized_user = PopulatedUserSerializer(user)
+        return Response(serialized_user.data, status=status.HTTP_200_OK)
+
+
+class ProfileEdit(APIView):
     permission_classes = (IsAuthenticated, )
+    
     def get_user(self, pk):
         try:
             return User.objects.get(pk=pk)
@@ -52,16 +67,12 @@ class ProfileView(APIView):
     def is_profile_owner(self, profile, user):
         if profile.id != user.id:
             raise PermissionDenied()
-          
-    def get(self, _request, pk):
-        user = self.get_user(pk)
-        serialized_user = PopulatedUserSerializer(user)
-        return Response(serialized_user.data, status=status.HTTP_200_OK)
-      
+ 
     def put(self, request, pk):
-        profile_to_update = self.get_profile(pk)
+        profile_to_update = self.get_user(pk)
         self.is_profile_owner(profile_to_update, request.user)
-        updated_profile = UserSerializer(profile_to_update, data=request.data)
+        updated_profile = UpdateUserSerializer(profile_to_update, data=request.data)
+
         if updated_profile.is_valid():
             updated_profile.save()
             return Response(updated_profile.data, status=status.HTTP_202_ACCEPTED)
@@ -72,12 +83,3 @@ class ProfileView(APIView):
         self.is_profile_owner(user_to_delete, request.user)
         user_to_delete.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-# class ProfileIndexView(APIView):
-#     permission_classes = (IsAuthenticated, )
-
-#     def get(self, request):
-#         users = User.objects.all()
-#         serialized_users = UserSerializer(users)
-#         return Response(serialized_users.data)

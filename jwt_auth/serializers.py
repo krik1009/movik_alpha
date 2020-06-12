@@ -41,9 +41,16 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class PopulatedUserSerializer(UserSerializer):
-    uploaded_contents = ContentSerializer(many=True)
-    liked_contents = LikeSerializer(many=True)
-    your_tags = TagSerializer(many=True)
+    uploaded_contents = ContentSerializer(many=True, required=False)
+    liked_contents = LikeSerializer(many=True, required=False)
+    your_tags = TagSerializer(many=True, required=False)
     created_categories = CategorySerializer(many=True, required=False)
     followers = FollowerSerializer(many=True, required=False)
     followings = FollowerSerializer(many=True, required=False)
+
+
+class UpdateUserSerializer(serializers.ModelSerializer):
+  
+    class Meta:
+        model = User
+        exclude = ('password', )

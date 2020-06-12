@@ -1,17 +1,8 @@
-mov - the content creators' platform
+movik - the content creators' platform
 
-# Core functions
-MVP
-- Index
-- Show
-- Search by category and tag
 
-- Reg, Login
-- User prof
-
-Nice to have
-- Reg with interest - recommendation of contents
-
+# Wireframe
+https://miro.com/app/board/o9J_krLAZPU=/
 
 # Screenshot
 Index
@@ -21,13 +12,39 @@ User Profile
 ref- https://www.pexels.com/videos/
 
 
+# Core Components / Functions
+- Contents - video clips
+  - Index 
+      - Search by tags, categories and colors
+  - Show
+      - Like
+      - Comments
+      - Similar contents
+  - New
+  - Edit
+
+- User
+  - Show
+    - Contents uploaded
+    - Follow
+    - Donate
+  - Register
+  - Login
+
+
+
+
+# DB structure
+https://miro.com/app/board/o9J_krL41w4=/
+
+
 # Technologies
 BE - Python, Django
 FE - React Hooks
 
-API - Pixabay API
-https://pixabay.com/api/docs/
-
+Seeds resource 
+- Pixabay API https://pixabay.com/api/docs/
+- Faker
 
 # Dependencies
 ## B/E
@@ -47,7 +64,10 @@ https://pixabay.com/api/docs/
 * fontawsome
 * pure-react-carousel https://www.npmjs.com/package/pure-react-carousel
 * react-notify-toast
-* react-select
+* react-select, react-select/creatable
+
+
+
 
 
 

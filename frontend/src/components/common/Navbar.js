@@ -63,7 +63,6 @@ class Navbar extends React.Component {
   render() {
     const { videosIsOpen, moreIsOpen, accountIsOpen, burgerIsOpen } = this.state
     const userId = getUserId()
-    console.log(isAuthenticated())
 
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -79,7 +78,7 @@ class Navbar extends React.Component {
       </span>
     </div>
 
-    <div id="navbarBasicExample" className="navbar-menu">
+    <div id="navbarBasicExample" className={`navbar-menu ${burgerIsOpen ? 'is-active' : ''}`}>
       <div className="navbar-start">
         <Link 
           to='/contents'

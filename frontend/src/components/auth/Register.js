@@ -1,9 +1,6 @@
-// ! logic to add bio, fav tag/category page
-// ! not register properly
-
 import React from 'react'
 import { registerUser } from '../../lib/api'
-import { setToken, getUserId } from '../../lib/auth'
+import { setToken } from '../../lib/auth'
 import ImageUpload from '../common/ImageUpload'
 
 
@@ -30,8 +27,7 @@ class Register extends React.Component {
     try {
       const res = await registerUser(this.state.formData)
       setToken(res.data.token)
-      const userId = getUserId()
-      this.props.history.push(`/profiles/${userId}`)
+      this.props.history.push('/contents')
     } catch (err) {
       this.setState({ errors: err.response.data.errors })
     } 
@@ -40,6 +36,7 @@ class Register extends React.Component {
 
   render() {
     const { formData, errors } = this.state
+    console.log(formData, errors)
 
     return (
       <div className="register" style={{ 
