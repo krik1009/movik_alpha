@@ -1,4 +1,4 @@
-//! function - donation, comment
+//! function - donation
 
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -108,11 +108,10 @@ class ProfileShow extends React.Component {
           {(isAuthenticated() && !this.isSelf()) && 
           <>
             {!followed ? 
-              <div className="button is-black" onClick={this.followOwner}>Follow</div>
+              <div className="button" onClick={this.followOwner}>Follow</div>
               :
               <div className="button is-light" onClick={this.unfollowOwner}>Unfollow</div>
             }
-           
           </>} 
           {(isAuthenticated() && !this.isSelf()) && <div className="button is-black">Donate</div>}
           {this.isSelf() && <Link className="button" to={`/profiles/${profile.id}/edit`}>Edit</Link>}
@@ -129,7 +128,7 @@ class ProfileShow extends React.Component {
             <h1 style={{ fontWeight: 900, fontSize: 28 }}>
               {profile.username.replace(profile.username[0], profile.username[0].toUpperCase())}</h1>
             {numFollowers > 1 && 
-              <p><i className="fas fa-users"></i>&nbsp;<strong>{numFollowers}</strong>&nbsp;fans</p>}
+              <p style={{ marginTop: 10 }}><i className="fas fa-users"></i>&nbsp;<strong>{numFollowers}</strong>&nbsp;fans</p>}
             {isAuthenticated() && 
             <p style={{ fontSize: 12 }} 
             // onClick={triggerOutlook(profile.email, 'Hi from movik.com')}
@@ -151,7 +150,10 @@ class ProfileShow extends React.Component {
                 {profile.uploaded_contents.map(item => (
                   <div key={item.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
                     <Link to={`/contents/${item.id}`}>
-                      <img src={item.thumbnail} alt={item.title} style={{ maxWidth: 300, maxHeight: 200, marginTop: 10, marginLeft: 10, marginRight: 10, marginBottom: 0}} />
+                      <img 
+                        src={item.thumbnail} 
+                        alt={item.title} 
+                        style={{ maxWidth: 300, maxHeight: 200, marginTop: 10, marginLeft: 10, marginRight: 10, marginBottom: 0}} />
                     </Link>
                     {this.isContentOwner(item.owner) && 
                       <div className="buttons" style={{ marginTop: 0, marginLeft: 10, marginRight: 10, marginBottom: 10 }}>

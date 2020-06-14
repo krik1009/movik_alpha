@@ -1,4 +1,5 @@
 //! trending logic - model change
+//! display profile image when hover
 
 import React from 'react'
 import axios from 'axios'
@@ -11,7 +12,8 @@ class Index extends React.Component {
     display: 'all',
     isOpen: false,
     filteredContents: [],
-    searchQuery: ''
+    searchQuery: '',
+    // hover: false
   }
 
   async componentDidMount() {
@@ -67,15 +69,41 @@ class Index extends React.Component {
     this.setState({ filteredContents, display: e.target.value })
   }
 
+  // toggleStyle = e => {
+  //   console.log(e)
+  //   if (e) {
+  //       e.target.style = { backgroundColor: "rgba(255, 255, 255, 0.3)", position: 'absolute', zIndex: 2 }
+  //       e.target.className = ''
+  //   } else {
+  //     e.target.style = ''
+  //     e.target.className = "is-hidden"
+  //   }
+  // }
 
+  // addStyle = e => {
+    
+  //   <div
+  //     className='is-hidden'
+  //     // className={hiddenClass} style={hiddenStyle} 
+  //     onMouseEnter={this.toggleStyle} onMouseLeave={this.toggleStyle} >
+  //     <img src={item.owner.profile_image} alt={item.owner.username} style={{ borderRadius: "50%", height: 120 }}/>
+  //   </div>
+  // }
+  
+
+  // toggleHover = () => {
+  //   this.setState({ hover: !this.state.hover })
+  // }
+  
 
   render() {
     console.log(this.state)
 
-    const { contents, display, isOpen, filteredContents, searchQuery } = this.state
+    const { contents, display, isOpen, filteredContents, searchQuery, hover } = this.state
     if (!contents) return null
 
-    const ram =  Math.floor(Math.random() * (contents.length - 1))
+    // const hiddenStyle = hover ? { backgroundColor: "rgba(255, 255, 255, 0.3)", position: 'absolute', zIndex: 2 } : ''
+    // const hiddenClass = hover ? '' : "is-hidden"
 
     return(
       <>
@@ -182,8 +210,19 @@ class Index extends React.Component {
 
           {filteredContents.length ? 
             filteredContents.map( item => (
-              <Link key={item.id} to={`contents/${item.id}`}>
-                <img src={item.thumbnail} style={{ maxWidth: 300, maxHeight: 200, marginLeft: 20}} />
+              <Link key={item.id} to={`contents/${item.id}`} onMouseEnter={this.showStyle}>
+                <img src={item.thumbnail} style={{ 
+                  maxWidth: 300, maxHeight: 200, marginLeft: 10
+                  // ,position: 'absolute', zIndex: 1
+                   }} />
+                
+                  <div
+                    className='is-hidden'
+                    // className={hiddenClass} style={hiddenStyle} 
+                    onMouseEnter={this.toggleStyle} onMouseLeave={this.toggleStyle} >
+                    <img src={item.owner.profile_image} alt={item.owner.username} style={{ borderRadius: "50%", height: 120 }}/>
+                  </div>
+                
               </Link>
             ))
             :
@@ -192,8 +231,8 @@ class Index extends React.Component {
         </main>
       </>
     )
-
   }
 }
 
 export default Index
+

@@ -1,4 +1,4 @@
-//! how to upload video w cloud
+//! func to upload video clips w cloudary
 
 import React from 'react'
 import CreatableSelect from 'react-select/creatable'

@@ -1,4 +1,3 @@
-//! not update properly
 import React from 'react'
 import { getSingleUser, editUser, deleteUser } from '../../lib/api'
 import { getUserId } from '../../lib/auth'

@@ -67,7 +67,7 @@ class Navbar extends React.Component {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
-      <a className="navbar-item" href="https://movik.com" style={{ fontWeight: 900 }}>
+      <a className="navbar-item" href="/" style={{ fontWeight: 900 }}>
         <i className="fas fa-seedling"></i>&nbsp;movik
       </a>
 

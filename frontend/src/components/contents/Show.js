@@ -1,4 +1,4 @@
-//! comment function
+//! comment function (like)
 //! self, owner in state? 
 
 import React from 'react'
@@ -7,7 +7,7 @@ import { getUserId, isAuthenticated } from '../../lib/auth'
 import { Link } from 'react-router-dom'
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, Image } from 'pure-react-carousel'
 import 'pure-react-carousel/dist/react-carousel.es.css'
-import axios from 'axios'
+
 
 class Show extends React.Component {
   state = { 
