@@ -5,7 +5,8 @@ import { isAuthenticated, logout, getUserId } from '../../lib/auth'
 
 class Navbar extends React.Component {
   state = { 
-    videosIsOpen: false,
+    homeIsOpen: false,
+    aboutIsOpen: false,
     moreIsOpen: false,
     accountIsOpen: false,
     burgerIsOpen: false
@@ -13,23 +14,34 @@ class Navbar extends React.Component {
 
   handleToggle = item => {
     switch (item) {
-      case 'videos':
+      case 'home':
         this.setState({
-          videosIsOpen: !this.state.videosIsOpen,
+          homeIsOpen: !this.state.homeIsOpen,
+          aboutIsOpen: false,
           moreIsOpen: false,
           accountIsOpen: false
         })
         break
+      case 'about':
+        this.setState({
+          homeIsOpen: false,
+          aboutIsOpen: false,
+          moreIsOpen: false,
+          aboutIsOpen: !this.state.aboutIsOpen
+        })
+        break
       case 'more':
         this.setState({
-          videosIsOpen: false,
+          homeIsOpen: false,
+          aboutIsOpen: false,
           moreIsOpen: !this.state.moreIsOpen,
           accountIsOpen: false
         })
         break
       case 'account':
         this.setState({
-          videosIsOpen: false,
+          homeIsOpen: false,
+          aboutIsOpen: false,
           moreIsOpen: false,
           accountIsOpen: !this.state.accountIsOpen
         })
@@ -52,7 +64,8 @@ class Navbar extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.setState({
-        videosIsOpen: false,
+        homeIsOpen: false,
+        aboutIsOpen: false,
         moreIsOpen: false,
         accountIsOpen: false,
         burgerIsOpen: false
@@ -61,7 +74,7 @@ class Navbar extends React.Component {
   }
 
   render() {
-    const { videosIsOpen, moreIsOpen, accountIsOpen, burgerIsOpen } = this.state
+    const { homeIsOpen, aboutIsOpen, moreIsOpen, accountIsOpen, burgerIsOpen } = this.state
     const userId = getUserId()
 
   return (
@@ -82,11 +95,17 @@ class Navbar extends React.Component {
       <div className="navbar-start">
         <Link 
           to='/contents'
-          className={`navbar-item ${videosIsOpen ? 'is-active' : ''}`} 
-          onClick={() => this.handleToggle('videos')}>
-          Videos</Link>
+          className={`navbar-item ${homeIsOpen ? 'is-active' : ''}`} 
+          onClick={() => this.handleToggle('home')}>
+          Home</Link>
         
-        <div className="navbar-item has-dropdown is-hoverable">
+        <Link 
+          to='/about'
+          className={`navbar-item ${aboutIsOpen ? 'is-active' : ''}`} 
+          onClick={() => this.handleToggle('about')}>
+          About</Link>
+        
+        {/* <div className="navbar-item has-dropdown is-hoverable">
           <a className={`navbar-link ${moreIsOpen ? 'is-active' : ''}`} 
             onClick={() => this.handleToggle('more')}>
             More</a>
@@ -106,7 +125,7 @@ class Navbar extends React.Component {
               Report an issue
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="navbar-end">
@@ -120,12 +139,11 @@ class Navbar extends React.Component {
                 <span onClick={this.handleLogout} className="navbar-item nav-color">Logout</span>
               </div>
           </div>}
-
           <div className="navbar-item">
             <div className="buttons">
               {isAuthenticated() && <Link className="button is-danger" to='/contents/new' style={{ minWidth: 150}}>Upload</Link>}
-              {!isAuthenticated() && <Link className="button is-black" to="/register" style={{ minWidth: 150}}><strong>JOIN</strong></Link>}
-              {!isAuthenticated() && <Link className="button is-light" to="/login">Log in</Link>}
+              {!isAuthenticated() && <Link className="button is-danger" to="/register/init" style={{ minWidth: 150}}><strong>Register</strong></Link>}
+              {/* {!isAuthenticated() && <Link className="button is-light" to="/login">Log in</Link>} */}
             </div>
           </div>
         </div>

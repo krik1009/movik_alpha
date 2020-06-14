@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { getAllContents } from '../../lib/api'
+import { backgroundImages } from '../../styles/backgroundImages'
 
 class Home extends React.Component {
   state = {
@@ -18,15 +19,15 @@ class Home extends React.Component {
   render() {
     const { contents } = this.state
     if (!contents) return null
-    const ram =  Math.floor(Math.random() * (contents.length - 1))
+    const ram =  Math.floor(Math.random() * (backgroundImages.length - 1))
 
     return(
       <Link 
-        to="/contents"
+        to="/about"
         style={{
           display: 'flex',
           justifyContent: 'center',
-          backgroundImage: `url(${contents[ram].thumbnail})`,
+          backgroundImage: `url(${backgroundImages[ram]})`,
           filter: "opacity(80%)",
           backgroundPosition:'center', 
           backgroundRepeat: 'no-repeat',

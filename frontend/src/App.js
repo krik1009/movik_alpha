@@ -6,11 +6,14 @@ import SecureRoute from './components/common/SecureRoute'
 import Home from './components/common/Home'
 import Footer from './components/common/Footer'
 import Navbar from './components/common/Navbar'
+import About from './components/common/About'
+import CompleteReg from './components/common/CompleteReg'
 
 
 // auth
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
+import RegisterInit from './components/auth/RegisterInit'
 
 
 // users
@@ -25,20 +28,6 @@ import Show from './components/contents/Show'
 import New from './components/contents/New'
 import Edit from './components/contents/Edit'
 
-// //hikes
-// import HikesIndex from './components/hikes/HikesIndex'
-// import HikeShow from './components/hikes/HikeShow'
-// import HikeCreate from './components/hikes/HikeCreate'
-// import HikeUpdate from './components/hikes/HikeUpdate'
-
-// // groups
-// import GroupIndex from './components/groups/GroupIndex'
-// import GroupShow from './components/groups/GroupShow'
-// import GroupNew from './components/groups/GroupNew'
-// import GroupEdit from './components/groups/GroupEdit'
-// import EventShow from './components/groups/EventShow' 
-// import GroupEventEdit from './components/groups/GroupEventEdit'
-// import GroupEventNew from './components/groups/GroupEventNew'
 
 const App = () => {
   return (
@@ -46,6 +35,8 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/about" component={About} />
+        <Route path="/complete" component={CompleteReg} />
 
         <SecureRoute path="/contents/:id/edit" component={Edit} />
         <SecureRoute path="/contents/new" component={New} />
@@ -53,6 +44,7 @@ const App = () => {
         <Route path="/contents" component={Index} />
 
         <Route path="/login" component={Login} />
+        <Route path="/register/init" component={RegisterInit} />
         <Route path="/register" component={Register} />
 
         <SecureRoute path='/profiles/:id/edit' component={ProfileEdit} />
