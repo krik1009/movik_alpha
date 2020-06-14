@@ -135,7 +135,7 @@ class RegisterInit extends React.Component {
 
                 <div className="field" style={formStyle}>
                   <label className="label" style={labelStyle}>Email</label>
-                  <div className="control" style={controlStyle}>
+                  <p class="control has-icons-left has-icons-right"style={controlStyle}>
                     <input
                       className={`input ${errors.email ? 'is-danger' : ''}`}
                       placeholder="Email"
@@ -143,13 +143,16 @@ class RegisterInit extends React.Component {
                       onChange={this.handleChange}
                       value={formData.email}
                     />
-                  </div>
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-envelope"></i>
+                    </span>
+                  </p>
                   {errors.email && <small className="help is-danger">Email is required</small>}
                 </div>
 
                 <div className="field" style={formStyle}>
                   <label className="label" style={labelStyle}>Password</label>
-                  <div className="control" style={controlStyle}>
+                  <p class="control has-icons-left has-icons-right"style={controlStyle}>
                     <input
                       className={`input ${errors.password ? 'is-danger' : ''}`}
                       type="password"
@@ -158,7 +161,10 @@ class RegisterInit extends React.Component {
                       onChange={this.handleChange}
                       value={formData.password}
                     />
-                  </div>
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-lock"></i>
+                    </span>
+                  </p>
                   {errors.password && <small className="help is-danger">Password is required</small>}
                 </div>
 
