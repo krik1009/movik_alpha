@@ -30,10 +30,10 @@ class LandingPage extends React.Component {
     const { view, benefitsCreator, benefitsViewer } = this.state
     const ram =  Math.floor(Math.random() * (backgroundImages.length - 1))
     const btnStyle = {
-      fontSize: 60,
+      fontSize: 50,
       filter: "none",
       textDecoration: "none",
-      margin: 20,
+      margin: 100,
       minWidth: "30%",
       fontFamily: 'Lexend Tera'
     }

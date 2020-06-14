@@ -93,11 +93,11 @@ class Navbar extends React.Component {
 
     <div id="navbarBasicExample" className={`navbar-menu ${burgerIsOpen ? 'is-active' : ''}`}>
       <div className="navbar-start">
-        <Link 
+        {/* <Link 
           to='/contents'
           className={`navbar-item ${homeIsOpen ? 'is-active' : ''}`} 
           onClick={() => this.handleToggle('home')}>
-          Home</Link>
+          Home</Link> */}
         
         <Link 
           to='/about'
