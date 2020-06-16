@@ -35,80 +35,93 @@ class Request extends React.Component {
 
   render() {
     const { formData, errors } = this.state
+    const overBreakPoint = window.innerWidth > 420 ? true : false
+    const backgroundStyle = {
+      display: 'flex',
+      justifyContent: 'center',
+      backgroundImage: `url(${backgroundImages[6]})`,
+      backgroundPosition:'center', 
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      minHeight: overBreakPoint ? 800 : 500,
+    }
+    const containerStyle = {
+      minWidth: overBreakPoint ? 700 : '95%',
+      backgroundColor: 'rgba(255, 255, 255, 0.7)'
+    }
+    const titleStyle ={
+      fontSize: overBreakPoint ? 28 : 20
+    }
     const formStyle = {
       display: 'flex',
       justifyContent: 'flex-start',
       alignItems: 'center'
     }
     const labelStyle = {
-      margin: 20,
-      minWidth: '25%'
+      margin: overBreakPoint ? 12 : 8,
+      width: overBreakPoint ? '25%' : '100%',
+      fontSize: overBreakPoint ? 18 : 10,
     }
     const controlStyle = {
-      margin: 20,
-      minWidth: '60%'
+      margin: overBreakPoint ? 12 : 8,
+      width: overBreakPoint ? '70%' : '100%',
+      fontSize: overBreakPoint ? 18 : 10,
     }
-  
+    const submitBtnStyle = {
+      marginTop: 50
+    }
+
     return (
-      <div className="register" style={{ 
-        backgroundImage: `url(${backgroundImages[6]})`,
-        backgroundPosition:'center', 
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        minHeight: 500
-        }}>
+      <div className="register" style={backgroundStyle}>
         <section className="section">
-          <div className="container box" style={{ maxWidth: '60%', backgroundColor: 'rgba(255, 255, 255, 0.7)'}}>
-            <h1 className="title">Request Form</h1>
+          <div className="container box" style={containerStyle}>
+            <h1 className="title" style={titleStyle}>Request Form</h1>
             <h2>We will contact you as soon as possible</h2> 
-            {/* <p style={{ fontSize: 10 }}>* required</p> */}
             <hr />
 
             <div className="columns">
               <form onSubmit={this.handleSubmit} className="column">
 
                 <div className="field" style={formStyle}>
-                    <label className="label" style={labelStyle}>Email *</label>
-                    <p class="control has-icons-left has-icons-right"style={controlStyle}>
-                      <input
-                        className={`input ${errors.email ? 'is-danger' : ''}`}
-                        placeholder="Your email address"
-                        name="email"
-                        onChange={this.handleChange}
-                        value={formData.email}
-                      />
-                      <span className="icon is-small is-left">
-                        <i className="fas fa-envelope"></i>
-                      </span>
-                    </p>
-                    {errors.email && <small className="help is-danger">Email is required</small>}
+                  {overBreakPoint && <label className="label" style={labelStyle}>Email *</label>}
+                  <p className="control" style={controlStyle}>
+                  {!overBreakPoint && <label className="label" style={labelStyle}>Email *</label>}
+                    <input
+                      className={`input ${errors.email ? 'is-danger' : ''} ${overBreakPoint ? '': 'is-small'}`}
+                      placeholder="Your email address"
+                      name="email"
+                      onChange={this.handleChange}
+                      value={formData.email}
+                    />
+                  </p>
+                  {errors.email && <small className="help is-danger">Email is required</small>}
                 </div>
 
-
                 <div className="field" style={formStyle}>
-                  <label className="label" style={labelStyle}>You are: </label>
+                  {overBreakPoint && <label className="label" style={labelStyle}>You are: </label>}
                   <div className="control" style={controlStyle}>
+                  {!overBreakPoint && <label className="label" style={labelStyle}>You are: </label>}
                     <label className="radio" style={{ marginRight: 20 }}>
-                      <input type="radio" name="user_type"  value="cr" onClick={this.handleChange} />
+                      <input type="radio" name="user_type"  value="cr" onClick={this.handleChange} style={{ margin: 8}}/>
                       Creator
                     </label>
                     <label className="radio">
-                      <input type="radio"  name="user_type"  value="vw" onClick={this.handleChange} />
+                      <input type="radio"  name="user_type"  value="vw" onClick={this.handleChange} style={{ margin: 8}}/ >
                       Viewer
                     </label>
                     <label className="radio">
-                      <input type="radio"  name="user_type"  value="ot" onClick={this.handleChange} />
+                      <input type="radio"  name="user_type"  value="ot" onClick={this.handleChange} style={{ margin: 8}} />
                       Other
                     </label>
                   </div>
                 </div>
 
-     
                 <div className="field" style={formStyle}>
-                  <label className="label" style={labelStyle}>Subject *</label>
+                  {overBreakPoint && <label className="label" style={labelStyle}>Subject *</label>}
                   <p class="control"style={controlStyle}>
+                    {!overBreakPoint && <label className="label" style={labelStyle}>Subject *</label>}
                     <input
-                      className={`input ${errors.subject ? 'is-danger' : ''}`}
+                      className={`input ${errors.subject ? 'is-danger' : ''} ${overBreakPoint ? '': 'is-small'}`}
                       type="text"
                       placeholder="Subject"
                       name="subject"
@@ -120,10 +133,11 @@ class Request extends React.Component {
                 </div>
 
                 <div className="field" style={formStyle}>
-                  <label className="label" style={labelStyle}>Request *</label>
+                  {overBreakPoint && <label className="label" style={labelStyle}>Request *</label>}
                   <p class="control"style={controlStyle}>
+                    {!overBreakPoint && <label className="label" style={labelStyle}>Request *</label>}
                     <input
-                      className={`input ${errors.description ? 'is-danger' : ''}`}
+                      className={`input ${errors.description ? 'is-danger' : ''} ${overBreakPoint ? '': 'is-small'}`}
                       type="textarea"
                       placeholder="Please enter the details of your request"
                       name="description"
@@ -156,6 +170,7 @@ class Request extends React.Component {
                   <button
                     type="submit"
                     className="button is-fullwidth is-black"
+                    style={submitBtnStyle}
                     >Submit</button>
                 </div>
 

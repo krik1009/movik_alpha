@@ -15,24 +15,27 @@ const CompleteReg = () => (
     minHeight: 600
     }}>
     <div style={{
-      width: '100%', 
+      width: '100%',
       backgroundColor: 'rgba(255, 255, 255, 0.6)',     
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       flexDirection: 'column',
-      marginTop: 150, 
+      marginTop: window.innerWidth > 420 ? 150 : 80, 
       height: 200 }}>
       <h1 style={{ 
-        fontSize: 36,
-        filter: "none",
-        textDecoration: "none",
-        color: 'black'
+        fontSize: window.innerWidth > 420 ? 32 : 24,
+        color: 'black',
+        textAlign: 'center'
       }}>
         Thank you for the registration
       </h1>
       <br />
-      <p style={{ fontSize: 24, color: 'black' }}>We will keep you inform our product updates.</p>
+      <p style={{ 
+        fontSize: window.innerWidth > 420 ? 20 : 16,
+        color: 'black',
+        textAlign: 'center'
+        }}>We will keep you inform our product updates.</p>
     </div>
   </div>
 )
