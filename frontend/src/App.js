@@ -8,6 +8,8 @@ import Footer from './components/common/Footer'
 import Navbar from './components/common/Navbar'
 import About from './components/common/About'
 import CompleteReg from './components/common/CompleteReg'
+import CompleteReq from './components/common/CompleteReq'
+import Request from './components/common/Request'
 
 
 // auth
@@ -28,6 +30,10 @@ import Show from './components/contents/Show'
 import New from './components/contents/New'
 import Edit from './components/contents/Edit'
 
+// admin
+import HandleRequests from './components/admin/HandleRequests'
+import HandleUsers from './components/admin/HandleUsers'
+
 
 const App = () => {
   return (
@@ -36,7 +42,9 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
-        <Route path="/complete" component={CompleteReg} />
+        <Route exact path="/complete" component={CompleteReg} />
+        <Route exact path="/request/sent" component={CompleteReq} />
+        <Route exact path="/request" component={Request} />
 
         <SecureRoute path="/contents/:id/edit" component={Edit} />
         <SecureRoute path="/contents/new" component={New} />
@@ -49,6 +57,10 @@ const App = () => {
 
         <SecureRoute path='/profiles/:id/edit' component={ProfileEdit} />
         <Route path="/profiles/:id" component={ProfileShow} />
+
+
+        <SecureRoute path='/admin/requests' component={HandleRequests} />
+        <SecureRoute path='/admin/users' component={HandleUsers} />
        
       </Switch>
       <Footer />

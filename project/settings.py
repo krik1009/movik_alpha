@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'tags',
     'categories',
     'comments',
-    'contents'
+    'contents',
+    'requests'
 ]
 
 MIDDLEWARE = [
@@ -142,4 +143,6 @@ AUTH_USER_MODEL = 'jwt_auth.User'
 
 STATIC_URL = '/static/'
 
-
+# MEDIA_ROOT = {
+#   'MEDIA_URL': 'api/requests/'
+# }

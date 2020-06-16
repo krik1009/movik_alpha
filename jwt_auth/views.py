@@ -42,7 +42,14 @@ class LoginView(APIView):
         return Response({'token': token, 'message': f'Welcome back {user.username}'})
 
 
-class ProfileView(APIView):
+class ProfileListView(APIView):
+    def get(self, _request):
+        users = User.objects.all()
+        serialized_users = PopulatedUserSerializer(users, many=True)
+        return Response(serialized_users.data, status=status.HTTP_200_OK)
+
+
+class ProfileDetailView(APIView):
     def get_user(self, pk):
         try:
             return User.objects.get(pk=pk)
@@ -53,6 +60,7 @@ class ProfileView(APIView):
         user = self.get_user(pk)
         serialized_user = PopulatedUserSerializer(user)
         return Response(serialized_user.data, status=status.HTTP_200_OK)
+
 
 
 class ProfileEdit(APIView):

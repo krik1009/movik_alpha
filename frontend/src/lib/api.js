@@ -36,6 +36,11 @@ export const deleteContent = async contentId => {
 
 
 // users
+export const getAllUsers = async () => {
+  const { data } = await axios.get(`${baseUrl}/profiles/`)
+  return data
+}
+
 export const getSingleUser = async userId => {
   const { data } = await axios.get(`${baseUrl}/profiles/${userId}/`)
   return data
@@ -57,7 +62,14 @@ export const deleteUser = async userId => {
   return await axios.delete(`${baseUrl}/profiles/${userId}/edit/`, withHeaders())
 }
 
+export const isAdmin = async (userId = '') => {
+  if (!userId) return false
 
+  const user = await getSingleUser(userId)
+  if (!user) return false
+  if (user.is_superuser === false || user.is_staff === false) return false
+  return true
+}
 
 // tags
 export const getAllTags = async () => {
@@ -99,7 +111,7 @@ export const deleteCategory = async categoryId => {
 
 // followers
 export const getAllFollows = async () => {
-  const { data } = await axios.get(`${baseUrl}/followers/`, withHeaders() )
+  const { data } = await axios.get(`${baseUrl}/followers/`, withHeaders())
   return data
 }
 
@@ -116,7 +128,7 @@ export const unfollowOwner = async id => {
 
 // likes
 export const getAllLikes = async () => {
-  const { data } = await axios.get(`${baseUrl}/likes/`, withHeaders() )
+  const { data } = await axios.get(`${baseUrl}/likes/`, withHeaders())
   return data
 }
 
@@ -143,4 +155,29 @@ export const postComment = async formData => {
 
 export const deleteComment = async id => {
   return await axios.delete(`${baseUrl}/comments/${id}/`, withHeaders())
+}
+
+
+// requests
+export const getAllRequests = async () => {
+  const { data } = await axios.get(`${baseUrl}/requests/admin/`, withHeaders())
+  return data
+}
+
+export const postRequest = async formData => {
+  return await axios.post(`${baseUrl}/requests/`, formData)
+}
+
+export const getSinglelRequest = async requestId => {
+  const { data } = await axios.get(`${baseUrl}/requests/admin/${requestId}/edit/`, withHeaders())
+  return data
+}
+
+export const editRequest = async (requestId, formData) => {
+  const { data } = await axios.put(`${baseUrl}/requests/admin/${requestId}/edit/`, formData, withHeaders())
+  return data
+}
+
+export const deleteRequest = async (requestId, formData) => {
+  return await axios.delete(`${baseUrl}/requests/admin/${requestId}/edit/`, formData, withHeaders())
 }

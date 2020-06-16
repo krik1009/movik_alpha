@@ -25,4 +25,5 @@ urlpatterns = [
     path('api/tags/', include('tags.urls')),
     path('api/categories/', include('categories.urls')),
     path('api/followers/', include('followers.urls')),
+    path('api/requests/', include('requests.urls'))
 ]

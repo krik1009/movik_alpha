@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { registerUser } from '../../lib/api'
 import { setToken } from '../../lib/auth'
 import { backgroundImages } from '../../styles/backgroundImages'
@@ -38,7 +39,6 @@ class RegisterInit extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     const { formData, errors } = this.state
     const formStyle = {
       display: 'flex',
@@ -190,6 +190,7 @@ class RegisterInit extends React.Component {
                     >Submit</button>
                 </div>
               </form>
+
 
             </div>
           </div>

@@ -2,8 +2,8 @@
 //! display profile image when hover
 
 import React from 'react'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { getAllContents } from '../../lib/api'
 
 
 class Index extends React.Component {
@@ -18,8 +18,8 @@ class Index extends React.Component {
 
   async componentDidMount() {
     try {
-      const { data } = await axios.get('/api/contents')
-      this.setState({ contents: data, filteredContents: data })
+      const contents = await getAllContents()
+      this.setState({ contents, filteredContents: contents })
     } catch(err) {
       console.log(err)
     }
