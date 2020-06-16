@@ -42,7 +42,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
-        <Route exact path="/complete" component={CompleteReg} />
+        <Route exact path="/register/sent" component={CompleteReg} />
         <Route exact path="/request/sent" component={CompleteReq} />
         <Route exact path="/request" component={Request} />
 

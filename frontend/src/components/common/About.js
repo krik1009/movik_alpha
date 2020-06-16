@@ -29,42 +29,70 @@ class LandingPage extends React.Component {
   render() {
     const { view, benefitsCreator, benefitsViewer } = this.state
     const ram =  Math.floor(Math.random() * (backgroundImages.length - 1))
+    const backgroundStyle = {
+      display: 'flex',
+      justifyContent: 'center',
+      backgroundImage: `url(${backgroundImages[ram]})`,
+      filter: "opacity(80%)",
+      backgroundPosition:'center', 
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      minHeight: window.innerWidth > 420 ? 1200 : 500,
+      minWidth: window.innerWidth
+    }
     const btnStyle = {
-      fontSize: 50,
+      fontSize: window.innerWidth > 420 ? 50 : 20,
       filter: "none",
       textDecoration: "none",
-      margin: 100,
-      minWidth: "30%",
+      margin: window.innerWidth > 420 ? 80 : 20,
+      width: window.innerWidth > 420 ? 360 : 200,
       fontFamily: 'Lexend Tera'
     }
+    const articlesContainerStyle = {
+      display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContents: 'center', marginTop: window.innerWidth > 420 ? 50 : 20
+    }
     const articleStyle = {
-      width: "80%",
       margin: 10,
       backgroundColor: 'rgba(255, 255, 255, 0.8)',
-      padding: 20,
-      fontSize: 12
+      padding: window.innerWidth > 420 ? 20 : 10,
+      fontSize: window.innerWidth > 420 ? 12 : 8,
+      width: window.innerWidth > 420 ? '80%' : '90%',
     }
     const articleHeaderStyle = {
-      fontSize: 16,
+      fontSize: window.innerWidth > 420 ? 16 : 12,
       fontWeight: 800,
+    }
+    const benefitListStyle = { 
+      display: 'flex', 
+      marginBottom: 20,
+      flexDirection: window.innerWidth > 420 ? 'row' : 'column',
+    }
+    const benefitCardStyle = {
+      margin: 10, 
+      width: window.innerWidth > 420 ? '32%' : '90%',
+      fontSize: window.innerWidth > 420 ? 12 : 10,
+    }
+    const regBtnContainerStyle = {
+      display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 30, width: '100%'
+    }
+    const regBtnStyle = {
+      fontSize: window.innerWidth > 420 ? 20 : 16,
+      padding: 10, 
+      width: window.innerWidth > 420 ? '100%' : '90%',
+      minHeight: window.innerWidth > 420 ? 80 : 40,
     }
 
     return (
       <>
         <div 
           className={(view.creator === false & view.viewer === false) ? '' : 'is-hidden'}
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            backgroundImage: `url(${backgroundImages[ram]})`,
-            filter: "opacity(80%)",
-            backgroundPosition:'center', 
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            height: 1000
-          }}
+          style={backgroundStyle}
         >
-          <div className="buttons">
+          <div className="buttons" style={{ 
+            display: 'flex',
+            flexDirection: window.innerWidth > 420 ? 'row' : 'column',
+            justifyContent: 'center',
+            alignItems: 'center' }}>
             <button 
               onClick={this.handleView}
               name="creator"
@@ -82,16 +110,10 @@ class LandingPage extends React.Component {
           </div>
         </div>
 
-
+  
         <div className={view.creator === true ? '' : 'is-hidden'}>
-          <main style={{
-            backgroundImage: `url(${backgroundImages[ram]})`,
-            backgroundPosition:'center', 
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            display: 'flex', justifyContents: 'center',
-          }}>
-            <div className='container' style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: 30 }}>
+          <main style={backgroundStyle}>
+            <div className='container' style={articlesContainerStyle}>
               <article className="message is-dark" style={articleStyle}>
                 <h2 style={articleHeaderStyle}><i className="fas fa-info-circle"></i> About The Company</h2>
                 <hr />
@@ -106,12 +128,21 @@ class LandingPage extends React.Component {
                 <img src={schemeCreator} alt="concept" style={{ width:'60%', alignSelf: 'center' }} />
               </article>
 
+              {window.innerWidth < 420 && 
+                <div style={regBtnContainerStyle}>
+                  <Link 
+                    to='/register/init'
+                    className="button is-rounded is-danger" 
+                    style={regBtnStyle}
+                    ><strong>Register</strong></Link>
+                </div>}
+
               <article className="message is-dark" style={articleStyle}>
                 <h2 style={articleHeaderStyle}><i className="fas fa-chart-line"></i> Your Benefits</h2>
                 <hr />
-                <div style={{ display: 'flex', marginBottom: 20 }}>
+                <div style={benefitListStyle}>
                 {benefitsCreator.map( item => (
-                  <article className="message is-dark" key={item.index} style={{ margin: 10, width: "32%", fontSize: 12 }}>
+                  <article className="message is-dark" key={item.index} style={benefitCardStyle}>
                     <div className="message-header">{item.summary}</div>
                     <div className="message-body"><i className="fas fa-check"></i> {item.detail}</div>
                   </article>
@@ -119,12 +150,12 @@ class LandingPage extends React.Component {
                 </div>
               </article>
 
-              <div style={{ display: 'flex', justifyContent: 'center', margin: 50, width: '80%' }}>
+              <div style={regBtnContainerStyle}>
                 <Link 
                   to='/register/init'
                   className="button is-rounded is-danger" 
-                  style={{ fontSize: 20, padding: 10, width: "100%", minHeight: 80 }}
-                  ><strong>Register for updates and more info</strong></Link>
+                  style={regBtnStyle}
+                  ><strong>Register</strong></Link>
               </div>
               
             </div>
@@ -133,13 +164,7 @@ class LandingPage extends React.Component {
 
 
         <div className={view.viewer === true ? '' : 'is-hidden'}>
-          <main style={{
-            backgroundImage: `url(${backgroundImages[ram]})`,
-            backgroundPosition:'center', 
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            display: 'flex', justifyContents: 'center',
-          }}>
+          <main style={backgroundStyle}>
             <div className='container' style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: 30 }}>
               <article className="message is-dark" style={articleStyle}>
                 <h2 style={articleHeaderStyle}><i className="fas fa-info-circle"></i> About The Company</h2>
@@ -157,12 +182,20 @@ class LandingPage extends React.Component {
                 <img src={schemeViewer} alt="concept" style={{ width:'60%', alignSelf: 'center' }} />
               </article>
 
+              {window.innerWidth < 420 && <div style={regBtnContainerStyle}>
+                <Link 
+                  to='/register/init'
+                  className="button is-rounded is-danger" 
+                  style={regBtnStyle}
+                  ><strong>Register</strong></Link>
+              </div>}
+
               <article className="message is-dark" style={articleStyle}>
                 <h2 style={articleHeaderStyle}><i className="fas fa-chart-line"></i> Your Benefits</h2>
                 <hr />
-                <div style={{ display: 'flex', marginBottom: 20 }}>
+                <div style={benefitListStyle}>
                 {benefitsViewer.map( item => (
-                  <article className="message is-dark" key={item.index} style={{ margin: 10, width: "32%", fontSize: 12 }}>
+                  <article className="message is-dark" key={item.index} style={benefitCardStyle}>
                     <div className="message-header">{item.summary}</div>
                     <div className="message-body"><i className="fas fa-check"></i> {item.detail}</div>
                   </article>
@@ -174,8 +207,8 @@ class LandingPage extends React.Component {
                 <Link 
                   to='/register/init'
                   className="button is-rounded is-danger" 
-                  style={{ fontSize: 20, padding: 10, width: "100%", minHeight: 80 }}
-                  ><strong>Register for updates and more info</strong></Link>
+                  style={regBtnStyle}
+                  ><strong>Register</strong></Link>
               </div>
               
             </div>

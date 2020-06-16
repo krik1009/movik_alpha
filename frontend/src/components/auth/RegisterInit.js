@@ -32,7 +32,7 @@ class RegisterInit extends React.Component {
     try {
       const res = await registerUser(this.state.formData)
       setToken(res.data.token)
-      this.props.history.push('/complete')
+      this.props.history.push('/register/sent')
     } catch (err) {
       this.setState({ errors: err.response.data.errors })
     } 

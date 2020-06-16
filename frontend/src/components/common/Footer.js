@@ -5,9 +5,11 @@ import { getUserId } from '../../lib/auth'
 
 
 const Footer = () => (
-  <footer className="footer" style={{ backgroundColor: '#e5e5e5', marginTop: 20 }}>
+  <footer className="footer" style={{ backgroundColor: '#e5e5e5', marginTop: 0 }}>
     <div className="content has-text-centered">
-      <p style={{ fontSize: 16 }}>
+      <p style={{ 
+        fontSize: window.innerWidth > 420 ? 16 : 10
+        }}>
         <strong>movik</strong> by <a href="/">movik.com</a> copyright 2020
       </p>
     </div>

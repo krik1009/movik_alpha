@@ -58,8 +58,9 @@ class Request extends React.Component {
         minHeight: 500
         }}>
         <section className="section">
-          <div className="container box" style={{ maxWidth: '60%', backgroundColor: 'rgba(255, 255, 255, 0.5)'}}>
+          <div className="container box" style={{ maxWidth: '60%', backgroundColor: 'rgba(255, 255, 255, 0.7)'}}>
             <h1 className="title">Request Form</h1>
+            <h2>We will contact you as soon as possible</h2> 
             {/* <p style={{ fontSize: 10 }}>* required</p> */}
             <hr />
 
@@ -119,7 +120,7 @@ class Request extends React.Component {
                 </div>
 
                 <div className="field" style={formStyle}>
-                  <label className="label" style={labelStyle}>Description *</label>
+                  <label className="label" style={labelStyle}>Request *</label>
                   <p class="control"style={controlStyle}>
                     <input
                       className={`input ${errors.description ? 'is-danger' : ''}`}

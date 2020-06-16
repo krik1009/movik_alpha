@@ -32,14 +32,15 @@ class Home extends React.Component {
           backgroundPosition:'center', 
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          height: 1000
+          minHeight: window.innerWidth > 420 ? 1200 : 500,
         }}
+        className='Home'
       >
         <h1 style={{ 
-          fontSize: 100,
+          fontSize: window.innerWidth > 420 ? 100 : 50,
           filter: "none",
           textDecoration: "none",
-          marginTop: 200,
+          marginTop: window.innerWidth > 420 ? 200 : 100,
           color: 'black'
         }}>
           movik

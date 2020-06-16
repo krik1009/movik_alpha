@@ -24,16 +24,15 @@ const CompleteReg = () => (
       marginTop: 150, 
       height: 200 }}>
       <h1 style={{ 
-        fontSize: 50,
+        fontSize: 36,
         filter: "none",
         textDecoration: "none",
-
         color: 'black'
       }}>
         Thank you for the registration
       </h1>
       <br />
-      <p style={{ fontSize: 18 }}>We will keep you inform our product updates.</p>
+      <p style={{ fontSize: 24, color: 'black' }}>We will keep you inform our product updates.</p>
     </div>
   </div>
 )
