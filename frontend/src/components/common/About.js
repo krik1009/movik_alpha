@@ -5,19 +5,19 @@ import schemeCreator from '../../styles/imgs/about1_creators.png'
 import schemeViewer from '../../styles/imgs/about1_viewers.png'
 
 
-class LandingPage extends React.Component {
+class About extends React.Component {
   state = {
    view: { creator: false, viewer: false },
    benefitsCreator: [
-     { summary: 'Revenue Opportunity', detail: 'Incentify your audience to tip your contents by unique revenue share scheme and no-ads mode' },
-     { summary: 'Direct Communication', detail: 'No restrictions to communicate with your audience and get feedback'},
-     { summary: 'Maximum Exposure', detail: 'Random recommendation system to expose your contents to your potential fans'}
+     { summary: 'More Income', detail: 'Motivate your followers to tip you directly through the income sharing scheme and no-ads mode' },
+     { summary: 'More Followers', detail: 'Increase followers through the income sharing scheme'},
+     { summary: 'Interactive Feedback', detail: 'No restrictions to communicate with your audience and get honest feedback'},
    ],
    benefitsViewer: [
-    { summary: 'Discovery', detail: 'Find your favorite content creator available at movik'},
-    { summary: 'Direct Communication', detail: 'Support your creators through your feedback, comments and tip' },
-    { summary: 'Revenue Opportunity', detail: 'Tip creators of your choice and share prospect revnue generated through tip from other fans' },
-    { summary: 'Ad Restriction', detail: 'No ads during the contents' }
+    { summary: 'More Growth, More Return', detail: 'Tip creators of your choice and enjoy return from their prospect income on the platform' },
+    { summary: 'Ad Restriction', detail: 'No ads during the contents (after tip)' },
+    { summary: 'Contents Discovery', detail: 'Find your favorite contents, some exclusively available on the platform'},
+    { summary: 'Interactive Communication', detail: 'Message your favorite creators and share your thoughts' },
   ]
   }
 
@@ -29,6 +29,7 @@ class LandingPage extends React.Component {
   render() {
     const { view, benefitsCreator, benefitsViewer } = this.state
     const ram =  Math.floor(Math.random() * (backgroundImages.length - 1))
+    const overBreakPoint = window.innerWidth > 420 ? true : false
     const backgroundStyle = {
       display: 'flex',
       justifyContent: 'center',
@@ -37,49 +38,76 @@ class LandingPage extends React.Component {
       backgroundPosition:'center', 
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
-      minHeight: window.innerWidth > 420 ? 1200 : 500,
+      minHeight: overBreakPoint ? 1200 : 500,
       minWidth: window.innerWidth
     }
+    const btnContainerStyle = { 
+      display: 'flex',
+      flexDirection: overBreakPoint ? 'row' : 'column',
+      justifyContent: 'center',
+      alignItems: 'center' 
+    }
     const btnStyle = {
-      fontSize: window.innerWidth > 420 ? 50 : 20,
+      fontSize: overBreakPoint ? 50 : 20,
       filter: "none",
       textDecoration: "none",
-      margin: window.innerWidth > 420 ? 80 : 20,
-      width: window.innerWidth > 420 ? 360 : 200,
+      margin: overBreakPoint ? 50 : 20,
+      width: overBreakPoint ? 360 : 200,
       fontFamily: 'Lexend Tera'
     }
     const articlesContainerStyle = {
-      display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContents: 'center', marginTop: window.innerWidth > 420 ? 50 : 20
+      display: 'flex', 
+      alignItems: 'center',
+      flexDirection: 'column', 
+      justifyContents: 'center', 
+      marginTop: overBreakPoint ? 50 : 20
     }
     const articleStyle = {
       margin: 10,
       backgroundColor: 'rgba(255, 255, 255, 0.8)',
-      padding: window.innerWidth > 420 ? 20 : 10,
-      fontSize: window.innerWidth > 420 ? 12 : 8,
-      width: window.innerWidth > 420 ? '80%' : '90%',
+      padding: overBreakPoint ? 20 : 10,
+      width: overBreakPoint ? '80%' : '90%',
     }
     const articleHeaderStyle = {
-      fontSize: window.innerWidth > 420 ? 16 : 12,
+      fontSize: overBreakPoint ? 16 : 12,
       fontWeight: 800,
+      color: 'black',
+    }
+    const articleBodyStyle = {
+      fontFamily: 'arial',
+      fontSize: overBreakPoint ? 16 : 12,
     }
     const benefitListStyle = { 
       display: 'flex', 
       marginBottom: 20,
-      flexDirection: window.innerWidth > 420 ? 'row' : 'column',
+      flexDirection: overBreakPoint ? 'row' : 'column',
     }
     const benefitCardStyle = {
       margin: 10, 
-      width: window.innerWidth > 420 ? '32%' : '90%',
-      fontSize: window.innerWidth > 420 ? 12 : 10,
+      width: overBreakPoint ? '32%' : '90%',
+      fontSize: overBreakPoint ? 14 : 12,
+    }
+    const benefitCardHeaderStyle = {
+      backgroundColor: 'black',
+      fontFamily: 'arial'
+    }
+    const benefitCardBodyStyle = {
+      // fontSize: overBreakPoint ? 12 : 10,
+      fontFamily: 'arial'
     }
     const regBtnContainerStyle = {
-      display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 30, width: '100%'
+      display: 'flex', 
+      justifyContent: 'center', 
+      marginTop: 10, 
+      marginBottom: 30, 
+      width: '100%'
     }
     const regBtnStyle = {
-      fontSize: window.innerWidth > 420 ? 20 : 16,
+      fontSize: overBreakPoint ? 20 : 16,
+      fontWeight: 700,
       padding: 10, 
-      width: window.innerWidth > 420 ? '100%' : '90%',
-      minHeight: window.innerWidth > 420 ? 80 : 40,
+      width: overBreakPoint ? '80%' : '90%',
+      minHeight: overBreakPoint ? 80 : 40,
     }
 
     return (
@@ -88,11 +116,7 @@ class LandingPage extends React.Component {
           className={(view.creator === false & view.viewer === false) ? '' : 'is-hidden'}
           style={backgroundStyle}
         >
-          <div className="buttons" style={{ 
-            display: 'flex',
-            flexDirection: window.innerWidth > 420 ? 'row' : 'column',
-            justifyContent: 'center',
-            alignItems: 'center' }}>
+          <div className="buttons" style={btnContainerStyle}>
             <button 
               onClick={this.handleView}
               name="creator"
@@ -117,18 +141,20 @@ class LandingPage extends React.Component {
               <article className="message is-dark" style={articleStyle}>
                 <h2 style={articleHeaderStyle}><i className="fas fa-info-circle"></i> About The Company</h2>
                 <hr />
-                <p><strong>movik</strong> is a cutting edge contents platform to provide income opportunity for creators in early stage through its unique revenuse share scheme.</p>
+                <p style={articleBodyStyle}><strong>movik</strong> is a cutting edge contents platform to provide income opportunity for emerging creators through its unique revenuse share scheme.</p>
               </article>
           
               <article className="message is-dark" style={articleStyle}>
                 <h2 style={articleHeaderStyle}><i className="fas fa-cogs"></i> How It Works</h2>
                 <hr />
-                <p><strong>movik</strong> intencifies viewers to tip creators of their choice through the income sharing. On top of revenue from ads, all creators have chance to gain extra revenue from their core fans.</p>
+                <p style={articleBodyStyle}><strong>movik</strong> motivates viewers to tip creators of their choice and share the contents through the kick-back system of the tip they had paid for the creators.
+                <br />So, you can enjoy extra income from your followers on top of the ad revenue generated on the platform, while accelerating the growth of your account.
+                </p>
                 <br/>
-                <img src={schemeCreator} alt="concept" style={{ width:'60%', alignSelf: 'center' }} />
+                <img src={schemeCreator} alt="concept" style={{ width:'60%', justifySelf: 'center'}} />
               </article>
 
-              {window.innerWidth < 420 && 
+              {!overBreakPoint && 
                 <div style={regBtnContainerStyle}>
                   <Link 
                     to='/register/init'
@@ -143,19 +169,26 @@ class LandingPage extends React.Component {
                 <div style={benefitListStyle}>
                 {benefitsCreator.map( item => (
                   <article className="message is-dark" key={item.index} style={benefitCardStyle}>
-                    <div className="message-header">{item.summary}</div>
-                    <div className="message-body"><i className="fas fa-check"></i> {item.detail}</div>
+                    <div className="message-header" style={benefitCardHeaderStyle}>{item.summary}</div>
+                    <div className="message-body" style={benefitCardBodyStyle}><i className="fas fa-check"></i> {item.detail}</div>
                   </article>
                 ))}
                 </div>
               </article>
 
               <div style={regBtnContainerStyle}>
-                <Link 
+                {overBreakPoint ?
+                  <Link 
+                    to='/register/init'
+                    className="button is-rounded is-danger" 
+                    style={regBtnStyle}
+                    >Register for more updates</Link>
+                    :
+                  <Link 
                   to='/register/init'
                   className="button is-rounded is-danger" 
                   style={regBtnStyle}
-                  ><strong>Register</strong></Link>
+                  >Register</Link>}  
               </div>
               
             </div>
@@ -165,24 +198,29 @@ class LandingPage extends React.Component {
 
         <div className={view.viewer === true ? '' : 'is-hidden'}>
           <main style={backgroundStyle}>
-            <div className='container' style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: 30 }}>
+            <div className='container' style={btnContainerStyle}>
               <article className="message is-dark" style={articleStyle}>
                 <h2 style={articleHeaderStyle}><i className="fas fa-info-circle"></i> About The Company</h2>
                 <hr />
-                <p><strong>movik</strong> is a cutting edge contents platform to provide opportunity to discover new creators in early stage and share income with the creators through tip. The platform is completely <strong>free</strong> to access.</p>
+                <p style={articleBodyStyle}><strong>movik</strong> is a cutting edge contents platform to provide you an opportunity to discover and invest your favorite creators.
+                <br/>The contents on the platform are <strong>free</strong> to view and whether to tip the creators is all up to you.</p>
               </article>
 
               <article className="message is-dark" style={articleStyle}>
                 <h2 style={articleHeaderStyle}><i className="fas fa-cogs"></i> How It Works</h2>
                 <hr />
-                <p><strong>movik</strong> provide you opportunities to discover and invest your favorite content creators. 
+                <p style={articleBodyStyle}><strong>movik</strong> provide income sharing scheme among creators and viewers.
                 <br />
-                The platform is free to access, and you have an option to tip creators of your choice. Earlier you tip a creator, more chance you increase the gain in the future.</p>
+                After the registration, you have an option to tip creators of your choice if you enjoy their contents. Then, you have a right to gain a portion of income that the creators you tipped will make on the platform. More income the creators will make, more return you will recieve in the future.
+                <br />
+                Exclusive contents, ad blocking function, and direct message to the creators available.
+                </p>
+
                 <br/>
-                <img src={schemeViewer} alt="concept" style={{ width:'60%', alignSelf: 'center' }} />
+                <img src={schemeViewer} alt="concept" style={{ width:'60%', justifySelf: 'center'}} />
               </article>
 
-              {window.innerWidth < 420 && <div style={regBtnContainerStyle}>
+              {!overBreakPoint && <div style={regBtnContainerStyle}>
                 <Link 
                   to='/register/init'
                   className="button is-rounded is-danger" 
@@ -196,30 +234,34 @@ class LandingPage extends React.Component {
                 <div style={benefitListStyle}>
                 {benefitsViewer.map( item => (
                   <article className="message is-dark" key={item.index} style={benefitCardStyle}>
-                    <div className="message-header">{item.summary}</div>
-                    <div className="message-body"><i className="fas fa-check"></i> {item.detail}</div>
+                    <div className="message-header" style={benefitCardHeaderStyle}>{item.summary}</div>
+                    <div className="message-body" style={benefitCardBodyStyle}><i className="fas fa-check"></i> {item.detail}</div>
                   </article>
                 ))}
                 </div>
               </article>
 
-              <div style={{ display: 'flex', justifyContent: 'center', margin: 50, width: "80%"}}>
+              <div style={regBtnContainerStyle}>
+              {overBreakPoint ?
                 <Link 
                   to='/register/init'
                   className="button is-rounded is-danger" 
                   style={regBtnStyle}
-                  ><strong>Register</strong></Link>
+                  >Register for more updates</Link>
+                  :
+                <Link 
+                to='/register/init'
+                className="button is-rounded is-danger" 
+                style={regBtnStyle}
+                >Register</Link>}
               </div>
               
             </div>
           </main>
         </div>
       </>
-    
-
     )
   }
-
 }
 
-export default LandingPage
+export default About

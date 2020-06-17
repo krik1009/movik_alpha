@@ -43,7 +43,7 @@ class RegisterInit extends React.Component {
     const backgroundStyle = {
       display: 'flex',
       justifyContent: 'center',
-      backgroundImage: `url(${backgroundImages[6]})`,
+      backgroundImage: `url(${backgroundImages[5]})`,
       backgroundPosition:'center', 
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
