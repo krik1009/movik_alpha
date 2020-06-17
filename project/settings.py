@@ -151,7 +151,6 @@ STATIC_URL = '/static/'
 
 ROOT_URLCONF = 'project.urls' #check if you have this already, if not add it in
 
-STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend', "build", "static"), 
