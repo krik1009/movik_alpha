@@ -10,7 +10,7 @@ const Footer = () => (
       <p style={{ 
         fontSize: window.innerWidth > 420 ? 16 : 10
         }}>
-        <strong>movik</strong> by <a href="/">movik.com</a> copyright 2020
+        <strong>movik</strong> by <a href="/">movik inc.</a> copyright 2020
       </p>
     </div>
 
