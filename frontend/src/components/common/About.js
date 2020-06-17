@@ -89,7 +89,8 @@ class About extends React.Component {
     }
     const benefitCardHeaderStyle = {
       backgroundColor: 'black',
-      fontFamily: 'arial'
+      fontFamily: 'arial',
+      height: 36
     }
     const benefitCardBodyStyle = {
       // fontSize: overBreakPoint ? 12 : 10,
@@ -198,7 +199,7 @@ class About extends React.Component {
 
         <div className={view.viewer === true ? '' : 'is-hidden'}>
           <main style={backgroundStyle}>
-            <div className='container' style={btnContainerStyle}>
+            <div className='container' style={articlesContainerStyle}>
               <article className="message is-dark" style={articleStyle}>
                 <h2 style={articleHeaderStyle}><i className="fas fa-info-circle"></i> About The Company</h2>
                 <hr />
