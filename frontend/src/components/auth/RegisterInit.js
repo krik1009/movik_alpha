@@ -107,11 +107,11 @@ class RegisterInit extends React.Component {
                   <div className="control" style={controlStyle}>
                   {!overBreakPoint && <label className="label" style={labelStyle}>You are: </label>}
                   <label className="radio" style={{ marginRight: 20 }}>
-                    <input type="radio" name="user_type"  value="cr" onClick={this.handleChange}/ >
+                    <input type="radio" name="user_type"  value="cr" onClick={this.handleChange} style={{ margin: 8}}/>
                     Creator
                   </label>
                   <label className="radio">
-                    <input type="radio"  name="user_type"  value="vw" onClick={this.handleChange} />
+                    <input type="radio"  name="user_type"  value="vw" onClick={this.handleChange} style={{ margin: 8}}/>
                     Viewer
                   </label>
                     {/* <input

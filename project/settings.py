@@ -142,7 +142,6 @@ AUTH_USER_MODEL = 'jwt_auth.User'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
 
 # MEDIA_ROOT = {
 #   'MEDIA_URL': 'api/requests/'
@@ -150,6 +149,7 @@ STATIC_URL = '/static/'
 
 ROOT_URLCONF = 'project.urls' #check if you have this already, if not add it in
 
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend', "build", "static"), 
