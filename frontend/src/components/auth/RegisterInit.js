@@ -54,7 +54,12 @@ class RegisterInit extends React.Component {
       backgroundColor: 'rgba(255, 255, 255, 0.7)'
     }
     const titleStyle ={
-      fontSize: overBreakPoint ? 28 : 20
+      fontSize: overBreakPoint ? 28 : 20,
+      fontFamily: 'arial'
+    }
+    const subtitleStyle = {
+      fontSize: overBreakPoint ? 20 : 16,
+      fontFamily: 'arial'
     }
     const formStyle = {
       display: 'flex',
@@ -71,6 +76,7 @@ class RegisterInit extends React.Component {
       margin: overBreakPoint ? 12 : 8,
       width: overBreakPoint ? '70%' : '100%',
       fontSize: overBreakPoint ? 18 : 10,
+      fontFamily: 'arial'
     }
     const submitBtnStyle = {
       marginTop: 50
@@ -81,7 +87,7 @@ class RegisterInit extends React.Component {
         <section className="section">
           <div className="container box" style={containerStyle}>
             <h1 className="title" style={titleStyle}>Registeration Form</h1>
-            <p style={{ fontSize: 12 }}>We will share with you our new product features.</p>
+            <p style={subtitleStyle}>We will share with you our new product features.</p>
             <hr />
 
             <div className="columns">
@@ -107,12 +113,12 @@ class RegisterInit extends React.Component {
                   {overBreakPoint && <label className="label" style={labelStyle}>You are: </label>}
                   <div className="control" style={controlStyle}>
                   {!overBreakPoint && <label className="label" style={labelStyle}>You are: </label>}
-                  <label className="radio" style={{ marginRight: 20 }}>
-                    <input type="radio" name="user_type"  value="cr" onClick={this.handleChange} style={{ marginRight: 8}}/>
+                  <label className="radio" style={{ labelStyle }}>
+                    <input type="radio" name="user_type"  value="cr" onClick={this.handleChange} style={{ marginRight: 8 }}/>
                     Creator
                   </label>
-                  <label className="radio">
-                    <input type="radio"  name="user_type"  value="vw" onClick={this.handleChange} style={{ marginRight: 8}}/>
+                  <label className="radio" style={{ labelStyle }}>
+                    <input type="radio"  name="user_type"  value="vw" onClick={this.handleChange} style={{ marginRight: 8, fontFamily: 'arial' }}/>
                     Viewer
                   </label>
                     {/* <input

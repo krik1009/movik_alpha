@@ -50,7 +50,12 @@ class Request extends React.Component {
       backgroundColor: 'rgba(255, 255, 255, 0.7)'
     }
     const titleStyle ={
-      fontSize: overBreakPoint ? 28 : 20
+      fontSize: overBreakPoint ? 28 : 20,
+      fontFamily: 'arial'
+    }
+    const subtitleStyle = {
+      fontSize: overBreakPoint ? 20 : 16,
+      fontFamily: 'arial'
     }
     const formStyle = {
       display: 'flex',
@@ -61,11 +66,13 @@ class Request extends React.Component {
       margin: overBreakPoint ? 12 : 8,
       width: overBreakPoint ? '25%' : '100%',
       fontSize: overBreakPoint ? 18 : 10,
+      fontFamily: 'arial'
     }
     const controlStyle = {
       margin: overBreakPoint ? 12 : 8,
       width: overBreakPoint ? '70%' : '100%',
       fontSize: overBreakPoint ? 18 : 10,
+      fontFamily: 'arial'
     }
     const submitBtnStyle = {
       marginTop: 50
@@ -76,7 +83,7 @@ class Request extends React.Component {
         <section className="section">
           <div className="container box" style={containerStyle}>
             <h1 className="title" style={titleStyle}>Request Form</h1>
-            <h2>We will contact you as soon as possible</h2> 
+            <p style={subtitleStyle}>We will contact you as soon as possible</p> 
             <hr />
 
             <div className="columns">
