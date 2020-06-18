@@ -65,6 +65,7 @@ class RegisterInit extends React.Component {
       margin: overBreakPoint ? 12 : 8,
       width: overBreakPoint ? '25%' : '100%',
       fontSize: overBreakPoint ? 18 : 10,
+      fontFamily: 'arial'
     }
     const controlStyle = {
       margin: overBreakPoint ? 12 : 8,
