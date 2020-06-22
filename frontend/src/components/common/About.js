@@ -7,18 +7,20 @@ import schemeViewer from '../../styles/imgs/about1_viewers.png'
 
 class About extends React.Component {
   state = {
-   view: { creator: false, viewer: false },
-   benefitsCreator: [
-     { summary: 'More Income', detail: 'Motivate your followers to tip you directly through the income sharing scheme and no-ads mode' },
-     { summary: 'More Followers', detail: 'Increase followers through the income sharing scheme'},
-     { summary: 'Interactive Feedback', detail: 'No restrictions to communicate with your audience and get honest feedback'},
-   ],
-   benefitsViewer: [
-    { summary: 'More Growth, More Return', detail: 'Tip creators of your choice and enjoy return from their prospect income on the platform' },
-    { summary: 'Ad Restriction', detail: 'No ads during the contents (after tip)' },
-    { summary: 'Contents Discovery', detail: 'Find your favorite contents, some exclusively available on the platform'},
-    { summary: 'Interactive Communication', detail: 'Message your favorite creators and share your thoughts' },
-  ]
+    view: { creator: false, viewer: false },
+    components: { about: false, scheme: false, benefits: false },
+    compIcons: { about: 'down', scheme: 'down', benefits: 'down' },
+    benefitsCreator: [
+      { summary: 'More Income', detail: 'Motivate your followers to tip you directly through the income sharing scheme and no-ads mode' },
+      { summary: 'More Followers', detail: 'Increase followers through the income sharing scheme'},
+      { summary: 'Interactive Feedback', detail: 'No restrictions to communicate with your audience and get honest feedback'},
+    ],
+    benefitsViewer: [
+      { summary: 'More Growth, More Return', detail: 'Tip creators of your choice and enjoy return from their prospect income on the platform' },
+      { summary: 'Contents Discovery', detail: 'Find your favorite contents, some exclusively available on the platform'},
+      { summary: 'No Ads on Contents', detail: 'No ads during the contents' },
+      // { summary: 'Interactive Communication', detail: 'Message your favorite creators and share your thoughts' },
+    ]
   }
 
   handleView = e => {
@@ -26,8 +28,18 @@ class About extends React.Component {
     this.setState({ view })
   }
 
+  handleShow = comp => {
+    const components = { ...this.state.components, [comp]: !this.state.components[comp] }
+    const compIcons = !this.state.components[comp] === true ? 
+      { ...this.state.compIcons, [comp]: 'up' }
+      :
+      { ...this.state.compIcons, [comp]: 'down' }
+    this.setState({ components, compIcons })
+    // console.log(this.state.compIcons)
+  }
+
   render() {
-    const { view, benefitsCreator, benefitsViewer } = this.state
+    const { view, benefitsCreator, benefitsViewer, components, compIcons } = this.state
     const ram =  Math.floor(Math.random() * (backgroundImages.length - 1))
     const overBreakPoint = window.innerWidth > 420 ? true : false
     const backgroundStyle = {
@@ -69,14 +81,14 @@ class About extends React.Component {
       width: overBreakPoint ? '80%' : '90%',
     }
     const articleHeaderStyle = {
-      fontSize: overBreakPoint ? 18 : 12,
+      fontSize: overBreakPoint ? 20 : 16,
       fontWeight: 800,
       color: 'black',
       fontFamily: 'arial'
     }
     const articleBodyStyle = {
       fontFamily: 'arial',
-      fontSize: overBreakPoint ? 16 : 12,
+      fontSize: overBreakPoint ? 18 : 14,
     }
     const benefitListStyle = { 
       display: 'flex', 
@@ -91,7 +103,7 @@ class About extends React.Component {
     const benefitCardHeaderStyle = {
       backgroundColor: 'black',
       fontFamily: 'arial',
-      height: 36
+      height: 40
     }
     const benefitCardBodyStyle = {
       // fontSize: overBreakPoint ? 12 : 10,
@@ -105,8 +117,9 @@ class About extends React.Component {
       width: '100%'
     }
     const regBtnStyle = {
-      fontSize: overBreakPoint ? 20 : 16,
+      fontSize: overBreakPoint ? 24 : 20,
       fontWeight: 700,
+      fontFamily: 'arial',
       padding: 10, 
       width: overBreakPoint ? '80%' : '90%',
       minHeight: overBreakPoint ? 80 : 40,
@@ -136,61 +149,72 @@ class About extends React.Component {
           </div>
         </div>
 
-  
         <div className={view.creator === true ? '' : 'is-hidden'}>
           <main style={backgroundStyle}>
             <div className='container' style={articlesContainerStyle}>
+
               <article className="message is-dark" style={articleStyle}>
-                <h2 style={articleHeaderStyle}><i className="fas fa-info-circle"></i> About The Company</h2>
-                <hr />
-                <p style={articleBodyStyle}><strong>movik</strong> is a community for emerging creators to provide income opportunity  through its unique revenuse share scheme.</p>
+                <h2
+                  onClick={() => this.handleShow('about')}
+                  style={articleHeaderStyle}
+                  ><i className="fas fa-info-circle"></i> About The Company 
+                  <span className="icon">
+                    <i className={`fas fa-caret-${compIcons.about}`}></i>
+                  </span>
+                </h2>
+                <div className={ components.about === true ? '' : 'is-hidden'}>
+                  <hr />
+                  <p style={articleBodyStyle}>
+                    <strong>movik</strong> is a cutting-edge contents platform to provide income opportunity for emerging creators through its unique revenuse share scheme. The company is currently under seed funding and building prototype.</p>
+                </div>
               </article>
           
               <article className="message is-dark" style={articleStyle}>
-                <h2 style={articleHeaderStyle}><i className="fas fa-cogs"></i> How It Works</h2>
-                <hr />
-                <p style={articleBodyStyle}><strong>movik</strong> motivates viewers to tip creators of their choice and share the contents through the kick-back system of the tip they had paid for the creators.
-                <br />So, you can enjoy extra income from your followers on top of the ad revenue generated on the platform, while accelerating the growth of your account.
-                </p>
-                <br/>
-                <img src={schemeCreator} alt="concept" style={{ width:'60%', justifySelf: 'center'}} />
+                <h2 
+                   onClick={() => this.handleShow('scheme')} 
+                   style={articleHeaderStyle}
+                   ><i className="fas fa-cogs"></i>  How It Works
+                   <span className="icon">
+                    <i className={`fas fa-caret-${compIcons.scheme}`}></i>
+                  </span>
+                  </h2>
+                <div className={ components.scheme === true ? '' : 'is-hidden'}>
+                  <hr />
+                  <p style={articleBodyStyle}><strong>movik</strong> motivates viewers to tip creators of their choice and share the contents through the kick-back system of the tip they had paid for the creators.
+                  <br />So, you can enjoy extra income from your followers on top of the ad revenue generated on the platform, while accelerating the growth of your account.
+                  </p>
+                  <br/>
+                  <img src={schemeCreator} alt="concept" style={{ width:'60%', justifySelf: 'center'}} />
+                </div>
               </article>
 
-              {!overBreakPoint && 
-                <div style={regBtnContainerStyle}>
-                  <Link 
-                    to='/register/init'
-                    className="button is-rounded is-danger" 
-                    style={regBtnStyle}
-                    ><strong>Register</strong></Link>
-                </div>}
-
               <article className="message is-dark" style={articleStyle}>
-                <h2 style={articleHeaderStyle}><i className="fas fa-chart-line"></i> Your Benefits</h2>
-                <hr />
-                <div style={benefitListStyle}>
-                {benefitsCreator.map( item => (
-                  <article className="message is-dark" key={item.index} style={benefitCardStyle}>
-                    <div className="message-header" style={benefitCardHeaderStyle}>{item.summary}</div>
-                    <div className="message-body" style={benefitCardBodyStyle}><i className="fas fa-check"></i> {item.detail}</div>
-                  </article>
-                ))}
+                <h2
+                  onClick={() => this.handleShow('benefits')}
+                  style={articleHeaderStyle}
+                  ><i className="fas fa-chart-line"></i> Your Benefits
+                  <span className="icon">
+                    <i className={`fas fa-caret-${compIcons.benefits}`}></i>
+                  </span></h2>
+                <div className={ components.benefits === true ? '' : 'is-hidden'}>
+                  <hr />
+                  <div style={benefitListStyle}>
+                  {benefitsCreator.map( item => (
+                    <article className="message is-dark" key={item.index} style={benefitCardStyle}>
+                      <div className="message-header" style={benefitCardHeaderStyle}>{item.summary}</div>
+                      <div className="message-body" style={benefitCardBodyStyle}><i className="fas fa-check"></i> {item.detail}</div>
+                    </article>
+                  ))}
+                  </div>
                 </div>
               </article>
 
               <div style={regBtnContainerStyle}>
-                {overBreakPoint ?
-                  <Link 
-                    to='/register/init'
-                    className="button is-rounded is-danger" 
-                    style={regBtnStyle}
-                    >Register for more updates</Link>
-                    :
-                  <Link 
+                <Link 
                   to='/register/init'
                   className="button is-rounded is-danger" 
                   style={regBtnStyle}
-                  >Register</Link>}  
+                  >Register for Updates</Link>
               </div>
               
             </div>
@@ -201,61 +225,72 @@ class About extends React.Component {
         <div className={view.viewer === true ? '' : 'is-hidden'}>
           <main style={backgroundStyle}>
             <div className='container' style={articlesContainerStyle}>
+
               <article className="message is-dark" style={articleStyle}>
-                <h2 style={articleHeaderStyle}><i className="fas fa-info-circle"></i> About The Company</h2>
-                <hr />
-                <p style={articleBodyStyle}><strong>movik</strong> is a cutting edge contents platform to provide you an opportunity to discover and invest your favorite creators.
-                <br/>The contents on the platform are <strong>free</strong> to view and whether to tip the creators is all up to you.</p>
+                <h2
+                  onClick={() => this.handleShow('about')}
+                  style={articleHeaderStyle}
+                  ><i className="fas fa-info-circle"></i> About The Company
+                  <span className="icon">
+                    <i className={`fas fa-caret-${compIcons.about}`}></i>
+                  </span></h2>
+                <div className={ components.about === true ? '' : 'is-hidden'}>
+                  <hr />
+                  <p style={articleBodyStyle}><strong>movik</strong> is a cutting edge contents platform to provide you an opportunity to discover and invest your favorite creators.
+                  <br/>The contents on the platform are free to access and watch the contents and whether to tip the creators is all up to you.
+                  <br/>The company is currently under seed funding and building prototype.</p>
+                </div>
               </article>
 
               <article className="message is-dark" style={articleStyle}>
-                <h2 style={articleHeaderStyle}><i className="fas fa-cogs"></i> How It Works</h2>
-                <hr />
-                <p style={articleBodyStyle}><strong>movik</strong> provide income sharing scheme among creators and viewers.
-                <br />
-                After the registration, you have an option to tip creators of your choice if you enjoy their contents. Then, you have a right to gain a portion of income that the creators you tipped will make on the platform. More income the creators will make, more return you will recieve in the future.
-                <br />
-                Exclusive contents, ad blocking function, and direct message to the creators available.
-                </p>
+                <h2
+                  onClick={() => this.handleShow('scheme')}  
+                  style={articleHeaderStyle}
+                  ><i className="fas fa-cogs"></i>  How It Works
+                  <span className="icon">
+                    <i className={`fas fa-caret-${compIcons.scheme}`}></i>
+                  </span>
+                  </h2>
+                <div className={ components.scheme === true ? '' : 'is-hidden'}>
+                  <hr />
+                  <p style={articleBodyStyle}><strong>movik</strong> provide income sharing scheme among creators and viewers.
+                  <br />
+                  After the registration, you have an option to tip creators of your choice if you enjoy their contents. Then, you have a right to gain a portion of income that the creators you tipped will make on the platform. More income the creators will make, more return you will recieve in the future.
+                  <br />
+                  Exclusive contents, ad blocking function, and direct message to the creators available.
+                  </p>
 
-                <br/>
-                <img src={schemeViewer} alt="concept" style={{ width:'60%', justifySelf: 'center'}} />
+                  <br/>
+                  <img src={schemeViewer} alt="concept" style={{ width:'60%', justifySelf: 'center'}} />
+                </div>
               </article>
 
-              {!overBreakPoint && <div style={regBtnContainerStyle}>
-                <Link 
-                  to='/register/init'
-                  className="button is-rounded is-danger" 
-                  style={regBtnStyle}
-                  ><strong>Register</strong></Link>
-              </div>}
-
               <article className="message is-dark" style={articleStyle}>
-                <h2 style={articleHeaderStyle}><i className="fas fa-chart-line"></i> Your Benefits</h2>
-                <hr />
-                <div style={benefitListStyle}>
-                {benefitsViewer.map( item => (
-                  <article className="message is-dark" key={item.index} style={benefitCardStyle}>
-                    <div className="message-header" style={benefitCardHeaderStyle}>{item.summary}</div>
-                    <div className="message-body" style={benefitCardBodyStyle}><i className="fas fa-check"></i> {item.detail}</div>
-                  </article>
-                ))}
+                <h2
+                  onClick={() => this.handleShow('benefits')}
+                  style={articleHeaderStyle}><i className="fas fa-chart-line"></i> Your Benefits 
+                   <span className="icon">
+                    <i className={`fas fa-caret-${compIcons.benefits}`}></i>
+                  </span></h2>
+                <div className={ components.benefits === true ? '' : 'is-hidden'}> 
+                  <hr />
+                  <div style={benefitListStyle}>
+                  {benefitsViewer.map( item => (
+                    <article className="message is-dark" key={item.index} style={benefitCardStyle}>
+                      <div className="message-header" style={benefitCardHeaderStyle}>{item.summary}</div>
+                      <div className="message-body" style={benefitCardBodyStyle}><i className="fas fa-check"></i> {item.detail}</div>
+                    </article>
+                  ))}
+                  </div>
                 </div>
               </article>
 
               <div style={regBtnContainerStyle}>
-              {overBreakPoint ?
                 <Link 
                   to='/register/init'
                   className="button is-rounded is-danger" 
                   style={regBtnStyle}
-                  >Register for more updates</Link>
-                  :
-                <Link 
-                to='/register/init'
-                className="button is-rounded is-danger" 
-                style={regBtnStyle}
-                >Register</Link>}
+                  >Register for Updates</Link>
               </div>
               
             </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { registerUser } from '../../lib/api'
 import { setToken } from '../../lib/auth'
 import { backgroundImages } from '../../styles/backgroundImages'
@@ -81,13 +82,19 @@ class RegisterInit extends React.Component {
     const submitBtnStyle = {
       marginTop: 50
     }
+    const refStyle = {
+      margin: overBreakPoint ? 12 : 8,
+      width: '100%',
+      fontSize: overBreakPoint ? 12 : 10,
+      fontFamily: 'arial'
+    }
 
     return (
       <div className="register" style={backgroundStyle}>
         <section className="section">
           <div className="container box" style={containerStyle}>
             <h1 className="title" style={titleStyle}>Registeration Form</h1>
-            <p style={subtitleStyle}>We will share with you our new product features.</p>
+            <p style={subtitleStyle}>We will update new features and more!</p>
             <hr />
 
             <div className="columns">
@@ -193,6 +200,12 @@ class RegisterInit extends React.Component {
                     className="button is-fullwidth is-black"
                     style={submitBtnStyle}
                     >Submit</button>
+                  <div>
+                    <Link to='/login' style={refStyle}>Already registered? Log in</Link>
+                  </div>
+                  <div>
+                    <Link to='/request'style={refStyle}>Any questions, opinions? Contact us</Link>
+                  </div>
                 </div>
               </form>
 
