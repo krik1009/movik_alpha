@@ -108,17 +108,18 @@ class Navbar extends React.Component {
 
       <div id="navbarBasicExample" className={`navbar-menu ${burgerIsOpen ? 'is-active' : ''}`}>
         <div className="navbar-start">
-          {/* <Link 
-            to='/contents'
-            className={`navbar-item ${homeIsOpen ? 'is-active' : ''}`} 
-            onClick={() => this.handleToggle('home')}>
-            Home</Link> */}
           
           <Link 
             to='/about'
             className={`navbar-item ${aboutIsOpen ? 'is-active' : ''}`} 
             onClick={() => this.handleToggle('about')}>
             About</Link>
+          
+          <Link 
+            to='/contents'
+            className={`navbar-item ${homeIsOpen ? 'is-active' : ''}`} 
+            onClick={() => this.handleToggle('home')}>
+            Home</Link>
           
           {/* <div className="navbar-item has-dropdown is-hoverable">
             <a className={`navbar-link ${moreIsOpen ? 'is-active' : ''}`} 
