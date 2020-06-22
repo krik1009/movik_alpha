@@ -26,7 +26,7 @@
       "last_name": "movik",
       "email": "johnemail",
       "password": "pass",
-      "profile_image": "https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg",
+      "profile_image": "https://s3.amazonaws.com/uifaces/faces/twitter/kkusaa/128.jpg",
       "is_superuser": false, 
       "bio": "I am a sample user", 
       "is_staff": false,

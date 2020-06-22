@@ -143,7 +143,7 @@ class About extends React.Component {
               <article className="message is-dark" style={articleStyle}>
                 <h2 style={articleHeaderStyle}><i className="fas fa-info-circle"></i> About The Company</h2>
                 <hr />
-                <p style={articleBodyStyle}><strong>movik</strong> is a cutting edge contents platform to provide income opportunity for emerging creators through its unique revenuse share scheme.</p>
+                <p style={articleBodyStyle}><strong>movik</strong> is a community for emerging creators to provide income opportunity  through its unique revenuse share scheme.</p>
               </article>
           
               <article className="message is-dark" style={articleStyle}>
