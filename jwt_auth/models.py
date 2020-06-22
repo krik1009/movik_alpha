@@ -7,6 +7,7 @@ class User(AbstractUser):
     class UserType(models.TextChoices):
         CREATOR = 'cr', _('Creator')
         VIEWER = 'vw', _('Viewer')
+        OTHER = 'ot', _('Other')
         
     email = models.CharField(max_length=50, unique=True)
     profile_image = models.CharField(max_length=500, blank=True)
