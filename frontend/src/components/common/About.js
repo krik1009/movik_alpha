@@ -69,9 +69,10 @@ class About extends React.Component {
       width: overBreakPoint ? '80%' : '90%',
     }
     const articleHeaderStyle = {
-      fontSize: overBreakPoint ? 16 : 12,
+      fontSize: overBreakPoint ? 18 : 12,
       fontWeight: 800,
       color: 'black',
+      fontFamily: 'arial'
     }
     const articleBodyStyle = {
       fontFamily: 'arial',

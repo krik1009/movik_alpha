@@ -35,5 +35,10 @@
   {"model": "tags.tag", "pk": 34, "fields": { "name": "ink", "created_at": "2020-06-05 10:00", "owner": 1} },
   {"model": "tags.tag", "pk": 35, "fields": { "name": "paint", "created_at": "2020-06-05 10:00", "owner": 1} },
   {"model": "tags.tag", "pk": 36, "fields": { "name": "along the river", "created_at": "2020-06-05 10:00", "owner": 1} },
-  {"model": "tags.tag", "pk": 37, "fields": { "name": "forest", "created_at": "2020-06-05 10:00", "owner": 1} }
+  {"model": "tags.tag", "pk": 37, "fields": { "name": "forest", "created_at": "2020-06-05 10:00", "owner": 1} },
+  {"model": "tags.tag", "pk": 38, "fields": { "name": "concert", "created_at": "2020-06-05 10:00", "owner": 1} },
+  {"model": "tags.tag", "pk": 39, "fields": { "name": "music", "created_at": "2020-06-05 10:00", "owner": 1} },
+  {"model": "tags.tag", "pk": 40, "fields": { "name": "night", "created_at": "2020-06-05 10:00", "owner": 1} },
+  {"model": "tags.tag", "pk": 41, "fields": { "name": "illumination", "created_at": "2020-06-05 10:00", "owner": 1} },
+  {"model": "tags.tag", "pk": 42, "fields": { "name": "drone", "created_at": "2020-06-05 10:00", "owner": 1} }
 ]

@@ -8,8 +8,40 @@
       "password": "pass",
       "profile_image": "https://image.freepik.com/free-vector/man-profile-cartoon_18591-58483.jpg",
       "is_superuser": true, 
-      "bio": "", 
+      "bio": "admin", 
       "is_staff": true,
+      "is_active": true,
+      "date_joined": "2020-06-01T12:09:53.559183Z",
+      "user_type": "ot"
+    }
+  },
+  {
+    "model": "jwt_auth.user", 
+    "pk": 2, 
+    "fields": {
+      "username": "Tom (sample)", 
+      "email": "tom@email",
+      "password": "pass",
+      "profile_image": "https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg",
+      "is_superuser": false, 
+      "bio": "I am a sample user", 
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-06-01T12:09:53.559183Z",
+      "user_type": "ot"
+    }
+  },
+  {
+    "model": "jwt_auth.user", 
+    "pk": 3, 
+    "fields": {
+      "username": "Kate (sample)", 
+      "email": "kate@email",
+      "password": "pass",
+      "profile_image": "https://image.freepik.com/free-vector/man-profile-cartoon_18591-58484.jpg",
+      "is_superuser": false, 
+      "bio": "I am a sample user", 
+      "is_staff": false,
       "is_active": true,
       "date_joined": "2020-06-01T12:09:53.559183Z",
       "user_type": "ot"

@@ -18,11 +18,6 @@ class Request extends React.Component {
     this.setState({ formData })
   }
 
-  // uploadFile = e => {
-  //   const fileName = document.querySelector('#file has-name .file-name')
-  //   fileName.textContent = fileInput.files.name
-  // } 
-
   handleSubmit = async e => {
     e.preventDefault()
     try {

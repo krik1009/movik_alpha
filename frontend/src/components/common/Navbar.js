@@ -5,7 +5,7 @@ import { isAuthenticated, logout, getUserId } from '../../lib/auth'
 
 class Navbar extends React.Component {
   state = { 
-    homeIsOpen: false,
+    indexIsOpen: false,
     aboutIsOpen: false,
     contactIsOpen: false,
     moreIsOpen: false,
@@ -15,9 +15,9 @@ class Navbar extends React.Component {
 
   handleToggle = item => {
     switch (item) {
-      case 'home':
+      case 'index':
         this.setState({
-          homeIsOpen: !this.state.homeIsOpen,
+          indexIsOpen: !this.state.indexIsOpen,
           aboutIsOpen: false,
           contactIsOpen: false,
           moreIsOpen: false,
@@ -26,7 +26,7 @@ class Navbar extends React.Component {
         break
       case 'about':
         this.setState({
-          homeIsOpen: false,
+          indexIsOpen: false,
           aboutIsOpen: !this.state.aboutIsOpen,
           contactIsOpen: false,
           moreIsOpen: false,
@@ -35,7 +35,7 @@ class Navbar extends React.Component {
         break
       case 'contact':
         this.setState({
-          homeIsOpen: false,
+          indexIsOpen: false,
           aboutIsOpen: false,
           contactIsOpen: !this.state.contactIsOpen,
           moreIsOpen: false,
@@ -44,7 +44,7 @@ class Navbar extends React.Component {
         break
       case 'more':
         this.setState({
-          homeIsOpen: false,
+          indexIsOpen: false,
           aboutIsOpen: false,
           contactIsOpen: false,
           moreIsOpen: !this.state.moreIsOpen,
@@ -53,7 +53,7 @@ class Navbar extends React.Component {
         break
       case 'account':
         this.setState({
-          homeIsOpen: false,
+          indexIsOpen: false,
           aboutIsOpen: false,
           contactIsOpen: false,
           moreIsOpen: false,
@@ -78,7 +78,7 @@ class Navbar extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.setState({
-        homeIsOpen: false,
+        indexIsOpen: false,
         aboutIsOpen: false,
         contactIsOpen: false,
         moreIsOpen: false,
@@ -89,7 +89,7 @@ class Navbar extends React.Component {
   }
 
   render() {
-    const { homeIsOpen, aboutIsOpen, contactIsOpen, moreIsOpen, accountIsOpen, burgerIsOpen } = this.state
+    const { indexIsOpen, aboutIsOpen, contactIsOpen, moreIsOpen, accountIsOpen, burgerIsOpen } = this.state
     const userId = getUserId()
 
     return (
@@ -117,9 +117,9 @@ class Navbar extends React.Component {
           
           <Link 
             to='/contents'
-            className={`navbar-item ${homeIsOpen ? 'is-active' : ''}`} 
-            onClick={() => this.handleToggle('home')}>
-            Home</Link>
+            className={`navbar-item ${indexIsOpen ? 'is-active' : ''}`} 
+            onClick={() => this.handleToggle('index')}>
+            Index</Link>
           
           {/* <div className="navbar-item has-dropdown is-hoverable">
             <a className={`navbar-link ${moreIsOpen ? 'is-active' : ''}`} 
