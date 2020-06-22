@@ -113,7 +113,9 @@ class ProfileShow extends React.Component {
               <div className="button is-light" onClick={this.unfollowOwner}>Unfollow</div>
             }
           </>} 
-          {(isAuthenticated() && !this.isSelf()) && <div className="button is-black">Donate</div>}
+          {/* {(isAuthenticated() && !this.isSelf()) &&  */}
+          <div className="button is-black">Donate</div>
+          {/* } */}
           {this.isSelf() && <Link className="button" to={`/profiles/${profile.id}/edit`}>Edit</Link>}
         </div>
         <header style={{ display: "flex", justifyContent: "center", margin: 20 }}>

@@ -4,6 +4,8 @@
     "pk": 1, 
     "fields": {
       "username": "krik", 
+      "first_name": "krik",
+      "last_name": "movik", 
       "email": "krik@email",
       "password": "pass",
       "profile_image": "https://image.freepik.com/free-vector/man-profile-cartoon_18591-58483.jpg",
@@ -19,8 +21,10 @@
     "model": "jwt_auth.user", 
     "pk": 2, 
     "fields": {
-      "username": "Tom (sample)", 
-      "email": "tom@email",
+      "username": "john",
+      "first_name": "john",
+      "last_name": "movik",
+      "email": "johnemail",
       "password": "pass",
       "profile_image": "https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg",
       "is_superuser": false, 
@@ -33,18 +37,74 @@
   },
   {
     "model": "jwt_auth.user", 
-    "pk": 3, 
+    "pk": 3,
     "fields": {
-      "username": "Kate (sample)", 
-      "email": "kate@email",
+      "username": "kate",
+      "first_name": "kate",
+      "last_name": "movik",
+      "email": "max@email",
       "password": "pass",
-      "profile_image": "https://image.freepik.com/free-vector/man-profile-cartoon_18591-58484.jpg",
-      "is_superuser": false, 
-      "bio": "I am a sample user", 
-      "is_staff": false,
-      "is_active": true,
-      "date_joined": "2020-06-01T12:09:53.559183Z",
-      "user_type": "ot"
+      "profile_image": "https://s3.amazonaws.com/uifaces/faces/twitter/renbyrd/128.jpg",
+      "is_superuser": false,
+      "user_type": "ot",
+      "bio": "I love taking photos, watching movies and spending great time with my friends.", 
+      "is_staff": false, 
+      "is_active": true, 
+      "date_joined": "2020-06-01T12:09:53.559183Z"
     }
+  },
+  {
+    "model": "jwt_auth.user",
+    "pk": 4,
+    "fields": {
+      "username": "jack",
+      "first_name": "jack",
+      "last_name": "movik",
+      "email": "jack@email",
+      "password": "pass",
+      "profile_image": "https://s3.amazonaws.com/uifaces/faces/twitter/hjartstrorn/128.jpg",
+      "is_superuser": false,
+      "user_type": "ot",
+      "bio": "I love taking photos, watching movies and spending great time with my friends.", 
+      "is_staff": false, 
+      "is_active": true,
+      "date_joined": "2020-06-01T12:09:53.559183Z"
+    }
+  },
+  {
+    "model": "jwt_auth.user", 
+    "pk": 5, 
+    "fields": {
+      "username": "max",
+      "first_name": "max",
+      "last_name": "movik", 
+      "email": "max@email", 
+      "password": "pass", 
+      "profile_image": "https://s3.amazonaws.com/uifaces/faces/twitter/itstotallyamy/128.jpg", 
+      "is_superuser": false,
+      "user_type": "ot",
+      "bio": "I love taking photos, watching movies and spending great time with my friends.", 
+      "is_staff": false, 
+      "is_active": true, 
+      "date_joined": "2020-06-01T12:09:53.559183Z"
+    }
+  },
+  {
+    "model": "jwt_auth.user",
+    "pk": 6, 
+    "fields": {
+      "username": "tom",
+      "first_name": "tom",
+      "last_name": "movik",
+      "email": "tom@email",
+      "password": "pass",
+      "profile_image": "https://s3.amazonaws.com/uifaces/faces/twitter/kkusaa/128.jpg",
+       "is_superuser": false, 
+       "bio": "I love taking photos, watching movies and spending great time with my friends.",
+       "is_staff": false,
+       "is_active": true, 
+       "date_joined": "2020-06-01T12:09:53.559183Z",
+       "user_type": "ot"
+       }
   }
 ]
