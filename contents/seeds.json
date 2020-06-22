@@ -3,7 +3,7 @@
   "model": "contents.content",
   "pk": 1,
   "fields": {
-    "title": "film - sea",
+    "title": "sample1",
     "thumbnail": "https://i.vimeocdn.com/video/862586427_1920x1080.jpg",
     "video": "https://player.vimeo.com/external/396036988.hd.mp4?s=d409153a1984fc0bd388cdc8d0a3a94eed888de3&profile_id=172",
     "description": "The film is created by...",
@@ -11,23 +11,22 @@
     "height": 2160,
     "width": 3840,
     "lang": "en",
-    "isEditorsChoice": false,
+    "isEditorsChoice": true,
     "isSafeSearch": true,
     "owner": 1,
     "color": "mlt",
     "created_at": "2020-06-05T10:00:00Z",
     "tags": [
-      1,
-      5
+      1
     ],
-    "categories": []
+    "categories": [3, 10, 17]
   }
 },
 {
   "model": "contents.content",
   "pk": 2,
   "fields": {
-    "title": "film - sunrise",
+    "title": "sample_",
     "thumbnail": "https://i.vimeocdn.com/video/877697510_1920x1080.jpg",
     "video": "https://player.vimeo.com/external/407130678.hd.mp4?s=c384238fdf4a44a7bbc197b18b1d02af34663d9e&profile_id=171",
     "description": "The film is created by...",
@@ -42,10 +41,9 @@
     "created_at": "2020-06-05T10:00:00Z",
     "tags": [
       2,
-      3,
-      5
+      3
     ],
-    "categories": []
+    "categories": [3, 10, 17]
   }
 }
 ]
