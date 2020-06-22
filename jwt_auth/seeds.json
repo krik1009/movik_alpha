@@ -7,7 +7,11 @@
       "email": "krik@email",
       "password": "pass",
       "profile_image": "https://image.freepik.com/free-vector/man-profile-cartoon_18591-58483.jpg",
-      "is_superuser": true, "bio": "Hi I am the user #01. I love taking photos, watching movies and spending great time with my friends.", "is_staff": true, "is_active": true, "date_joined": "2020-06-01T12:09:53.559183Z",
+      "is_superuser": true, 
+      "bio": "", 
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2020-06-01T12:09:53.559183Z",
       "user_type": "ot"
     }
   }
