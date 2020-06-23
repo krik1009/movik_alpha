@@ -14,7 +14,7 @@ class Index extends React.Component {
     isOpen: false,
     filteredContents: [],
     searchQuery: '',
-    // hover: false
+    // hover: false,
   }
 
   async componentDidMount() {
@@ -69,12 +69,16 @@ class Index extends React.Component {
     }
     this.setState({ filteredContents, display: e.target.value })
   }
+
+  // toggleHover = id => {
+  //   this.setState({ hover: !this.state.hover, id: id})
+  // }
   
 
   render() {
     console.log(this.state)
 
-    const { contents, display, isOpen, filteredContents, searchQuery } = this.state
+    const { contents, display, isOpen, filteredContents, searchQuery, hover, id } = this.state
     if (!contents) return null
 
     const overBreakPoint = window.innerWidth > 420 ? true : false
@@ -138,13 +142,56 @@ class Index extends React.Component {
       justifyContent: 'flex-start',
       flexDirection: overBreakPoint ? 'row' : 'column',
       flexWrap: overBreakPoint ? 'wrap' : 'nowrap',
-      margin: 10
+      margin: 10,
+      position: 'relative',
+      overflow: 'hidden'
     }
-    const thumbnailStyle = {
-      width: overBreakPoint ? '31%' : '90%',
-      height: overBreakPoint ? 160 : 'auto',
-      margin: 5
-    }
+    const mapThumbnailStyle = 
+    // hover ?
+      { 
+        width: overBreakPoint ? '31%' : '90%',
+        height: overBreakPoint ? 160 : 'auto',
+        margin: 5,
+        filter: 'saturate(1) contrast(1.2)',
+        transition: '0.4s'
+      }
+    //   :
+    // { 
+    //   width: overBreakPoint ? '31%' : '90%',
+    //   height: overBreakPoint ? 160 : 'auto',
+    //   margin: 5,
+    //   filter: 'saturate(0) contrast(1.2)',
+    //   transition: '0.4s'
+    // }
+    const mapInfoStyle = 
+    // hover ?
+      {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        color: '#fff',
+        padding: '1em',
+        background: 'linear-gradient(transparent, rgba(0, 0, 0, 0.9))',
+        transition: 'all 0.3s ease-in-out',
+      }
+    // :
+    // {
+    //   position: 'absolute',
+    //   bottom: -200,
+    //   width: '100%',
+    //   color: '#fff',
+    //   padding: '1em',
+    //   background: 'linear-gradient(transparent, rgba(0, 0, 0, 0.9))',
+    //   transition: 'all 0.3s ease-in-out',
+    // }
+    // const mapInfoLetterStyle = {
+    //   fontSize: 10
+    // }
+    // const mapInfoImgStyle = {
+    //   borderRadius: "50%", 
+    //   height: '20%'
+    // }
+
 
     return(
       <html>
@@ -228,15 +275,20 @@ class Index extends React.Component {
         <div style={thumbnailContainerStyle}>
           {filteredContents.length ? 
             filteredContents.map( item => (
-              // <div key={item.id} to={`contents/${item.id}`} >
-                <img src={item.thumbnail} style={thumbnailStyle} />
-                /* <div
-                  className='is-hidden'
-                  // className={hiddenClass} style={hiddenStyle} 
-                  onMouseEnter={this.toggleStyle} onMouseLeave={this.toggleStyle} >
-                  <img src={item.owner.profile_image} alt={item.owner.username} style={{ borderRadius: "50%", height: 120 }}/>
-                </div> */
-              // </div>
+              // <Link key={item.id} to={`contents/${item.id}`} >
+              <>
+                <img 
+                  src={item.thumbnail} 
+                  style={mapThumbnailStyle} 
+                  // onMouseEnter={() => this.toggleHover(item.id)}
+                  // onMouseLeave={() => this.toggleHover(item.id)} 
+                  />
+                {/* <div style={mapInfoStyle}>
+                  <p style={mapInfoLetterStyle}>{item.title}</p>
+                  <img src={item.owner.profile_image} alt={item.owner.username} style={mapInfoImgStyle}/>
+                  <p style={mapInfoLetterStyle}>By {item.owner.username.replace(item.owner.username[0], item.owner.username[0].toUpperCase())}</p>
+                </div> */}
+              </>
             ))
             :
             <div style={{ margin: 30 }}>Coming soon... </div>
