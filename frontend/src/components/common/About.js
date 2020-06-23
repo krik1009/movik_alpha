@@ -8,8 +8,8 @@ import schemeViewer from '../../styles/imgs/about1_viewers.png'
 class About extends React.Component {
   state = {
     view: { creator: false, viewer: false },
-    components: { about: false, scheme: false, benefits: false },
-    compIcons: { about: 'down', scheme: 'down', benefits: 'down' },
+    components: { about: true, scheme: true, benefits: true },
+    compIcons: { about: 'up', scheme: 'up', benefits: 'up' },
     benefitsCreator: [
       { summary: 'More Income', detail: 'Motivate your followers to tip you directly through the income sharing scheme and no-ads mode' },
       { summary: 'More Followers', detail: 'Increase followers through the income sharing scheme'},
@@ -40,12 +40,12 @@ class About extends React.Component {
 
   render() {
     const { view, benefitsCreator, benefitsViewer, components, compIcons } = this.state
-    const ram =  Math.floor(Math.random() * (backgroundImages.length - 1))
+    // const ram =  Math.floor(Math.random() * (backgroundImages.length - 1))
     const overBreakPoint = window.innerWidth > 420 ? true : false
     const backgroundStyle = {
       display: 'flex',
       justifyContent: 'center',
-      backgroundImage: `url(${backgroundImages[ram]})`,
+      backgroundImage: `url(${backgroundImages[9]})`,
       filter: "opacity(80%)",
       backgroundPosition:'center', 
       backgroundRepeat: 'no-repeat',

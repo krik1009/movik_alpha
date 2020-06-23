@@ -4,6 +4,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { getAllContents } from '../../lib/api'
+import { backgroundImages } from '../../styles/backgroundImages'
 
 
 class Index extends React.Component {
@@ -68,168 +69,182 @@ class Index extends React.Component {
     }
     this.setState({ filteredContents, display: e.target.value })
   }
-
-  // toggleStyle = e => {
-  //   console.log(e)
-  //   if (e) {
-  //       e.target.style = { backgroundColor: "rgba(255, 255, 255, 0.3)", position: 'absolute', zIndex: 2 }
-  //       e.target.className = ''
-  //   } else {
-  //     e.target.style = ''
-  //     e.target.className = "is-hidden"
-  //   }
-  // }
-
-  // addStyle = e => {
-    
-  //   <div
-  //     className='is-hidden'
-  //     // className={hiddenClass} style={hiddenStyle} 
-  //     onMouseEnter={this.toggleStyle} onMouseLeave={this.toggleStyle} >
-  //     <img src={item.owner.profile_image} alt={item.owner.username} style={{ borderRadius: "50%", height: 120 }}/>
-  //   </div>
-  // }
-  
-
-  // toggleHover = () => {
-  //   this.setState({ hover: !this.state.hover })
-  // }
   
 
   render() {
     console.log(this.state)
 
-    const { contents, display, isOpen, filteredContents, searchQuery, hover } = this.state
+    const { contents, display, isOpen, filteredContents, searchQuery } = this.state
     if (!contents) return null
 
-    // const hiddenStyle = hover ? { backgroundColor: "rgba(255, 255, 255, 0.3)", position: 'absolute', zIndex: 2 } : ''
-    // const hiddenClass = hover ? '' : "is-hidden"
+    const overBreakPoint = window.innerWidth > 420 ? true : false
+    const headerBackgroundStyle = {
+      backgroundImage: `url(${backgroundImages[12]})`,
+      backgroundPosition:'center', 
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      height: overBreakPoint ? 500 : 300, 
+    }
+    const headerContainerStyle = { 
+      backgroundColor: "rgba(255,255,255, 0.1)", 
+      height: '100%', 
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+    }
+    const headerTitleStyle = {
+      marginBottom: overBreakPoint ? 30 : 10,
+      fontSize: overBreakPoint ? 50 : 20
+    }
+    const searchBarContainerStyle = {
+      width: '70%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }
+    const searchBarInputStyle = {
+      width: '100%',
+      height: overBreakPoint ? 50 : 30,
+      fontSize: overBreakPoint ? 20 : 16,
+    }
+    const searchBarBtnStyle = {
+      fontFamily: 'arial',
+      fontSize: overBreakPoint ? 20 : 12,
+      height: overBreakPoint ? 50 : 30,
+      width: overBreakPoint ? 'auto' : 50,
+    }
+    const searchBarRefStyle = { 
+      fontSize: overBreakPoint ? 18 : 10,
+      fontFamily: 'arial'
+    }
+    const dropdownStyle = { 
+      fontFamily: 'Lexend Tera', 
+      fontSize: 14, 
+      border: "none", 
+      backgroundColor: "white"
+    }
+    const mainContainerStyle = {
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'column',
+      width: '90%',
+      marginTop: 30
+    }
+    const thumbnailContainerStyle = {
+      minHeight: 300,
+      display: 'flex',
+      justifyContent: 'flex-start',
+      flexDirection: overBreakPoint ? 'row' : 'column',
+      flexWrap: overBreakPoint ? 'wrap' : 'nowrap',
+      margin: 10
+    }
+    const thumbnailStyle = {
+      width: overBreakPoint ? '31%' : '90%',
+      height: overBreakPoint ? 160 : 'auto',
+      margin: 5
+    }
 
     return(
-      <>
-        <header style={{
-          backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Muse_in_Sydney.jpg/1200px-Muse_in_Sydney.jpg')",
-          backgroundPosition:'center', 
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          height: 500
-        }}>
-          <div style={{ 
-            backgroundColor: "rgba(255,255,255, 0.1)", 
-            height: 500, 
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            color: 'black'
-          }}>
-            <h1 style={{
-              marginBottom: 100,
-              fontSize: 50
-            }}>
+      <html>
+        <header style={headerBackgroundStyle}>
+          <div style={headerContainerStyle}>
+            <h1 style={headerTitleStyle}>
               Welcome to movik
             </h1>
             
-            <div className="field has-addons">
-              <div className="control">
+            <div className="field has-addons" style={searchBarContainerStyle} >
                 <input 
                   className="input" 
                   type="text"
-                  placeholder="Search by categories, tags, colors"
+                  placeholder="Search by category or tag"
                   onChange={this.filterContents}
                   value={searchQuery} 
-                  style={{ minWidth: 800}} 
+                  style={searchBarInputStyle}
                 />
-                <p style={{ fontSize: 15, fontFamily: 'arial'}}>Any keywords? Try summer, nature, travel etc</p>
-              </div>
-              <div className="control">
-                <div className="button is-black">
+                <div className="button is-black" style={searchBarBtnStyle}>
                   Explore
                 </div>
-              </div>
             </div>
+            <p style={searchBarRefStyle}>
+              No keywords in your mind? Try nature, travel or summer i.e.</p>
           </div>
         </header>
 
-        <main className='container'>
-          <nav className="navbar" role="navigation" aria-label="dropdown navigation">
-            <div className="navbar-menu">
-              <div className="navbar-start">
-                <div className="navbar-item">
-                  {`${display.replace(display[0], display[0].toUpperCase())} Items`}
-                </div>
-              </div>
-         
-              <div className="navbar-end">
-                <div 
-                  onClick={this.handleToggle} 
-                  className={`navbar-item has-dropdown ${isOpen ? 'is-active' : ''}`}
-                >
-                  <a className="navbar-link">{display.replace(display[0], display[0].toUpperCase())}</a>
+        <main className='container' style={mainContainerStyle}>
+          <div
+            onClick={this.handleToggle} 
+            className={`dropdown ${isOpen ? 'is-active' : ''}`}
+          >
+            <div className="dropdown-trigger">
+              <button className="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                <span>{`${display.replace(display[0], display[0].toUpperCase())}`}</span>
+                <span className="icon is-small">
+                  <i className="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div className="dropdown-menu" id="dropdown-menu" role="menu">
 
-                  <div className="navbar-dropdown is-right">
-                    <button
-                        className="navbar-item" 
-                        value="all" 
-                        style={{ fontFamily: 'Lexend Tera', fontSize: 14, border: "none", backgroundColor: "white" }} 
-                        onClick={this.controlDisplay} 
-                      >
-                        All
-                    </button>
-                    <button
-                      className="navbar-item" 
-                      value="new" 
-                      style={{ fontFamily: 'Lexend Tera', fontSize: 14, border: "none", backgroundColor: "white" }} 
-                      onClick={this.controlDisplay} 
-                    >
-                      New
-                    </button>
-                    <button 
-                      className="navbar-item" 
-                      value="trending" 
-                      style={{ fontFamily: 'Lexend Tera', fontSize: 14, border: "none", backgroundColor: "white" }} 
-                      onClick={this.controlDisplay}
-                    >
-                      Trending
-                    </button>
-                    <hr className="navbar-divider" />
-                    <button
-                      className="navbar-item" 
-                      value="editors choice" 
-                      style={{ fontFamily: 'Lexend Tera', fontSize: 14, border: "none", backgroundColor: "white" }} 
-                      onClick={this.controlDisplay} 
-                    >
-                      Editors Choice
-                    </button>
-                  </div>
-                </div>
+              <div className="dropdown-content">
+                <button
+                  className="dropdown-item" 
+                  value="all" 
+                  style={dropdownStyle} 
+                  onClick={this.controlDisplay} 
+                >
+                  All
+                </button>
+                <button
+                  className="dropdown-item" 
+                  value="new" 
+                  style={dropdownStyle} 
+                  onClick={this.controlDisplay} 
+                >
+                  New
+                </button>
+                <button 
+                  className="dropdown-item" 
+                  value="trending" 
+                  style={dropdownStyle} 
+                  onClick={this.controlDisplay}
+                >
+                  Trending
+                </button>
+                <hr className="dropdown-divider" />
+                <button 
+                  className="dropdown-item" 
+                  value="editors choice" 
+                  style={dropdownStyle} 
+                  onClick={this.controlDisplay}
+                >
+                  Editors Choice
+                </button>
               </div>
             </div>
-          </nav>
+          </div>
 
+        <div style={thumbnailContainerStyle}>
           {filteredContents.length ? 
             filteredContents.map( item => (
-              <Link key={item.id} to={`contents/${item.id}`} onMouseEnter={this.showStyle}>
-                <img src={item.thumbnail} style={{ 
-                  maxWidth: 300, maxHeight: 200, marginLeft: 10
-                  // ,position: 'absolute', zIndex: 1
-                   }} />
-                
-                  <div
-                    className='is-hidden'
-                    // className={hiddenClass} style={hiddenStyle} 
-                    onMouseEnter={this.toggleStyle} onMouseLeave={this.toggleStyle} >
-                    <img src={item.owner.profile_image} alt={item.owner.username} style={{ borderRadius: "50%", height: 120 }}/>
-                  </div>
-                
-              </Link>
+              // <div key={item.id} to={`contents/${item.id}`} >
+                <img src={item.thumbnail} style={thumbnailStyle} />
+                /* <div
+                  className='is-hidden'
+                  // className={hiddenClass} style={hiddenStyle} 
+                  onMouseEnter={this.toggleStyle} onMouseLeave={this.toggleStyle} >
+                  <img src={item.owner.profile_image} alt={item.owner.username} style={{ borderRadius: "50%", height: 120 }}/>
+                </div> */
+              // </div>
             ))
             :
             <div style={{ margin: 30 }}>Coming soon... </div>
           }
+          </div>
+
         </main>
-      </>
+      </html>
     )
   }
 }
