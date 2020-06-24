@@ -274,22 +274,23 @@ class Index extends React.Component {
 
         <div style={thumbnailContainerStyle}>
           {filteredContents.length ? 
-            filteredContents.map( item => (
+            filteredContents.map( item => 
               // <Link key={item.id} to={`contents/${item.id}`} >
-              <>
+              // <>
                 <img 
+                  key={item.id}
                   src={item.thumbnail} 
                   style={mapThumbnailStyle} 
                   // onMouseEnter={() => this.toggleHover(item.id)}
                   // onMouseLeave={() => this.toggleHover(item.id)} 
                   />
-                {/* <div style={mapInfoStyle}>
+                /* <div style={mapInfoStyle}>
                   <p style={mapInfoLetterStyle}>{item.title}</p>
                   <img src={item.owner.profile_image} alt={item.owner.username} style={mapInfoImgStyle}/>
                   <p style={mapInfoLetterStyle}>By {item.owner.username.replace(item.owner.username[0], item.owner.username[0].toUpperCase())}</p>
-                </div> */}
-              </>
-            ))
+                </div> */
+              // </>
+            )
             :
             <div style={{ margin: 30 }}>Coming soon... </div>
           }
