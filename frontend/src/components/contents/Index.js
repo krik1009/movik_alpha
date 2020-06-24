@@ -153,7 +153,7 @@ class Index extends React.Component {
         height: overBreakPoint ? 160 : 'auto',
         margin: 5,
         filter: 'saturate(1) contrast(1.2)',
-        transition: '0.4s'
+        // transition: '0.4s'
       }
     //   :
     // { 
