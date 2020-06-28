@@ -26,8 +26,28 @@ class CommentListView(APIView):
         return Response(created_comment.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
+class CommentLikeView(APIView):
+    permission_classes = (IsAuthenticated, )
 
-class CommentDetailView(APIView):
+    def get_comment(self, pk):
+        try:
+            return Comment.objects.get(pk=pk)
+        except Comment.DoesNotExist:
+            raise NotFound()
+
+    def put(self, request, pk, user):
+        comment_to_like = self.get_comment(pk)
+        if comment_to_like.owner.id != user.id:
+            request.data['liked'] = request.user.id 
+            updated_comment = CommentSerializer(comment_to_like, data=request.data)
+            if updated_comment.is_valid():
+                updated_comment.save()
+                return Response(updated_comment.data, status=status.HTTP_202_ACCEPTED)
+            return Response(updated_comment.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        return Response(updated_comment.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+
+
+class CommentDeleteView(APIView):
     permission_classes = (IsAuthenticated, )
 
     def get_comment(self, pk):

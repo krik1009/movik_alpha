@@ -61,8 +61,10 @@ class New extends React.Component {
 
   async componentDidMount() {
     const tags = await getAllTags()
+    console.log(tags)
     const tagOptions = tags.map( item => this.returnObj(item.name.toLowerCase(), item.id))
     const categories = await getAllCategories()
+    console.log(categories)
     const categoryOptions = categories.map( item => this.returnObj(item.name.toLowerCase(), item.id))
     this.setState({ tagOptions, categoryOptions })
   }

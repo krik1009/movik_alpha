@@ -1,0 +1,1 @@
+export const frontEndBaseUrl = 'https://movik-alph.herokuapp.com/'

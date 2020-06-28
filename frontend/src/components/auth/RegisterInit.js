@@ -23,7 +23,6 @@ class RegisterInit extends React.Component {
 
   handleChange = e => {
     const formData = { ...this.state.formData, [e.target.name]: e.target.value }
-    console.log(e.target.name, e.target.value)
     this.setState({ formData })
   }
 
@@ -34,7 +33,7 @@ class RegisterInit extends React.Component {
       setToken(res.data.token)
       this.props.history.push('/register/sent')
     } catch (err) {
-      this.setState({ errors: err.response.data.errors })
+      this.setState({ errors: err.response.data })
     } 
   }
 
@@ -88,6 +87,8 @@ class RegisterInit extends React.Component {
       fontSize: overBreakPoint ? 12 : 10,
       fontFamily: 'arial'
     }
+
+    console.log(this.state)
 
     return (
       <div className="register" style={backgroundStyle}>

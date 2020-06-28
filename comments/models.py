@@ -10,17 +10,16 @@ class Comment(models.Model):
     )
     owner = models.ForeignKey(
         'jwt_auth.User',
-        related_name = 'comments',
+        related_name = 'posted_comments',
         on_delete = models.CASCADE
+    )
+    liked = models.ManyToManyField(
+        'jwt_auth.User',
+        related_name='liked_comments',
+        blank=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return f'comment {self.comment} is posted on {self.content}'
-
-# 0. id
-# 1. Comment
-# 2. Owner -> One to many: User 8. comments
-# 3. Content -> One to many : Content / 15. Comments
-# 4. CreatedAt

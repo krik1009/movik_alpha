@@ -95,7 +95,7 @@ export const deleteTag = async tagId => {
 
 // categories
 export const getAllCategories = async () => {
-  const { data } = await axios.get(`${baseUrl}/categories`, withHeaders())
+  const { data } = await axios.get(`${baseUrl}/categories/`)
   return data
 }
 
@@ -153,8 +153,13 @@ export const postComment = async formData => {
   return await axios.post(`${baseUrl}/comments/`, formData, withHeaders())
 }
 
-export const deleteComment = async id => {
-  return await axios.delete(`${baseUrl}/comments/${id}/`, withHeaders())
+export const likeComment = async commentId => {
+  const { data } = await axios.put(`${baseUrl}/comments/${commentId}/edit/`, withHeaders())
+  return data
+}
+
+export const deleteComment = async commentId => {
+  return await axios.delete(`${baseUrl}/comments/${commentId}/`, withHeaders())
 }
 
 

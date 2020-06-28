@@ -113,9 +113,9 @@ class ProfileShow extends React.Component {
               <div className="button is-light" onClick={this.unfollowOwner}>Unfollow</div>
             }
           </>} 
-          {/* {(isAuthenticated() && !this.isSelf()) &&  */}
-          <div className="button is-black">Donate</div>
-          {/* } */}
+          {!this.isSelf() &&
+          <div className="button is-black">Donate</div>}
+          
           {this.isSelf() && <Link className="button" to={`/profiles/${profile.id}/edit`}>Edit</Link>}
         </div>
         <header style={{ display: "flex", justifyContent: "center", margin: 20 }}>
@@ -129,7 +129,7 @@ class ProfileShow extends React.Component {
           <div style={{ margin: 20 }}>
             <h1 style={{ fontWeight: 900, fontSize: 28 }}>
               {profile.username.replace(profile.username[0], profile.username[0].toUpperCase())}</h1>
-            {numFollowers > 1 && 
+            {numFollowers > 0 && 
               <p style={{ marginTop: 10 }}><i className="fas fa-users"></i>&nbsp;<strong>{numFollowers}</strong>&nbsp;fans</p>}
             {isAuthenticated() && 
             <p style={{ fontSize: 12 }} 

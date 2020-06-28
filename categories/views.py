@@ -10,13 +10,14 @@ from .serializers import CategorySerializer, PopulatedCategorySerializer
 
 
 class CategoryListView(APIView):
-    permission_classes = (IsAuthenticated, )
-
     def get(self, _request):
         categories = Category.objects.all()
         serialized_categories = PopulatedCategorySerializer(categories, many=True)
         return Response(serialized_categories.data, status=status.HTTP_200_OK)
-      
+
+class CategoryCreateView(APIView):  
+    permission_classes = (IsAuthenticated, )
+    
     def post(self, request):
         request.data['owner'] = request.user.id
         created_category = CategorySerializer(data=request.data)

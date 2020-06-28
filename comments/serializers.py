@@ -15,6 +15,6 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = '__all__'
 
-
 class PopulatedCommentSerializer(CommentSerializer):
     owner = UserSerializer()
+    liked = UserSerializer(many=True)

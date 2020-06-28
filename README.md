@@ -4,12 +4,6 @@ movik - the content creators' platform
 # Wireframe
 https://miro.com/app/board/o9J_krLAZPU=/
 
-# Screenshot
-Index
-Show
-User Profile
-
-ref- https://www.pexels.com/videos/
 
 
 # Core Components / Functions
@@ -30,7 +24,6 @@ ref- https://www.pexels.com/videos/
     - Donate
   - Register
   - Login
-
 
 
 
@@ -65,18 +58,5 @@ Seeds resource
 * pure-react-carousel https://www.npmjs.com/package/pure-react-carousel
 * react-notify-toast
 * react-select, react-select/creatable
-
-
-
-
-
-
-
-########
-* An embedded screenshot of the app
-* Explanations of the **technologies** used
-* A couple paragraphs about the **general approach you took**
-* **Installation instructions** for any dependencies
-* Link to your **user stories/wireframes** – sketches of major views / interfaces in your application
-* Link to your **pitch deck/presentation** – documentation of your wireframes, user stories, and proposed architecture
-* Descriptions of any **unsolved problems** or **major hurdles** you had to overcome
+* react-share
+* react-moment, timezone
