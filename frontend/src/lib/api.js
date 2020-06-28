@@ -158,8 +158,11 @@ export const getSingleComment = async commentId => {
   return data
 }
 
-export const likeComment = async (commentId, formData) => {
-  const { data } = await axios.put(`${baseUrl}/comments/${commentId}/edit/`, formData, withHeaders())
+export const likeComment = async commentId => {
+  const comment = await getSingleComment(commentId)
+  const { data } = await axios.put(`${baseUrl}/comments/${commentId}/edit/`, {
+    ...comment
+  }, withHeaders())
   return data
 }
 

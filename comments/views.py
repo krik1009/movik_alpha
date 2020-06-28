@@ -34,13 +34,7 @@ class CommentLikeView(APIView):
             return Comment.objects.get(pk=pk)
         except Comment.DoesNotExist:
             raise NotFound()
-    
-    def get(self, _request, pk):
-        comment = self.get_comment(pk)
-        serialized_comment = PopulatedCommentSerializer(comment)
-        print(comment)
-        return Response(serialized_comment.data, status=status.HTTP_200_OK)
-    
+
     def put(self, request, pk):
         comment_to_like = self.get_comment(pk)
         if comment_to_like.owner.id == request.user.id:
@@ -62,6 +56,11 @@ class CommentDeleteView(APIView):
             return Comment.objects.get(pk=pk)
         except Comment.DoesNotExist:
             raise NotFound()
+        
+    def get(self, _request, pk):
+        comment = self.get_comment(pk)
+        serialized_comment = PopulatedCommentSerializer(comment)
+        return Response(serialized_comment.data, status=status.HTTP_200_OK)
 
     def is_comment_owner(self, comment, user):
         if comment.owner.id != user.id:

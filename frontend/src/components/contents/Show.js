@@ -170,7 +170,7 @@ class Show extends React.Component {
     if (comment_to_like.liked.some(item => item.id === selfId)) return
     comment_to_like.liked.push(selfId)
     console.log(selfId, comment_to_like)
-    comment_to_like = await likeComment(id, comment_to_like)
+    await likeComment(id, selfId)
     console.log(comment_to_like)
     
     const self = await this.getUserInfo(selfId)
