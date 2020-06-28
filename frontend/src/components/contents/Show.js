@@ -1,3 +1,5 @@
+//! like comments 
+
 import React from 'react'
 import { getSingleContent, getSingleUser, getAllTags, getAllFollows, followOwner, unfollowOwner, likeContent, unlikeContent, getSingleComment, postComment, likeComment, deleteComment } from '../../lib/api'
 import { getUserId, isAuthenticated } from '../../lib/auth'
@@ -164,14 +166,14 @@ class Show extends React.Component {
 
   handleLikeComment = async id => {
     const selfId = this.state.self.id
-    const comment_to_like = await getSingleComment(id)
-    // this.state.content.comments.find( item => item.id = id)
+    // const comment_to_like = await getSingleComment(id)
+    // // this.state.content.comments.find( item => item.id = id)
     
-    if (comment_to_like.liked.some(item => item.id === selfId)) return
-    comment_to_like.liked.push(selfId)
-    console.log(selfId, comment_to_like)
-    await likeComment(id, selfId)
-    console.log(comment_to_like)
+    // if (comment_to_like.liked.some(item => item.id === selfId)) return
+    // comment_to_like.liked.push(selfId)
+    // console.log(selfId, comment_to_like)
+    await likeComment(id)
+    // console.log(comment_to_like)
     
     const self = await this.getUserInfo(selfId)
     const contentId = this.props.match.params.id

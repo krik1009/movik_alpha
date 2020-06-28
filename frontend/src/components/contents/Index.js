@@ -150,7 +150,7 @@ class Index extends React.Component {
     // hover ?
       { 
         width: overBreakPoint ? '31%' : '90%',
-        height: overBreakPoint ? 160 : 'auto',
+        height: overBreakPoint ? 300 : 200,
         margin: 5,
         filter: 'saturate(1) contrast(1.2)',
         // transition: '0.4s'
@@ -163,6 +163,10 @@ class Index extends React.Component {
     //   filter: 'saturate(0) contrast(1.2)',
     //   transition: '0.4s'
     // }
+    const thumbnailImgStyle = {
+      width: '100%',
+      height: '90%'
+    }
     const mapInfoStyle = 
     // hover ?
       {
@@ -275,21 +279,13 @@ class Index extends React.Component {
         <div style={thumbnailContainerStyle}>
           {filteredContents.length ? 
             filteredContents.map( item => 
-              // <Link key={item.id} to={`contents/${item.id}`} >
-              // <>
+              <Link key={item.id} to={`contents/${item.id}`} style={mapThumbnailStyle} >
                 <img 
-                  key={item.id}
-                  src={item.thumbnail} 
-                  style={mapThumbnailStyle} 
+                  src={item.thumbnail} style={thumbnailImgStyle}
                   // onMouseEnter={() => this.toggleHover(item.id)}
                   // onMouseLeave={() => this.toggleHover(item.id)} 
                   />
-                /* <div style={mapInfoStyle}>
-                  <p style={mapInfoLetterStyle}>{item.title}</p>
-                  <img src={item.owner.profile_image} alt={item.owner.username} style={mapInfoImgStyle}/>
-                  <p style={mapInfoLetterStyle}>By {item.owner.username.replace(item.owner.username[0], item.owner.username[0].toUpperCase())}</p>
-                </div> */
-              // </>
+              </Link>
             )
             :
             <div style={{ margin: 30 }}>Coming soon... </div>
