@@ -1,5 +1,5 @@
 import React from 'react'
-import { getSingleContent, getSingleUser, getAllTags, getAllFollows, followOwner, unfollowOwner, likeContent, unlikeContent, postComment, likeComment, deleteComment } from '../../lib/api'
+import { getSingleContent, getSingleUser, getAllTags, getAllFollows, followOwner, unfollowOwner, likeContent, unlikeContent, getSingleComment, postComment, likeComment, deleteComment } from '../../lib/api'
 import { getUserId, isAuthenticated } from '../../lib/auth'
 import { frontEndBaseUrl } from '../../lib/url'
 import { Link } from 'react-router-dom'
@@ -33,7 +33,8 @@ class Show extends React.Component {
     formData: {
       comment: '',
       commented_content: '',
-      owner: ''
+      owner: '',
+      liked: []
     }
   }
 
@@ -162,11 +163,20 @@ class Show extends React.Component {
   }
 
   handleLikeComment = async id => {
-    const ownerId = this.state.content.owner.id
-    await likeComment(id)
-    const self = this.getUserInfo(ownerId)
+    const selfId = this.state.self.id
+    const comment_to_like = await getSingleComment(id)
+    // this.state.content.comments.find( item => item.id = id)
+    
+    if (comment_to_like.liked.some(item => item.id === selfId)) return
+    comment_to_like.liked.push(selfId)
+    console.log(selfId, comment_to_like)
+    comment_to_like = await likeComment(id, comment_to_like)
+    console.log(comment_to_like)
+    
+    const self = await this.getUserInfo(selfId)
     const contentId = this.props.match.params.id
     const content = await getSingleContent(contentId)
+    console.log(self, content)
     this.setState({ content, self })
   }
 

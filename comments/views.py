@@ -34,16 +34,23 @@ class CommentLikeView(APIView):
             return Comment.objects.get(pk=pk)
         except Comment.DoesNotExist:
             raise NotFound()
-
-    def put(self, request, pk, user):
+    
+    def get(self, _request, pk):
+        comment = self.get_comment(pk)
+        serialized_comment = PopulatedCommentSerializer(comment)
+        print(comment)
+        return Response(serialized_comment.data, status=status.HTTP_200_OK)
+    
+    def put(self, request, pk):
         comment_to_like = self.get_comment(pk)
-        if comment_to_like.owner.id != user.id:
-            request.data['liked'] = request.user.id 
-            updated_comment = CommentSerializer(comment_to_like, data=request.data)
-            if updated_comment.is_valid():
-                updated_comment.save()
-                return Response(updated_comment.data, status=status.HTTP_202_ACCEPTED)
-            return Response(updated_comment.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        if comment_to_like.owner.id == request.user.id:
+            return Response(status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+          
+        request.data['liked'] = { request.user.id }
+        updated_comment = CommentSerializer(comment_to_like, data=request.data)
+        if updated_comment.is_valid():
+            updated_comment.save()
+            return Response(updated_comment.data, status=status.HTTP_202_ACCEPTED)
         return Response(updated_comment.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
