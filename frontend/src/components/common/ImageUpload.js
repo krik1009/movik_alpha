@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-const uploadUrl = process.env.REACT_APP_IMAGE_UPLOAD_URL
+const uploadUrl = `${process.env.CLOUDINARY_API_BASE_URL}image/upload`
 const uploadPreset = process.env.REACT_APP_IMAGE_UPLOAD_PRESET
 
 class ImageUpload extends React.Component {

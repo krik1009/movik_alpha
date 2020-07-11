@@ -50,7 +50,8 @@ class Content(models.Model):
     color = models.CharField(
         max_length=3,
         choices=Color.choices,
-        default=Color.MULTI
+        default=Color.MULTI,
+        blank=True
     )
     tags = models.ManyToManyField(
         'tags.Tag',
@@ -62,6 +63,7 @@ class Content(models.Model):
         related_name='contents',
         blank=True
     )
+    views = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

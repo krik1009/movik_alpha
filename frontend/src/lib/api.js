@@ -20,7 +20,7 @@ export const getSingleContent = async id => {
 }
 
 export const uploadContent = async formData => {
-  const { data } = await axios.post(`${baseUrl}/contents/create/`, formData, withHeaders())
+  const { data } = await axios.post(`${baseUrl}/contents/new/`, formData, withHeaders())
   return data
 }
 

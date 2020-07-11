@@ -3,7 +3,7 @@ from .views import ContentListView, ContentDetailView, ContentCreateView, Conten
 
 urlpatterns = [
     path('', ContentListView.as_view()),
-    path('create/', ContentCreateView.as_view()),
+    path('new/', ContentCreateView.as_view()),
     path('<int:pk>/', ContentDetailView.as_view()),
     path('<int:pk>/edit/', ContentEditDeleteView.as_view())
 ]

@@ -1,4 +1,4 @@
-//! trending logic - model change
+//! trending logic, react tracker
 //! display profile image when hover
 
 import React from 'react'

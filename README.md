@@ -1,9 +1,8 @@
-movik - the content creators' platform
+### A platform for creators and fans
 
 
 # Wireframe
 https://miro.com/app/board/o9J_krLAZPU=/
-
 
 
 # Core Components / Functions
@@ -35,7 +34,7 @@ https://miro.com/app/board/o9J_krL41w4=/
 BE - Python, Django
 FE - React Hooks
 
-Seeds resource 
+Seeds
 - Pixabay API https://pixabay.com/api/docs/
 - Faker
 
@@ -60,3 +59,5 @@ Seeds resource
 * react-select, react-select/creatable
 * react-share
 * react-moment, timezone
+* react-tracker
+* cloudinary-react, cloudinary-cli

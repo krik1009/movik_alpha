@@ -1,10 +1,23 @@
-//! func to upload video clips w cloudary
+//!  video transformation - 100mb
 
 import React from 'react'
 import CreatableSelect from 'react-select/creatable'
 import ImageUpload from '../common/ImageUpload'
-import { getSingleUser, uploadContent, getAllTags, getAllCategories, createCategory, createTag, getSingleContent } from '../../lib/api'
+
+import { getSingleUser, uploadContent, getAllTags, getAllCategories, createCategory, createTag } from '../../lib/api'
 import { getUserId } from '../../lib/auth'
+import { backgroundImages } from '../../styles/backgroundImages'
+// import { cloudinary } from 'cloudinary'
+// import { createUploadWidget } from 'cloudinary-core'
+// import VideoUpload from '../common/VideoUpload'
+// import axios from 'axios'
+// import { Image, Video, Transformation, CloudinaryContext } from 'cloudinary-react'
+
+// const cloudinaryUrl = process.env.CLOUDINARY_URL
+// const uploadUrl = process.env.REACT_APP_VIDEO_UPLOAD_URL
+// const baseUrl = process.env.CLOUDINARY_API_BASE_URL
+const cloudName = process.env.REACT_APP_CLOUD_NAME
+const uploadPreset = process.env.REACT_APP_VIDEO_UPLOAD_PRESET
 
 
 class New extends React.Component {
@@ -17,10 +30,10 @@ class New extends React.Component {
       duration: '',
       height: '',
       width: '',
-      lang: '',
-      color: '', 
-      tags: '',
-      categories: ''
+      lang: 'en',
+      color: 'mlt', 
+      tags: [],
+      categories: []
     },
     tagOptions: [],
     categoryOptions: [],
@@ -61,17 +74,63 @@ class New extends React.Component {
 
   async componentDidMount() {
     const tags = await getAllTags()
-    console.log(tags)
     const tagOptions = tags.map( item => this.returnObj(item.name.toLowerCase(), item.id))
     const categories = await getAllCategories()
-    console.log(categories)
     const categoryOptions = categories.map( item => this.returnObj(item.name.toLowerCase(), item.id))
-    this.setState({ tagOptions, categoryOptions })
+    const profile = await getSingleUser(getUserId())
+    this.setState({ tagOptions, categoryOptions, profile })
   }
 
   handleChange = e => {
     const formData = { ...this.state.formData, [e.target.name]: e.target.value }
     this.setState({ formData })
+  }
+
+  uploadVideo = () => {
+    const myWidget = window.cloudinary.createUploadWidget({
+      cloudName: cloudName,
+      uploadPreset: uploadPreset,
+      publicId: `${this.state.profile.id}_${this.state.profile.uploaded_contents.length + 1}`,
+      maxFiles: 1,
+      showAdvancedOptions: false,
+
+      // preBatch: (cb, data, result) => {
+      //   console.log(cb, data)
+      //   if (result.info.file.size >= 100000000 ) {
+      //     cb({ cancel: true })
+      //   }
+      //   else { 
+      //     cb()
+      //   }
+      // }
+    }, (error, result) => {
+        console.log(error, result, baseUrl)
+        // const publicId = `${this.state.profile.id}_${this.state.profile.uploaded_contents.length + 1}`
+        // if (result.size && result.size >= 100000000) {
+        //   axios.post(`${baseUrl}/video/upload/w_0.5/${publicId}`)
+        // }
+
+        if (result.event === "success") {
+          const formData = { 
+            ...this.state.formData, 
+            video: result.info.secure_url,
+            thumbnail: result.info.thumbnail_url,
+            height: result.info.height,
+            width: result.info.width
+          }
+          this.setState({ formData })
+        }
+
+        if (result.event === "queues-end") {
+          const formData = { 
+            ...this.state.formData, 
+            title: result.info.files[0].name
+          }
+          this.setState({ formData })
+        }
+      }
+    )
+    myWidget.open()
   }
 
   handleSelectCategories = (newValue, _actionMeta) => {
@@ -119,14 +178,13 @@ class New extends React.Component {
     } 
   }
 
-
   render() {
-    const { formData, errors, tagOptions, categoryOptions } = this.state
+    const { formData, errors, tagOptions, categoryOptions, profile } = this.state
     console.log(this.state)
 
     return (
-      <div className="register" style={{ 
-        backgroundImage: 'url(https://img.freepik.com/free-photo/happy-people-dance-nightclub-party-concert_31965-606.jpg?size=626&ext=jpg)',
+      <div className="register" style={{
+        backgroundImage: `url(${backgroundImages[13]})`,
         backgroundPosition:'center', 
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -182,13 +240,23 @@ class New extends React.Component {
                 <div className="field">
                   <label className="label">Video</label>
                   <div className="control">
-                    <input
+                    {/* <input
                       className="input"
                       type="file"
                       value={formData.video}
-                      onChange={this.handleChange}
+                      onChange={this.handleVideoUpload}
                       name="video"
-                    />
+                    /> */}
+  
+                    {/* <VideoUpload
+                          onChange={this.handleChange}
+                          name="video"
+                    /> */}
+                    <button 
+                      className="cloudinary-button"
+                      onClick={this.uploadVideo} 
+                      name="video"
+                      >Upload files</button>
                   </div>
                   {errors.video && <small className="help is-danger">This fieid is required</small>}
                 </div>

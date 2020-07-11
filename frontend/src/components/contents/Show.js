@@ -1,7 +1,7 @@
-//! like comments 
+//! like comments, view counter, edit content
 
 import React from 'react'
-import { getSingleContent, getSingleUser, getAllTags, getAllFollows, followOwner, unfollowOwner, likeContent, unlikeContent, getSingleComment, postComment, likeComment, deleteComment } from '../../lib/api'
+import { getSingleContent, getSingleUser, getAllTags, getAllFollows, followOwner, unfollowOwner, likeContent, unlikeContent, getSingleComment, postComment, likeComment, deleteComment, editContent } from '../../lib/api'
 import { getUserId, isAuthenticated } from '../../lib/auth'
 import { frontEndBaseUrl } from '../../lib/url'
 import { Link } from 'react-router-dom'
@@ -37,7 +37,8 @@ class Show extends React.Component {
       commented_content: '',
       owner: '',
       liked: []
-    }
+    },
+    views: ''
   }
 
   getSimilarContents = async () => {
@@ -190,6 +191,12 @@ class Show extends React.Component {
     const content = await getSingleContent(contentId)
     this.setState({ content, self })
   }
+
+  // countViews = async contentId => {
+  //   const views = this.state.views + 1
+  //   await editContent(contentId, views)
+    
+  // }
 
   render() {
     const { content, similarCont, followed, liked, owner, self, formData } = this.state

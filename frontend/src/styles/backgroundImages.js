@@ -11,7 +11,8 @@ export const backgroundImages = [
   'https://i.vimeocdn.com/video/892457140_1920x1080.jpg',
   'https://i.vimeocdn.com/video/873368798_1920x1080.jpg',
   'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Muse_in_Sydney.jpg/1200px-Muse_in_Sydney.jpg',
-  'https://img.freepik.com/free-photo/happy-people-dance-nightclub-party-concert_31965-114.jpg?size=626&ext=jpg'
+  'https://img.freepik.com/free-photo/happy-people-dance-nightclub-party-concert_31965-114.jpg?size=626&ext=jpg',
+  'https://img.freepik.com/free-photo/happy-people-dance-nightclub-party-concert_31965-606.jpg?size=626&ext=jpg'
   // 'https://i.vimeocdn.com/video/879339970_1920x1080.jpg',
   // 'https://i.vimeocdn.com/video/862035621_1920x1080.jpg',
   // 'https://i.vimeocdn.com/video/885893632_1920x1080.jpg',

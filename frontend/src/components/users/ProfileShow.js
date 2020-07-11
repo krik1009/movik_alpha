@@ -1,4 +1,6 @@
 //! function - donation
+//! edit cont, delete cont (from cloudinary)
+
 
 import React from 'react'
 import { Link } from 'react-router-dom'
