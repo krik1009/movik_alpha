@@ -104,7 +104,7 @@ class New extends React.Component {
       //   }
       // }
     }, (error, result) => {
-        console.log(error, result, baseUrl)
+        console.log(error, result)
         // const publicId = `${this.state.profile.id}_${this.state.profile.uploaded_contents.length + 1}`
         // if (result.size && result.size >= 100000000) {
         //   axios.post(`${baseUrl}/video/upload/w_0.5/${publicId}`)
