@@ -1,5 +1,5 @@
 //!  video transformation - 100mb
-//! upload - button x 
+//! img uploader
 
 import React from 'react'
 import CreatableSelect from 'react-select/creatable'
@@ -133,6 +133,16 @@ class New extends React.Component {
     myWidget.open()
   }
 
+  openImgUploader = () => {
+    return (
+      <ImageUpload
+        onChange={this.handleChange}
+        name="thumbnail"
+        thumbnail={this.state.formData.thumbnail}
+      />
+    )
+  }
+
   handleSelectCategories = (newValue, _actionMeta) => {
     let addedCategories
     const newPk = this.state.categoryOptions.sort((a, b) => a.value - b.value)[this.state.categoryOptions.length - 1].value
@@ -225,6 +235,12 @@ class New extends React.Component {
     const submitBtnStyle = {
       marginTop: 50
     }
+    const refStyle = {
+      margin: overBreakPoint ? 12 : 8,
+      width: '100%',
+      fontSize: overBreakPoint ? 12 : 10,
+      fontFamily: 'arial'
+    }
 
     return (
       <div className="register" style={backgroundStyle}>
@@ -233,23 +249,21 @@ class New extends React.Component {
             <h1 className="title" style={titleStyle}>
               {`Hi ${profile.username.replace(profile.username[0], profile.username[0].toUpperCase())},`}
             </h1>
-            {/* <p style={subtitleStyle}>
-              Click the button to select a file to upload
-            </p> */}
-           
 
             <div className="columns">
               <form onSubmit={this.handleSubmit} className="column">
 
                 { formData.video ?
-                  <p>Uploaded</p>
+                  <video>
+                    <source src={formData.video} type="video/mp4"></source>
+                  </video>
                   :
                   <div className="field" style={formStyle}>
                     {/* {overBreakPoint && <label className="label" style={labelStyle}>Video</label>} */}
                     <div className="control" style={controlStyle}>
                     {/* {!overBreakPoint && <label className="label" style={labelStyle}>Video</label>} */}
                       <button 
-                        className="button is-link"
+                        className="button is-link is-fullwidth"
                         onClick={this.uploadVideo} 
                         name="video"
                         style={subtitleStyle}
@@ -260,6 +274,31 @@ class New extends React.Component {
                 }
 
                 <hr />
+
+                <div className="field" style={formStyle}>
+                  {overBreakPoint && <label className="label" style={labelStyle}>Thumbnail *</label>}
+                  <div className="control" style={controlStyle}>
+                  {!overBreakPoint && <label className="label" style={labelStyle}>Thumbnail *</label>}
+                  
+                  {formData.thumbnail ?
+                    <>
+                      <img src={formData.thumbnail} alt="thumbnail" />
+                      <button 
+                        className="button is-small"
+                        style={submitBtnStyle}
+                        onClick={this.openImgUploader}
+                        >Change thumbnail</button>
+                    </>
+                    :
+                    <ImageUpload
+                      onChange={this.handleChange}
+                      name="thumbnail"
+                      thumbnail={formData.thumbnail}
+                    />
+                  }
+                 </div>
+                  {errors.thumbnail && <small className="help is-danger">This field is required</small>}
+                </div>
 
                 <div className="field" style={formStyle}>
                   {overBreakPoint && <label className="label" style={labelStyle}>Title *</label>}
@@ -274,21 +313,6 @@ class New extends React.Component {
                     />
                   </div>
                   {errors.title && <small className="help is-danger">This feild is required</small>}
-                </div>
-
-                <div className="field" style={formStyle}>
-                  {overBreakPoint && <label className="label" style={labelStyle}>Thumbnail *</label>}
-                  <div className="control" style={controlStyle}>
-                  {!overBreakPoint && <label className="label" style={labelStyle}>Thumbnail *</label>}
-                  
-                  <img src={formData.thumbnail} alt="thumbnail" />
-                  <ImageUpload
-                    onChange={this.handleChange}
-                    name="thumbnail"
-                    thumbnail={formData.thumbnail}
-                  />
-                  </div>
-                  {errors.thumbnail && <small className="help is-danger">This field is required</small>}
                 </div>
 
                 <div className="field" style={formStyle}>
@@ -350,7 +374,7 @@ class New extends React.Component {
                       isMulti
                       onChange={this.handleSelectCategories}
                       options={categoryOptions}
-                      placeholder='Select or create'
+                      placeholder='-'
                     />
                   </div>
                 </div>
@@ -363,10 +387,11 @@ class New extends React.Component {
                       isMulti
                       onChange={this.handleSelectTags}
                       options={tagOptions}
-                      placeholder='Select or create'
+                      placeholder='-'
                     />
                   </div>
                 </div>
+                <div style={refStyle}>Select from options or add your own tags / categories in the fields</div>
 
                 <div className="field">
                   <button

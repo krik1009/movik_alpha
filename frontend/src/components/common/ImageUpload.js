@@ -31,14 +31,14 @@ class ImageUpload extends React.Component {
           </div>
           
           :
-          <>
-            <label className="label" style={{ fontSize: 10 }}> - Wait for upload to finish before the submit - </label>
+          // <>
+          //   <label className="label" style={{ fontSize: 10 }}> - Wait for upload to finish before the submit - </label>
             <input
               className="input"
               type="file"
               onChange={this.handleUpload}
             />
-          </>
+          // </>
         }
       </div>
     )
