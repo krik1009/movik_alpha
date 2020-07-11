@@ -32,7 +32,7 @@ class Content(models.Model):
     thumbnail = models.CharField(max_length=500)
     video = models.CharField(max_length=500)
     description = models.CharField(max_length=1000, blank=True)
-    duration = models.DurationField(blank=True)
+    # duration = models.DurationField(blank=True)
     height = models.PositiveIntegerField(blank=True)
     width = models.PositiveIntegerField(blank=True)
     lang = models.CharField(

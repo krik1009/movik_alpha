@@ -1,3 +1,5 @@
+//! p2 - bio, profImage
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { registerUser } from '../../lib/api'

@@ -1,4 +1,5 @@
 //!  video transformation - 100mb
+//! upload - button x 
 
 import React from 'react'
 import CreatableSelect from 'react-select/creatable'
@@ -27,7 +28,6 @@ class New extends React.Component {
       description: '',
       thumbnail: '',
       video: '',
-      duration: '',
       height: '',
       width: '',
       lang: 'en',
@@ -37,7 +37,7 @@ class New extends React.Component {
     },
     tagOptions: [],
     categoryOptions: [],
-    profile: '',
+    profile: null,
     errors: {}
   }
 
@@ -181,39 +181,120 @@ class New extends React.Component {
   render() {
     const { formData, errors, tagOptions, categoryOptions, profile } = this.state
     console.log(this.state)
+    if (!profile) return null
+
+    const overBreakPoint = window.innerWidth > 420 ? true : false
+    const backgroundStyle = {
+      display: 'flex',
+      justifyContent: 'center',
+      backgroundImage: `url(${backgroundImages[13]})`,
+      backgroundPosition:'center', 
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      minHeight: overBreakPoint ? 800 : 500,
+    }
+    const containerStyle = {
+      minWidth: overBreakPoint ? 700 : '95%',
+      backgroundColor: 'rgba(255, 255, 255, 0.7)'
+    }
+    const titleStyle ={
+      fontSize: overBreakPoint ? 28 : 20,
+      fontFamily: 'arial'
+    }
+    const subtitleStyle = {
+      fontSize: overBreakPoint ? 20 : 16,
+      fontFamily: 'arial'
+    }
+    const formStyle = {
+      display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'center'
+    }
+    const labelStyle = {
+      margin: overBreakPoint ? 12 : 8,
+      width: overBreakPoint ? '25%' : '100%',
+      fontSize: overBreakPoint ? 18 : 10,
+      fontFamily: 'arial'
+    }
+    const controlStyle = {
+      margin: overBreakPoint ? 12 : 8,
+      width: overBreakPoint ? '70%' : '100%',
+      fontSize: overBreakPoint ? 18 : 10,
+      fontFamily: 'arial'
+    }
+    const submitBtnStyle = {
+      marginTop: 50
+    }
 
     return (
-      <div className="register" style={{
-        backgroundImage: `url(${backgroundImages[13]})`,
-        backgroundPosition:'center', 
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        minHeight: 500
-        }}>
+      <div className="register" style={backgroundStyle}>
         <section className="section">
-          <div className="container box" style={{ maxWidth: '60%', backgroundColor: 'rgba(255, 255, 255, 0.3)'}}>
-            <h1 className="title">Upload</h1>
-            <hr />
+          <div className="container box" style={containerStyle}>
+            <h1 className="title" style={titleStyle}>
+              {`Hi ${profile.username.replace(profile.username[0], profile.username[0].toUpperCase())},`}
+            </h1>
+            {/* <p style={subtitleStyle}>
+              Click the button to select a file to upload
+            </p> */}
+           
 
-             <div className="columns">
-               <form onSubmit={this.handleSubmit} className="column">
-                 <div className="field">
-                   <label className="label">Title</label>
-                   <div className="control">
-                     <input
-                      className={`input ${errors.title ? 'is-danger' : ''}`}
+            <div className="columns">
+              <form onSubmit={this.handleSubmit} className="column">
+
+                { formData.video ?
+                  <p>Uploaded</p>
+                  :
+                  <div className="field" style={formStyle}>
+                    {/* {overBreakPoint && <label className="label" style={labelStyle}>Video</label>} */}
+                    <div className="control" style={controlStyle}>
+                    {/* {!overBreakPoint && <label className="label" style={labelStyle}>Video</label>} */}
+                      <button 
+                        className="button is-link"
+                        onClick={this.uploadVideo} 
+                        name="video"
+                        style={subtitleStyle}
+                        >Select Contents to Upload</button>
+                    </div>
+                    {errors.video && <small className="help is-danger">This feild is required</small>}
+                  </div>
+                }
+
+                <hr />
+
+                <div className="field" style={formStyle}>
+                  {overBreakPoint && <label className="label" style={labelStyle}>Title *</label>}
+                  <div className="control" style={controlStyle}>
+                  {!overBreakPoint && <label className="label" style={labelStyle}>Title *</label>}
+                    <input
+                      className={`input ${errors.title ? 'is-danger' : ''} ${overBreakPoint ? '': 'is-small'}`}
                       placeholder="Title"
                       name="title"
                       onChange={this.handleChange}
                       value={formData.title}
                     />
                   </div>
-                  {errors.title && <small className="help is-danger">Title is required</small>}
+                  {errors.title && <small className="help is-danger">This feild is required</small>}
                 </div>
 
-                <div className="field">
-                  <label className="label">Description</label>
-                  <div className="control">
+                <div className="field" style={formStyle}>
+                  {overBreakPoint && <label className="label" style={labelStyle}>Thumbnail *</label>}
+                  <div className="control" style={controlStyle}>
+                  {!overBreakPoint && <label className="label" style={labelStyle}>Thumbnail *</label>}
+                  
+                  <img src={formData.thumbnail} alt="thumbnail" />
+                  <ImageUpload
+                    onChange={this.handleChange}
+                    name="thumbnail"
+                    thumbnail={formData.thumbnail}
+                  />
+                  </div>
+                  {errors.thumbnail && <small className="help is-danger">This field is required</small>}
+                </div>
+
+                <div className="field" style={formStyle}>
+                  {overBreakPoint && <label className="label" style={labelStyle}>Description</label>}
+                  <div className="control" style={controlStyle}>
+                  {!overBreakPoint && <label className="label" style={labelStyle}>Description</label>}
                     <input
                       type="textarea"
                       className={`input ${errors.description ? 'is-danger' : ''}`}
@@ -223,112 +304,36 @@ class New extends React.Component {
                       value={formData.description}
                     />
                   </div>
-                  {errors.description && <small className="help is-danger">Description is required</small>}
                 </div>
 
-                <div className="field">
-                  <label className="label">Thumbnail</label>
-                  <div className="control">
-                    <ImageUpload
-                      onChange={this.handleChange}
-                      name="thumbnail"
-                    />
-                  </div>
-                  {errors.password && <small className="help is-danger">Thumbnail is required</small>}
-                </div>
-
-                <div className="field">
-                  <label className="label">Video</label>
-                  <div className="control">
-                    {/* <input
-                      className="input"
-                      type="file"
-                      value={formData.video}
-                      onChange={this.handleVideoUpload}
-                      name="video"
-                    /> */}
-  
-                    {/* <VideoUpload
-                          onChange={this.handleChange}
-                          name="video"
-                    /> */}
-                    <button 
-                      className="cloudinary-button"
-                      onClick={this.uploadVideo} 
-                      name="video"
-                      >Upload files</button>
-                  </div>
-                  {errors.video && <small className="help is-danger">This fieid is required</small>}
-                </div>
-
-                <div className="field">
-                  <label className="label">Duration (in sec)</label>
-                  <div className="control">
-                    <input
-                      type="number"
-                      className={`input ${errors.duration ? 'is-danger' : ''}`}
-                      placeholder="Duration"
-                      name="duration"
-                      onChange={this.handleChange}
-                      value={formData.duration}
-                    />
-                  </div>
-                </div>
-
-                <div className="field">
-                  <label className="label">Height</label>
-                  <div className="control">
-                    <input
-                      type="number"
-                      className={`input ${errors.height ? 'is-danger' : ''}`}
-                      placeholder="Height"
-                      name="height"
-                      onChange={this.handleChange}
-                      value={formData.height}
-                    />
-                  </div>
-                </div>
-
-                <div className="field">
-                  <label className="label">Width</label>
-                  <div className="control">
-                    <input
-                      type="number"
-                      className={`input ${errors.width ? 'is-danger' : ''}`}
-                      placeholder="Width"
-                      name="width"
-                      onChange={this.handleChange}
-                      value={formData.width}
-                    />
-                  </div>
-                </div>
-
-                <div className="field">
-                  <label className="label">Language</label>
-                  <div className="select">
+                <div className="field" style={formStyle}>
+                  {overBreakPoint && <label className="label" style={labelStyle}>Language</label>}
+                  <div className="select" style={controlStyle}>
+                  {!overBreakPoint && <label className="label" style={labelStyle}>Language</label>}
                     <select 
                       name="lang" 
                       onChange={this.handleChange}
                       value={formData.lang}
                       style={{ minWidth: 300 }}
                     >
-                      <option disabled value=""></option>
-                      {this.langOptions.map( (item, i) => (
-                        <option value={item.value} key={i}>{item.label}</option>
-                      ))}
+                    <option disabled value=""></option>
+                    {this.langOptions.map( (item, i) => (
+                      <option value={item.value} key={i}>{item.label}</option>
+                    ))}
                     </select>
                   </div>
                 </div>
 
-                <div className="field">
-                  <label className="label">Key Color</label>
-                  <div className="select">
+                <div className="field" style={formStyle}>
+                  {overBreakPoint && <label className="label" style={labelStyle}>Main Color</label>}
+                  <div className="select" style={controlStyle}>
+                  {!overBreakPoint && <label className="label" style={labelStyle}>Main Color</label>}
                     <select
                       name="color" 
                       onChange={this.handleChange}
                       value={formData.color}
                       style={{ minWidth: 300 }}
-                      >
+                    >
                       <option disabled value=""></option>
                       {this.colorOptions.map( (item, i) => (
                         <option value={item.value} key={i}>{item.label}</option>
@@ -337,24 +342,28 @@ class New extends React.Component {
                   </div>
                 </div>
 
-                <div className="field">
-                  <label className="label">Categories</label>
-                  <div className="control">
+                <div className="field" style={formStyle}>
+                  {overBreakPoint && <label className="label" style={labelStyle}>Category</label>}
+                  <div className="control" style={controlStyle}>
+                  {!overBreakPoint && <label className="label" style={labelStyle}>Category</label>}
                     <CreatableSelect
                       isMulti
                       onChange={this.handleSelectCategories}
                       options={categoryOptions}
+                      placeholder='Select or create'
                     />
                   </div>
                 </div>
 
-                <div className="field">
-                  <label className="label">Tags</label>
-                  <div className="control">
+                <div className="field" style={formStyle}>
+                  {overBreakPoint && <label className="label" style={labelStyle}>Tag</label>}
+                  <div className="control" style={controlStyle}>
+                  {!overBreakPoint && <label className="label" style={labelStyle}>Tag</label>}
                     <CreatableSelect
                       isMulti
                       onChange={this.handleSelectTags}
                       options={tagOptions}
+                      placeholder='Select or create'
                     />
                   </div>
                 </div>
@@ -362,13 +371,205 @@ class New extends React.Component {
                 <div className="field">
                   <button
                     type="submit"
-                    className="button is-fullwidth is-black">Upload</button>
+                    className="button is-fullwidth is-black"
+                    style={submitBtnStyle}
+                    >Submit</button>
                 </div>
+
+
               </form>
+
             </div>
           </div>
         </section>
       </div>
+
+      // <div className="register" style={{
+      //   backgroundImage: `url(${backgroundImages[13]})`,
+      //   backgroundPosition:'center', 
+      //   backgroundRepeat: 'no-repeat',
+      //   backgroundSize: 'cover',
+      //   minHeight: 500
+      //   }}>
+      //   <section className="section">
+      //     <div className="container box" style={{ maxWidth: '60%', backgroundColor: 'rgba(255, 255, 255, 0.3)'}}>
+      //       <h1 className="title">Upload</h1>
+      //       <hr />
+
+      //        <div className="columns">
+              //  <form onSubmit={this.handleSubmit} className="column">
+                //  <div className="field">
+                //    <label className="label">Title</label>
+                //    <div className="control">
+                //      <input
+                //       className={`input ${errors.title ? 'is-danger' : ''}`}
+                //       placeholder="Title"
+                //       name="title"
+                //       onChange={this.handleChange}
+                //       value={formData.title}
+                //     />
+                //   </div>
+                //   {errors.title && <small className="help is-danger">Title is required</small>}
+                // </div>
+
+                // <div className="field">
+                //   <label className="label">Description</label>
+                //   <div className="control">
+                //     <input
+                //       type="textarea"
+                //       className={`input ${errors.description ? 'is-danger' : ''}`}
+                //       placeholder="Description"
+                //       name="description"
+                //       onChange={this.handleChange}
+                //       value={formData.description}
+                //     />
+                //   </div>
+                //   {errors.description && <small className="help is-danger">Description is required</small>}
+                // </div>
+
+                // <div className="field">
+                //   <label className="label">Thumbnail</label>
+                //   <div className="control">
+                //     <ImageUpload
+                //       onChange={this.handleChange}
+                //       name="thumbnail"
+                //     />
+                //   </div>
+                //   {errors.password && <small className="help is-danger">Thumbnail is required</small>}
+                // </div>
+
+                // <div className="field">
+                //   <label className="label">Video</label>
+                //   <div className="control">
+                //     {/* <input
+                //       className="input"
+                //       type="file"
+                //       value={formData.video}
+                //       onChange={this.handleVideoUpload}
+                //       name="video"
+                //     /> */}
+  
+                //     {/* <VideoUpload
+                //           onChange={this.handleChange}
+                //           name="video"
+                //     /> */}
+                //     <button 
+                //       className="cloudinary-button"
+                //       onClick={this.uploadVideo} 
+                //       name="video"
+                //       >Upload files</button>
+                //   </div>
+                //   {errors.video && <small className="help is-danger">This fieid is required</small>}
+                // </div>
+
+                // <div className="field">
+                //   <label className="label">Duration (in sec)</label>
+                //   <div className="control">
+                //     <input
+                //       type="number"
+                //       className={`input ${errors.duration ? 'is-danger' : ''}`}
+                //       placeholder="Duration"
+                //       name="duration"
+                //       onChange={this.handleChange}
+                //       value={formData.duration}
+                //     />
+                //   </div>
+                // </div>
+
+                // <div className="field">
+                //   <label className="label">Height</label>
+                //   <div className="control">
+                //     <input
+                //       type="number"
+                //       className={`input ${errors.height ? 'is-danger' : ''}`}
+                //       placeholder="Height"
+                //       name="height"
+                //       onChange={this.handleChange}
+                //       value={formData.height}
+                //     />
+                //   </div>
+                // </div>
+
+                // <div className="field">
+                //   <label className="label">Width</label>
+                //   <div className="control">
+                //     <input
+                //       type="number"
+                //       className={`input ${errors.width ? 'is-danger' : ''}`}
+                //       placeholder="Width"
+                //       name="width"
+                //       onChange={this.handleChange}
+                //       value={formData.width}
+                //     />
+                //   </div>
+                // </div>
+
+                // <div className="field">
+                //   <label className="label">Language</label>
+                //   <div className="select">
+                //     <select 
+                //       name="lang" 
+                //       onChange={this.handleChange}
+                //       value={formData.lang}
+                //       style={{ minWidth: 300 }}
+                //     >
+                //       <option disabled value=""></option>
+                //       {this.langOptions.map( (item, i) => (
+                //         <option value={item.value} key={i}>{item.label}</option>
+                //       ))}
+                //     </select>
+                //   </div>
+                // </div>
+
+                // <div className="field">
+                //   <label className="label">Color</label>
+                //   <div className="select">
+                //     <select
+                //       name="color" 
+                //       onChange={this.handleChange}
+                //       value={formData.color}
+                //       style={{ minWidth: 300 }}
+                //       >
+                //       <option disabled value=""></option>
+                //       {this.colorOptions.map( (item, i) => (
+                //         <option value={item.value} key={i}>{item.label}</option>
+                //       ))}
+                //     </select>
+                //   </div>
+                // </div>
+
+                // <div className="field">
+                //   <label className="label">Categories</label>
+                //   <div className="control">
+                //     <CreatableSelect
+                //       isMulti
+                //       onChange={this.handleSelectCategories}
+                //       options={categoryOptions}
+                //     />
+                //   </div>
+                // </div>
+
+                // <div className="field">
+                //   <label className="label">Tags</label>
+                //   <div className="control">
+                //     <CreatableSelect
+                //       isMulti
+                //       onChange={this.handleSelectTags}
+                //       options={tagOptions}
+                //     />
+                //   </div>
+                // </div>
+
+      //           <div className="field">
+      //             <button
+      //               type="submit"
+      //               className="button is-fullwidth is-black">Upload</button>
+      //           </div>
+      //         </form>
+      //       </div>
+      //     </div>
+      //   </section>
+      // </div>
     )
   }
 }

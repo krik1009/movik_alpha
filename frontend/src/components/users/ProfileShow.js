@@ -1,5 +1,5 @@
-//! function - donation
-//! edit cont, delete cont (from cloudinary)
+//! func donate
+//! edit cont, delete cont from cloudinary)
 
 
 import React from 'react'
