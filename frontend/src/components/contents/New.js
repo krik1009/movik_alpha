@@ -7,15 +7,7 @@ import ImageUpload from '../common/ImageUpload'
 import { getSingleUser, uploadContent, getAllTags, getAllCategories, createCategory, createTag } from '../../lib/api'
 import { getUserId } from '../../lib/auth'
 import { backgroundImages } from '../../styles/backgroundImages'
-// import { cloudinary } from 'cloudinary'
-// import { createUploadWidget } from 'cloudinary-core'
-// import VideoUpload from '../common/VideoUpload'
-// import axios from 'axios'
-// import { Image, Video, Transformation, CloudinaryContext } from 'cloudinary-react'
 
-// const cloudinaryUrl = process.env.CLOUDINARY_URL
-// const uploadUrl = process.env.REACT_APP_VIDEO_UPLOAD_URL
-// const baseUrl = process.env.CLOUDINARY_API_BASE_URL
 const cloudName = process.env.REACT_APP_CLOUD_NAME
 const uploadPresetVideo = process.env.REACT_APP_VIDEO_UPLOAD_PRESET
 const uploadPresetImg = process.env.REACT_APP_IMAGE_UPLOAD_PRESET
