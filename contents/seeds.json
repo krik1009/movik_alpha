@@ -7,7 +7,7 @@
       "thumbnail": "https://i.vimeocdn.com/video/862586427_1920x1080.jpg",
       "video": "https://player.vimeo.com/external/396036988.hd.mp4?s=d409153a1984fc0bd388cdc8d0a3a94eed888de3&profile_id=172",
       "description": "This is a sample file",
-      "duration": "00:00:40",
+      
       "height": 2160,
       "width": 3840,
       "lang": "en",
@@ -19,7 +19,8 @@
       "tags": [
         1
       ],
-      "categories": [3, 10, 17]
+      "categories": [3, 10, 17],
+      "views": 0
     }
   },
   {
@@ -30,7 +31,7 @@
       "thumbnail": "https://i.vimeocdn.com/video/877697510_1920x1080.jpg",
       "video": "https://player.vimeo.com/external/407130678.hd.mp4?s=c384238fdf4a44a7bbc197b18b1d02af34663d9e&profile_id=171",
       "description": "Colors 10 minutes before sunrise. Rocher Percé (Pierced Rock), Quebec, Canada",
-      "duration": "00:00:29",
+      
       "height": 1440,
       "width": 2560,
       "lang": "en",
@@ -43,7 +44,8 @@
         2,
         3
       ],
-      "categories": [3, 10, 17]
+      "categories": [3, 10, 17],
+      "views": 0
     }
   },
   {
@@ -54,7 +56,7 @@
       "thumbnail": "https://freedesignfile.com/upload/2016/11/The-blue-light-shines-on-the-cheering-crowd-rock-concert-03.jpg",
       "video": "https://www.videvo.net/videvo_files/converted/2016_01/preview/koncert.mp426536.webm",
       "description": "Blurry slow motion footage of a concert",
-      "duration": "00:00:20",
+      
       "height": 1080,
       "width": 1920,
       "lang": "en",
@@ -68,7 +70,8 @@
       ],
       "categories": [
         8, 20
-      ]
+      ],
+      "views": 0
     }
   },
   {
@@ -79,7 +82,7 @@
       "thumbnail": "https://image.freepik.com/free-photo/national-theater-hall-liberty-square-main-gate-chiang-kai-shek-memorial-hall-night-taipei-taiwan_35076-3500.jpg",
       "video": "https://cdn.videvo.net/videvo_files/video/free/2019-07/small_watermarked/190625_16_ChiangKaiShekMemorial_Drone_03_preview.webm",
       "description": "Drone shot flying over Liberty Square National Theatre revealing the National Concert Hall Taipei, Taiwan.",
-      "duration": "00:00:20",
+     
       "height": 2160,
       "width": 3840,
       "lang": "en",
@@ -93,7 +96,8 @@
       ],
       "categories": [
         10, 18
-      ]
+      ],
+      "views": 0
     }
   },
   {
@@ -104,7 +108,7 @@
       "thumbnail": "https://i.vimeocdn.com/video/898899672_1920x1080.jpg",
       "video": "https://player.vimeo.com/external/422737559.hd.mp4?s=e0e5ca5f7d525c3b988e10c9462074a82ae36b35&profile_id=175",
       "description": "This video clip is created by ...",
-      "duration": "00:00:25",
+    
       "height": 1080,
       "width": 1920,
       "lang": "en",
@@ -116,7 +120,8 @@
       "tags": [
         7
       ],
-      "categories": [3]
+      "categories": [3],
+      "views": 0
     }
   }
 ]

@@ -1,11 +1,10 @@
 //!  video transformation - 100mb
-//! img uploader
 
 import React from 'react'
 import CreatableSelect from 'react-select/creatable'
 import ImageUpload from '../common/ImageUpload'
 
-import { getSingleUser, uploadContent, getAllTags, getAllCategories, createCategory, createTag } from '../../lib/api'
+import { getSingleUser, getLastContId, uploadContent, getAllTags, getAllCategories, createCategory, createTag } from '../../lib/api'
 import { getUserId } from '../../lib/auth'
 import { backgroundImages } from '../../styles/backgroundImages'
 // import { cloudinary } from 'cloudinary'
@@ -18,8 +17,8 @@ import { backgroundImages } from '../../styles/backgroundImages'
 // const uploadUrl = process.env.REACT_APP_VIDEO_UPLOAD_URL
 // const baseUrl = process.env.CLOUDINARY_API_BASE_URL
 const cloudName = process.env.REACT_APP_CLOUD_NAME
-const uploadPreset = process.env.REACT_APP_VIDEO_UPLOAD_PRESET
-
+const uploadPresetVideo = process.env.REACT_APP_VIDEO_UPLOAD_PRESET
+const uploadPresetImg = process.env.REACT_APP_IMAGE_UPLOAD_PRESET
 
 class New extends React.Component {
   state = {
@@ -86,11 +85,13 @@ class New extends React.Component {
     this.setState({ formData })
   }
 
-  uploadVideo = () => {
+  uploadVideo = async e => {
+    e.preventDefault()
+    const contId = await getLastContId()
     const myWidget = window.cloudinary.createUploadWidget({
       cloudName: cloudName,
-      uploadPreset: uploadPreset,
-      publicId: `${this.state.profile.id}_${this.state.profile.uploaded_contents.length + 1}`,
+      uploadPreset: uploadPresetVideo,
+      publicId: `${this.state.profile.id}_${contId + 1}`,
       maxFiles: 1,
       showAdvancedOptions: false,
 
@@ -133,14 +134,28 @@ class New extends React.Component {
     myWidget.open()
   }
 
-  openImgUploader = () => {
-    return (
-      <ImageUpload
-        onChange={this.handleChange}
-        name="thumbnail"
-        thumbnail={this.state.formData.thumbnail}
-      />
+  uploadImg = async e => {
+    e.preventDefault()
+    const contId = await getLastContId()
+    const myWidget = window.cloudinary.openUploadWidget({
+      cloudName: cloudName,
+      uploadPreset: uploadPresetImg,
+      publicId: `${this.state.profile.id}_${contId + 1}_thumbnail`,
+      maxFiles: 1,
+      showAdvancedOptions: false,
+    }, (error, result) => {
+        console.log(error, result)
+        if (result.event === "success") {
+          const formData = { 
+            ...this.state.formData, 
+            thumbnail: result.info.thumbnail_url
+          }
+          this.setState({ formData })
+          console.log(uploadPresetImg)
+        }
+      }
     )
+    myWidget.open()
   }
 
   handleSelectCategories = (newValue, _actionMeta) => {
@@ -251,25 +266,26 @@ class New extends React.Component {
             </h1>
 
             <div className="columns">
+
               <form onSubmit={this.handleSubmit} className="column">
 
-                { formData.video ?
+                {formData.video ?
                   <video>
                     <source src={formData.video} type="video/mp4"></source>
                   </video>
                   :
                   <div className="field" style={formStyle}>
-                    {/* {overBreakPoint && <label className="label" style={labelStyle}>Video</label>} */}
+                    {/* {overBreakPoint && <label className="label" style={labelStyle}>Video</label>}
                     <div className="control" style={controlStyle}>
-                    {/* {!overBreakPoint && <label className="label" style={labelStyle}>Video</label>} */}
-                      <button 
-                        className="button is-link is-fullwidth"
-                        onClick={this.uploadVideo} 
-                        name="video"
-                        style={subtitleStyle}
-                        >Select Contents to Upload</button>
-                    </div>
-                    {errors.video && <small className="help is-danger">This feild is required</small>}
+                    {!overBreakPoint && <label className="label" style={labelStyle}>Video</label>} */}
+                    <button 
+                      className="button is-danger is-fullwidth"
+                      onClick={this.uploadVideo} 
+                      name="video"
+                      style={subtitleStyle}
+                      >Select Contents to Upload</button>
+                    {/* </div>
+                    {errors.video && <small className="help is-danger">This feild is required</small>} */}
                   </div>
                 }
 
@@ -286,7 +302,7 @@ class New extends React.Component {
                       <button 
                         className="button is-small"
                         style={submitBtnStyle}
-                        onClick={this.openImgUploader}
+                        onClick={this.uploadImg}
                         >Change thumbnail</button>
                     </>
                     :
@@ -319,11 +335,11 @@ class New extends React.Component {
                   {overBreakPoint && <label className="label" style={labelStyle}>Description</label>}
                   <div className="control" style={controlStyle}>
                   {!overBreakPoint && <label className="label" style={labelStyle}>Description</label>}
-                    <input
-                      type="textarea"
-                      className={`input ${errors.description ? 'is-danger' : ''}`}
-                      placeholder="Description"
+                    <textarea
+                      className={`textarea ${errors.description ? 'is-danger' : ''}`}
+                      placeholder="Description (Up to 1,000 words)"
                       name="description"
+                      rows="5"
                       onChange={this.handleChange}
                       value={formData.description}
                     />
@@ -391,7 +407,7 @@ class New extends React.Component {
                     />
                   </div>
                 </div>
-                <div style={refStyle}>Select from options or add your own tags / categories in the fields</div>
+                <div style={refStyle}>Category/Tag: Select from options or add your own tags / categories in the fields</div>
 
                 <div className="field">
                   <button
@@ -403,7 +419,6 @@ class New extends React.Component {
 
 
               </form>
-
             </div>
           </div>
         </section>

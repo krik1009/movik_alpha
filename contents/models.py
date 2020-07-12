@@ -68,3 +68,5 @@ class Content(models.Model):
     
     def __str__(self):
         return f'{self.title} is created'
+
+# "duration": "00:00:25"

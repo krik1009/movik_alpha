@@ -1,4 +1,6 @@
-//! like comments, view counter, edit content
+//! like comments
+//! view counter
+//! edit content
 
 import React from 'react'
 import { getSingleContent, getSingleUser, getAllTags, getAllFollows, followOwner, unfollowOwner, likeContent, unlikeContent, getSingleComment, postComment, likeComment, deleteComment, editContent } from '../../lib/api'

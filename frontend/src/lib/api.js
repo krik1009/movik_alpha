@@ -14,6 +14,11 @@ export const getAllContents = async () => {
   return data
 }
 
+export const getLastContId = async () => {
+  const { data } = await axios.get(`${baseUrl}/contents/`)
+  return data[data.length - 1].id
+}
+
 export const getSingleContent = async id => {
   const { data } = await axios.get(`${baseUrl}/contents/${id}/`)
   return data
