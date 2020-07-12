@@ -176,8 +176,8 @@ class ProfileShow extends React.Component {
                 ))}
                 {(this.isSelf() && numConts === 0) &&
                   <div style={{ width: "100%"}}>
-                    Upload Contents
-                    <New updateProfile={this.updateProfile} />
+                    No uploaded contents -
+                    <Link to='/contents/new'>Upload Contents</Link>
                   </div>
                 }
               </div>

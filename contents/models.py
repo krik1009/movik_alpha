@@ -63,6 +63,7 @@ class Content(models.Model):
         related_name='contents',
         blank=True
     )
+    public_id = models.CharField(blank=True, max_length=1000)
     views = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     

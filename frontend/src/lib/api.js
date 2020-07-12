@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getToken } from './auth'
+// import { cloudinary } from 'cloudinary'
 const baseUrl = '/api'
 export const withHeaders = () => {
   return {
@@ -14,10 +15,10 @@ export const getAllContents = async () => {
   return data
 }
 
-export const getLastContId = async () => {
-  const { data } = await axios.get(`${baseUrl}/contents/`)
-  return data[data.length - 1].id
-}
+// export const getLastContId = async () => {
+//   const { data } = await axios.get(`${baseUrl}/contents/`)
+//   return data[data.length - 1].id
+// }
 
 export const getSingleContent = async id => {
   const { data } = await axios.get(`${baseUrl}/contents/${id}/`)
@@ -34,10 +35,12 @@ export const editContent = async (contentId, formData) => {
   return data
 }
 
-export const deleteContent = async contentId => {
+export const deleteContent = async (contentId
+  // , publicId
+  ) => {
+  // cloudinary.v2.api.delete_resources(publicId)
   return await axios.delete(`${baseUrl}/contents/${contentId}/edit/`, withHeaders())
 }
-
 
 
 // users

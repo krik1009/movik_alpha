@@ -4,7 +4,7 @@ import React from 'react'
 import CreatableSelect from 'react-select/creatable'
 import ImageUpload from '../common/ImageUpload'
 
-import { getSingleUser, getLastContId, uploadContent, getAllTags, getAllCategories, createCategory, createTag } from '../../lib/api'
+import { getSingleUser, uploadContent, getAllTags, getAllCategories, createCategory, createTag } from '../../lib/api'
 import { getUserId } from '../../lib/auth'
 import { backgroundImages } from '../../styles/backgroundImages'
 // import { cloudinary } from 'cloudinary'
@@ -32,7 +32,8 @@ class New extends React.Component {
       lang: 'en',
       color: 'mlt', 
       tags: [],
-      categories: []
+      categories: [],
+      public_id: ''
     },
     tagOptions: [],
     categoryOptions: [],
@@ -87,11 +88,10 @@ class New extends React.Component {
 
   uploadVideo = async e => {
     e.preventDefault()
-    const contId = await getLastContId()
     const myWidget = window.cloudinary.createUploadWidget({
       cloudName: cloudName,
       uploadPreset: uploadPresetVideo,
-      publicId: `${this.state.profile.id}_${contId + 1}`,
+      // publicId: `${this.state.profile.id}_${contId + 1}`,
       maxFiles: 1,
       showAdvancedOptions: false,
 
@@ -117,7 +117,8 @@ class New extends React.Component {
             video: result.info.secure_url,
             thumbnail: result.info.thumbnail_url,
             height: result.info.height,
-            width: result.info.width
+            width: result.info.width,
+            public_id: result.info.public_id
           }
           this.setState({ formData })
         }
@@ -136,13 +137,13 @@ class New extends React.Component {
 
   uploadImg = async e => {
     e.preventDefault()
-    const contId = await getLastContId()
     const myWidget = window.cloudinary.openUploadWidget({
       cloudName: cloudName,
       uploadPreset: uploadPresetImg,
-      publicId: `${this.state.profile.id}_${contId + 1}_thumbnail`,
+      publicId: this.state.formData.public_id,
       maxFiles: 1,
       showAdvancedOptions: false,
+      cropping: false,
     }, (error, result) => {
         console.log(error, result)
         if (result.event === "success") {
