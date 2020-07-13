@@ -8,6 +8,9 @@ from rest_framework import status
 from .models import Content
 from .serializers import ContentSerializer, PopulatedContentSerializer
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 class ContentListView(APIView):
     def get(self, _request):

@@ -108,7 +108,7 @@ export const getAllCategories = async () => {
 }
 
 export const createCategory = async formData => {
-  const { data } = await axios.post(`${baseUrl}/categories/`, formData, withHeaders())
+  const { data } = await axios.post(`${baseUrl}/categories/new/`, formData, withHeaders())
   return data
 }
 
