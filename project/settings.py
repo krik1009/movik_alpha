@@ -10,13 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import os
+from dotenv import load_dotenv
 import django_heroku
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv()
+
+CLOUD_NAME = os.getenv("CLOUD_NAME")
+API_KEY = os.getenv("API_KEY")
+API_SECRET = os.getenv("API_SECRET")
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,10 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'cloudinary',
     'cloudinary_storage',
+    'django.contrib.staticfiles',
+    'cloudinary',
+    'rest_framework',
     'jwt_auth',
     'followers',
     'likes',
@@ -161,9 +165,9 @@ STATICFILES_DIRS = (
 )
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dfeirxlea',
-    'API_KEY': '685517118446811',
-    'API_SECRET': 'uxNSftZ_N8qZpLgiveUlbPzs2KI'
+    'CLOUD_NAME': CLOUD_NAME,
+    'API_KEY': API_KEY,
+    'API_SECRET': API_SECRET
 }
 
 django_heroku.settings(locals())
