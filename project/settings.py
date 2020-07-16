@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'cloudinary',
+    'cloudinary_storage',
     'jwt_auth',
     'followers',
     'likes',
@@ -155,5 +156,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend', "build", "static"), 
 )
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dfeirxlea',
+    'API_KEY': '685517118446811',
+    'API_SECRET': 'uxNSftZ_N8qZpLgiveUlbPzs2KI'
+}
 
 django_heroku.settings(locals())
