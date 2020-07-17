@@ -10,25 +10,20 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import os
-import dj_database_url
 import dotenv
+from dotenv import load_dotenv
 import django_heroku
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-from dotenv import load_dotenv
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 load_dotenv()
 
 CLOUD_NAME = os.getenv("CLOUD_NAME")
 API_KEY = os.getenv("API_KEY")
 API_SECRET = os.getenv("API_SECRET")
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# dotenv_file = os.path.join(BASE_DIR, ".env")
-# if os.path.isfile(dotenv_file):
-#     dotenv.load_dotenv(dotenv_file)
 
 
 # Quick-start development settings - unsuitable for production
@@ -73,16 +68,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend')
-                 ]  #Look, we have added the root folder of frontend here
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'frontend')], #Look, we have added the root folder of frontend here
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -97,10 +89,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -112,7 +102,6 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -128,21 +117,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
-
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
@@ -152,10 +133,8 @@ REST_FRAMEWORK = {
         'jwt_auth.authentication.JWTAuthentication'
     ],
 }
-
 # # regsitering our custom user model as the auth model.
 AUTH_USER_MODEL = 'jwt_auth.User'
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -165,6 +144,12 @@ AUTH_USER_MODEL = 'jwt_auth.User'
 #   'MEDIA_URL': 'api/requests/'
 # }
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': CLOUD_NAME,
+    'API_KEY': API_KEY,
+    'API_SECRET': API_SECRET
+}
+
 ROOT_URLCONF = 'project.urls' #check if you have this already, if not add it in
 
 STATIC_URL = '/static/'
@@ -172,11 +157,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend', "build", "static"), 
 )
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': CLOUD_NAME,
-    'API_KEY': API_KEY,
-    'API_SECRET': API_SECRET
-}
 
 django_heroku.settings(locals())
