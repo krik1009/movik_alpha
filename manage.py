@@ -2,7 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from dotenv import Dotenv
+# from dotenv import Dotenv
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
@@ -16,8 +16,8 @@ def main():
         ) from exc
     
 
-    dotenv = Dotenv(os.path.join(os.path.dirname(__file__), '.env'))
-    os.environ.update(dotenv)
+    # dotenv = Dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+    # os.environ.update(dotenv)
     
     execute_from_command_line(sys.argv)
 
