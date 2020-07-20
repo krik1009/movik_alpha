@@ -17,18 +17,19 @@ import cloudinary.api
 import environ
 from decouple import config
 
-env = environ.Env(
-    DEBUG=(bool, False)
-)
+# env = environ.Env(
+#     DEBUG=(bool, False)
+# )
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # env_file = os.path.join(BASE_DIR, '.env')
-environ.Env.read_env(
-    # env_file
-    )
+# environ.Env.read_env(
+#     # env_file
+#     )
 
 # # reading .env file
 # READ_ENV_FILE = env.bool('DJANGO_READ_ENV_FILE', default=False)
@@ -40,7 +41,7 @@ environ.Env.read_env(
 # environ.Env.read_env()
 
 # False if not in os.environ
-DEBUG = config('DEBUG')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
 SECRET_KEY = config('SECRET_KEY')
