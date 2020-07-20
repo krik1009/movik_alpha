@@ -14,8 +14,8 @@ import django_heroku
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-
 import environ
+
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
@@ -24,16 +24,16 @@ env = environ.Env(
 environ.Env.read_env()
 
 # False if not in os.environ
-DEBUG = env('DEBUG')
+DEBUG = os.environ('DEBUG')
 
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.environ('SECRET_KEY')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-CLOUD_NAME = env('CLOUD_NAME')
-API_KEY = env('API_KEY')
-API_SECRET = env('API_SECRET')
+CLOUD_NAME = os.environ('CLOUD_NAME')
+API_KEY = os.environ('API_KEY')
+API_SECRET = os.environ('API_SECRET')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
