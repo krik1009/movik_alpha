@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import os
+# from dotenv import load_dotenv
 import django_heroku
 import cloudinary
 import cloudinary.uploader
@@ -17,7 +18,7 @@ import cloudinary.api
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-load_dotenv()
+# load_dotenv()
 
 CLOUD_NAME = os.getenv("CLOUD_NAME")
 API_KEY = os.getenv("API_KEY")
