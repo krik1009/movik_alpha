@@ -24,16 +24,17 @@ env = environ.Env(
 environ.Env.read_env()
 
 # False if not in os.environ
-DEBUG = os.environ('DEBUG')
+DEBUG = os.environ['DEBUG']
 
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
-SECRET_KEY = os.environ('SECRET_KEY')
+SECRET_KEY = os.environ['SECRET_KEY']
+
+
+CLOUD_NAME = os.environ['CLOUD_NAME']
+API_KEY = os.environ['API_KEY']
+API_SECRET = os.environ['API_SECRET']
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-CLOUD_NAME = os.environ('CLOUD_NAME')
-API_KEY = os.environ('API_KEY')
-API_SECRET = os.environ('API_SECRET')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
