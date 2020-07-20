@@ -16,11 +16,10 @@ import cloudinary.uploader
 import cloudinary.api
 import environ
 
-env = environ.Env()
-# env = environ.Env(
-#     # set casting, default value
-#     DEBUG=(bool, False)
-# )
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -28,11 +27,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # reading .env file
 READ_ENV_FILE = env.bool('DJANGO_READ_ENV_FILE', default=False)
+
 if READ_ENV_FILE:
     env_file = str(BASE_DIR.path('.env'))
     env.read_env(env_file)
     
-# environ.Env.read_env()
+environ.Env.read_env()
 
 # False if not in os.environ
 DEBUG=env('DEBUG')
