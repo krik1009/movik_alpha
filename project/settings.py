@@ -41,16 +41,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # environ.Env.read_env()
 
 # False if not in os.environ
-DEBUG = config.ConfigEnv('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
-SECRET_KEY = config.ConfigEnv('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 # SECRET_KEY = os.environ['SECRET_KEY']
 
 
-CLOUD_NAME = config.ConfigEnv('CLOUD_NAME')
-API_KEY = config.ConfigEnv('API_KEY')
-API_SECRET = config.ConfigEnv('API_SECRET')
+CLOUD_NAME = config('CLOUD_NAME')
+API_KEY = config('API_KEY')
+API_SECRET = config('API_SECRET')
 
 
 
