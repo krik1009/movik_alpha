@@ -21,7 +21,6 @@ from decouple import config
 #     DEBUG=(bool, False)
 # )
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,7 +36,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # if READ_ENV_FILE:
 #     env_file = str(BASE_DIR.path('.env'))
 #     env.read_env(env_file)
-    
+
 # environ.Env.read_env()
 
 # False if not in os.environ
@@ -47,11 +46,9 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 SECRET_KEY = config('SECRET_KEY')
 # SECRET_KEY = os.environ['SECRET_KEY']
 
-
 CLOUD_NAME = config('CLOUD_NAME')
 API_KEY = config('API_KEY')
 API_SECRET = config('API_SECRET')
-
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -65,7 +62,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -150,6 +146,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
@@ -159,12 +157,13 @@ REST_FRAMEWORK = {
         'jwt_auth.authentication.JWTAuthentication'
     ],
 }
-# # regsitering our custom user model as the auth model.
+
+# regsitering our custom user model as the auth model.
 AUTH_USER_MODEL = 'jwt_auth.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
+STATIC_URL = '/static/'
 
 # MEDIA_ROOT = {
 #   'MEDIA_URL': 'api/requests/'
@@ -178,10 +177,9 @@ CLOUDINARY_STORAGE = {
 
 ROOT_URLCONF = 'project.urls' #check if you have this already, if not add it in
 
-STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'frontend', "build", "static"), 
+    os.path.join(BASE_DIR, 'frontend', 'build', 'static'), 
 )
 
 django_heroku.settings(locals())
