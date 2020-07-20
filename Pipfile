@@ -49,3 +49,6 @@ django-dotenv = "*"
 
 [requires]
 python_version = "3.7"
+
+[scripts]
+start = "python main.py runserver"

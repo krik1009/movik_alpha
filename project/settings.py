@@ -10,15 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import os
-# from dotenv import load_dotenv
 import django_heroku
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# load_dotenv()
 
 CLOUD_NAME = os.getenv("CLOUD_NAME")
 API_KEY = os.getenv("API_KEY")
@@ -29,7 +26,8 @@ API_SECRET = os.getenv("API_SECRET")
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$09zc8^0u_#y_bj&wq=$n(_q@^ubk59xcl#h^d36tv8mswc&4m'
+SECRET_KEY = os.getenv("SECRET_KEY")
+# SECRET_KEY = '$09zc8^0u_#y_bj&wq=$n(_q@^ubk59xcl#h^d36tv8mswc&4m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
