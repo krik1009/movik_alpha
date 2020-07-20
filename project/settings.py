@@ -17,7 +17,6 @@ import cloudinary.api
 import environ
 
 env = environ.Env(
-    # set casting, default value
     DEBUG=(bool, False)
 )
 
@@ -25,8 +24,10 @@ env = environ.Env(
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-env_file = os.path.join(BASE_DIR, ".env")
-environ.Env.read_env(env_file)
+# env_file = os.path.join(BASE_DIR, '.env')
+environ.Env.read_env(
+    # env_file
+    )
 
 # # reading .env file
 # READ_ENV_FILE = env.bool('DJANGO_READ_ENV_FILE', default=False)
@@ -38,17 +39,15 @@ environ.Env.read_env(env_file)
 # environ.Env.read_env()
 
 # False if not in os.environ
-DEBUG=env('DEBUG')
+DEBUG = env('DEBUG')
 
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
-SECRET_KEY=env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
 
-CLOUD_NAME=env('CLOUD_NAME')
-API_KEY=env('API_KEY')
-API_SECRET=env('API_SECRET')
-
-
+CLOUD_NAME = env('CLOUD_NAME')
+API_KEY = env('API_KEY')
+API_SECRET = env('API_SECRET')
 
 
 
