@@ -14,6 +14,9 @@ import django_heroku
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
