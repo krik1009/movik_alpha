@@ -39,15 +39,15 @@ environ.Env.read_env(
 # environ.Env.read_env()
 
 # False if not in os.environ
-DEBUG = os.environ.get('DEBUG')
+DEBUG = os.environ['DEBUG']
 
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ['SECRET_KEY']
 
 
-CLOUD_NAME = os.environ.get('CLOUD_NAME')
-API_KEY = os.environ.get('API_KEY')
-API_SECRET = os.environ.get('API_SECRET')
+CLOUD_NAME = os.environ['CLOUD_NAME']
+API_KEY = os.environ['API_KEY']
+API_SECRET = os.environ['API_SECRET']
 
 
 
