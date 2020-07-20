@@ -14,7 +14,7 @@ import django_heroku
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-import environ
+# import environ
 from decouple import config
 
 # env = environ.Env(
