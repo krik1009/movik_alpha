@@ -15,21 +15,35 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
+import environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env()
+
+# False if not in os.environ
+DEBUG = env('DEBUG')
+
+# Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
+SECRET_KEY = env('SECRET_KEY')
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-CLOUD_NAME = os.getenv("CLOUD_NAME")
-API_KEY = os.getenv("API_KEY")
-API_SECRET = os.getenv("API_SECRET")
+CLOUD_NAME = env('CLOUD_NAME')
+API_KEY = env('API_KEY')
+API_SECRET = env('API_SECRET')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.getenv("SECRET_KEY")
-SECRET_KEY = '$09zc8^0u_#y_bj&wq=$n(_q@^ubk59xcl#h^d36tv8mswc&4m'
+# SECRET_KEY = '$09zc8^0u_#y_bj&wq=$n(_q@^ubk59xcl#h^d36tv8mswc&4m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 
