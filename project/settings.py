@@ -15,6 +15,7 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 import environ
+from decouple import config
 
 env = environ.Env(
     DEBUG=(bool, False)
@@ -42,7 +43,8 @@ environ.Env.read_env(
 DEBUG = os.environ['DEBUG']
 
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = os.environ['SECRET_KEY']
 
 
 CLOUD_NAME = os.environ['CLOUD_NAME']
