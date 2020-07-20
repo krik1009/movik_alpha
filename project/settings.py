@@ -25,14 +25,17 @@ env = environ.Env(
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# reading .env file
-READ_ENV_FILE = env.bool('DJANGO_READ_ENV_FILE', default=False)
+env_file = os.path.join(BASE_DIR, ".env")
+environ.Env.read_env(env_file)
 
-if READ_ENV_FILE:
-    env_file = str(BASE_DIR.path('.env'))
-    env.read_env(env_file)
+# # reading .env file
+# READ_ENV_FILE = env.bool('DJANGO_READ_ENV_FILE', default=False)
+
+# if READ_ENV_FILE:
+#     env_file = str(BASE_DIR.path('.env'))
+#     env.read_env(env_file)
     
-environ.Env.read_env()
+# environ.Env.read_env()
 
 # False if not in os.environ
 DEBUG=env('DEBUG')
