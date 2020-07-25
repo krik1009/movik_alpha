@@ -12,7 +12,7 @@
     "http-proxy-middleware": "^1.0.4",
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "nodemon": "^2.0.4",
     "pure-react-carousel": "^1.27.1",
     "react": "^16.13.1",
@@ -24,7 +24,8 @@
     "react-scripts": "3.4.1",
     "react-select": "^3.1.0",
     "react-share": "^4.2.0",
-    "react-tracker": "0.0.8"
+    "react-tracker": "0.0.8",
+    "sass-loader": "^9.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
