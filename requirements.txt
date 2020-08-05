@@ -37,3 +37,4 @@ whitenoise==5.1.0
 wrapt==1.12.1
 # django-environ
 django-decouple
+django_heroku
